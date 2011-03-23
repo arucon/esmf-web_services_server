@@ -582,6 +582,11 @@ System.out.println("Writing out 0 files");
 			// Read the returned data value
 			//***
 			dataValue = readStringPkg(dataIn);
+
+			//***
+			// Read the returned status string
+			//***
+			status = readIntPkg(dataIn);
 		}
 		catch (Exception  e)
 		{

@@ -9,11 +9,6 @@
 % ant jar.server
 
 //***
-// Build the server 
-//***
-% ant jar.server
-
-//***
 // Copy the build to the axis services directory to make it available via
 // the internet
 //***
