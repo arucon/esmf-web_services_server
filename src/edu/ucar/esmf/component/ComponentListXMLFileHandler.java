@@ -13,7 +13,7 @@ import org.xml.sax.*;
  *
  *
  * <p>
- *      Copyright (C) 2001 SGI.  All rights reserved.
+ *      Copyright (C) 2014 SGI.  All rights reserved.
  * </p>
  * 
  * <p>
