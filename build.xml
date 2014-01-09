@@ -104,6 +104,28 @@
             </batchtest>
         </junit>
     </target>
+    <target depends="compile.src" name="registrar" if="jars.ok">
+        <jar destfile="${lib}/registrar.jar">
+            <manifest>
+                <attribute name="Main-Class" value="edu.ucar.esmf.registrar.RegistrarMain"/>
+            </manifest>
+            <fileset dir="${classes}">
+                <include name="edu/ucar/esmf/*/*"/>
+            </fileset>
+        </jar>
+    </target>
+    <target depends="compile.src" name="esmfcomp" if="jars.ok">
+        <jar destfile="${lib}/esmfcomp.jar">
+            <manifest>
+                <attribute name="Main-Class" value="edu.ucar.esmf.componentsvc.Test.TestComponentConnector"/>
+            </manifest>
+            <fileset dir="${classes}">
+                <include name="edu/ucar/esmf/component/*"/>
+                <include name="edu/ucar/esmf/componentsvc/*"/>
+                <include name="edu/ucar/esmf/componentsvc/Test/*"/>
+            </fileset>
+        </jar>
+    </target>
     <target name="clean">
         <delete dir="${build}"/>
     </target>

@@ -27,10 +27,29 @@
         </xsd:sequence>
       </xsd:complexType>
 
+      <xsd:complexType name="ArrayOfDouble">
+        <xsd:sequence>
+          <xsd:element name="item"
+                       type="xsd:double"
+                       maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
       <xsd:complexType name="StatusMsg">
         <xsd:sequence>
           <xsd:element name="code" type="xsd:string"/>
           <xsd:element name="msg" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DataDesc">
+        <xsd:sequence>
+          <xsd:element name="NumberOfVariables" type="xsd:int"/>
+          <xsd:element name="VariableNames" type="tns:ArrayOfString"/>
+          <xsd:element name="NumberOfLatValues" type="xsd:int"/>
+          <xsd:element name="LatitudeValues" type="tns:ArrayOfDouble"/>
+          <xsd:element name="NumberOfLonValues" type="xsd:int"/>
+          <xsd:element name="LongitudeValues" type="tns:ArrayOfDouble"/>
         </xsd:sequence>
       </xsd:complexType>
       
@@ -69,7 +88,25 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      
+
+      <xsd:element name="SetOutputVariablesRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="VariableNames" type="tns:ArrayOfString"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetOutputVariablesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="tns:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
       <xsd:element name="InitComponentRequest">
         <xsd:complexType>
           <xsd:sequence>
@@ -86,7 +123,44 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      
+
+      <xsd:element name="SetInputDataDescRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="InputDataDesc" type="tns:DataDesc"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataDescResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="tns:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="Time" type="xsd:double"/>
+            <xsd:element name="Values" type="tns:ArrayOfDouble"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="tns:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
       <xsd:element name="RunComponentRequest">
         <xsd:complexType>
           <xsd:sequence>
@@ -97,6 +171,24 @@
       </xsd:element>
 
       <xsd:element name="RunComponentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="tns:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="TimestepComponentRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="NumTimeSteps" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="TimestepComponentResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="Status" type="tns:StatusMsg"/>
@@ -155,16 +247,31 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+
+      <xsd:element name="GetOutputDataDescRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetOutputDataDescResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="OutputDataDesc" type="tns:DataDesc"/>
+            <xsd:element name="Status" type="tns:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       
       <xsd:element name="GetOutputDataRequest">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="ServerName" type="xsd:string"/>
             <xsd:element name="ClientId" type="xsd:string"/>
-            <xsd:element name="VariableName" type="xsd:string"/>
-            <xsd:element name="Time" type="xsd:string"/>
-            <xsd:element name="Lat" type="xsd:string"/>
-            <xsd:element name="Lon" type="xsd:string"/>
+            <xsd:element name="Time" type="xsd:double"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -172,7 +279,11 @@
       <xsd:element name="GetOutputDataResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="Values" type="xsd:string"/>
+            <xsd:element name="NumberOfVariables" type="xsd:int"/>
+            <xsd:element name="VariableNames" type="tns:ArrayOfString"/>
+            <xsd:element name="NumberOfLatValues" type="xsd:int"/>
+            <xsd:element name="NumberOfLonValues" type="xsd:int"/>
+            <xsd:element name="Values" type="tns:ArrayOfDouble"/>
             <xsd:element name="Status" type="tns:StatusMsg"/>
           </xsd:sequence>
         </xsd:complexType>
@@ -215,6 +326,13 @@
     <wsdl:part name="output" element="tns:NewClientResponse"/>
   </wsdl:message>
 
+  <wsdl:message name="SetOutputVariablesRequest">
+    <wsdl:part name="input" element="tns:SetOutputVariablesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="SetOutputVariablesResponse">
+    <wsdl:part name="output" element="tns:SetOutputVariablesResponse"/>
+  </wsdl:message>
+
   <wsdl:message name="InitComponentRequest">
     <wsdl:part name="input" element="tns:InitComponentRequest"/>
   </wsdl:message>
@@ -222,11 +340,32 @@
     <wsdl:part name="output" element="tns:InitComponentResponse"/>
   </wsdl:message>
 
+  <wsdl:message name="SetInputDataDescRequest">
+    <wsdl:part name="input" element="tns:SetInputDataDescRequest"/>
+  </wsdl:message>
+  <wsdl:message name="SetInputDataDescResponse">
+    <wsdl:part name="output" element="tns:SetInputDataDescResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="SetInputDataRequest">
+    <wsdl:part name="input" element="tns:SetInputDataRequest"/>
+  </wsdl:message>
+  <wsdl:message name="SetInputDataResponse">
+    <wsdl:part name="output" element="tns:SetInputDataResponse"/>
+  </wsdl:message>
+
   <wsdl:message name="RunComponentRequest">
     <wsdl:part name="input" element="tns:RunComponentRequest"/>
   </wsdl:message>
   <wsdl:message name="RunComponentResponse">
     <wsdl:part name="output" element="tns:RunComponentResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="TimestepComponentRequest">
+    <wsdl:part name="input" element="tns:TimestepComponentRequest"/>
+  </wsdl:message>
+  <wsdl:message name="TimestepComponentResponse">
+    <wsdl:part name="output" element="tns:TimestepComponentResponse"/>
   </wsdl:message>
 
   <wsdl:message name="FinalizeComponentRequest">
@@ -248,6 +387,13 @@
   </wsdl:message>
   <wsdl:message name="GetFilesResponse">
     <wsdl:part name="output" element="tns:GetFilesResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetOutputDataDescRequest">
+    <wsdl:part name="input" element="tns:GetOutputDataDescRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutputDataDescResponse">
+    <wsdl:part name="output" element="tns:GetOutputDataDescResponse"/>
   </wsdl:message>
 
   <wsdl:message name="GetOutputDataRequest">
@@ -279,14 +425,34 @@
       <wsdl:output message="tns:NewClientResponse"/>
     </wsdl:operation>
 
+    <wsdl:operation name="SetOutputVariables">
+      <wsdl:input message="tns:SetOutputVariablesRequest"/>
+      <wsdl:output message="tns:SetOutputVariablesResponse"/>
+    </wsdl:operation>
+
     <wsdl:operation name="InitComponent">
       <wsdl:input message="tns:InitComponentRequest"/>
       <wsdl:output message="tns:InitComponentResponse"/>
     </wsdl:operation>
 
+    <wsdl:operation name="SetInputDataDesc">
+      <wsdl:input message="tns:SetInputDataDescRequest"/>
+      <wsdl:output message="tns:SetInputDataDescResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="SetInputData">
+      <wsdl:input message="tns:SetInputDataRequest"/>
+      <wsdl:output message="tns:SetInputDataResponse"/>
+    </wsdl:operation>
+
     <wsdl:operation name="RunComponent">
       <wsdl:input message="tns:RunComponentRequest"/>
       <wsdl:output message="tns:RunComponentResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="TimestepComponent">
+      <wsdl:input message="tns:TimestepComponentRequest"/>
+      <wsdl:output message="tns:TimestepComponentResponse"/>
     </wsdl:operation>
 
     <wsdl:operation name="FinalizeComponent">
@@ -302,6 +468,11 @@
     <wsdl:operation name="GetFiles">
       <wsdl:input message="tns:GetFilesRequest"/>
       <wsdl:output message="tns:GetFilesResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOutputDataDesc">
+      <wsdl:input message="tns:GetOutputDataDescRequest"/>
+      <wsdl:output message="tns:GetOutputDataDescResponse"/>
     </wsdl:operation>
 
     <wsdl:operation name="GetOutputData">
@@ -344,6 +515,16 @@
       </wsdl:output>
     </wsdl:operation>
 
+    <wsdl:operation name="SetOutputVariables">
+      <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/SetOutputVariables"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
     <wsdl:operation name="InitComponent">
       <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/InitComponent"/>
       <wsdl:input>
@@ -354,8 +535,38 @@
       </wsdl:output>
     </wsdl:operation>
 
+    <wsdl:operation name="SetInputDataDesc">
+      <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/SetInputDataDesc"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="SetInputData">
+      <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/SetInputData"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
     <wsdl:operation name="RunComponent">
       <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/RunComponent"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="TimestepComponent">
+      <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/TimestepComponent"/>
       <wsdl:input>
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
@@ -386,6 +597,16 @@
 
     <wsdl:operation name="GetFiles">
       <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/GetFiles"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOutputDataDesc">
+      <wsdlsoap:operation soapAction="http://ucar.edu/axis2/ESMFWebServices/GetOutputDataDesc"/>
       <wsdl:input>
         <wsdlsoap:body use="literal"/>
       </wsdl:input>

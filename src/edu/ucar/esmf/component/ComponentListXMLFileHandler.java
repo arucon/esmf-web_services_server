@@ -33,9 +33,7 @@ class ComponentListXMLFileHandler implements ContentHandler
    private Locator   theLocator;
 
 	private ComponentList	theCurrentList = null;
-	private String				theCurrentComponent = null;
-	private String				theCurrentHostName = null;
-	private String				theCurrentPortNum = null;
+	private Component			theCurrentComponent = null;
 	private StringBuffer		theCurrentData = null;
 	private boolean			theIsInListFlag = false;
 
@@ -224,23 +222,45 @@ class ComponentListXMLFileHandler implements ContentHandler
 		{
         	if (localName.equalsIgnoreCase("component"))
         	{
-      		for (int i = 0; i < atts.getLength(); ++i)
-      		{
-         		String   attName = atts.getLocalName(i);
+            theCurrentComponent = new Component();
 
-         		if (attName.equalsIgnoreCase("name"))
-         		{
-            		theCurrentComponent = atts.getValue(i);
-         		}
-         		else if (attName.equalsIgnoreCase("hostname"))
-         		{
-            		theCurrentHostName = atts.getValue(i);
-         		}
-         		else if (attName.equalsIgnoreCase("portnum"))
-         		{
-            		theCurrentPortNum = atts.getValue(i);
-         		}
-      		}
+            for (int i = 0; i < atts.getLength(); ++i)
+            {
+               String   attName = atts.getLocalName(i);
+
+               if (attName.equalsIgnoreCase("clientid"))
+               {
+                  theCurrentComponent.setClientId(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("jobid"))
+               {
+                  theCurrentComponent.setJobId(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("hostname"))
+               {
+                  theCurrentComponent.setHostName(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("portnum"))
+               {
+                  theCurrentComponent.setPortNum(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("name"))
+               {
+                  theCurrentComponent.setName(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("desc"))
+               {
+                  theCurrentComponent.setDescription(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("physhost"))
+               {
+                  theCurrentComponent.setPhysicalHostName(atts.getValue(i));
+               }
+               else if (attName.equalsIgnoreCase("state"))
+               {
+                  theCurrentComponent.setCurrentState(atts.getValue(i));
+               }
+            }
         	}
 		}
    }
@@ -276,20 +296,11 @@ class ComponentListXMLFileHandler implements ContentHandler
         	}
 	      else if (localName.equalsIgnoreCase("component"))
         	{
-				if ((theCurrentComponent != null)  &&  
-                (theCurrentHostName != null)  &&  
-                (theCurrentPortNum != null))
-				{
-					theCurrentList.addComponent(
-						new Component(theCurrentComponent, 
-                                "", 
-                                theCurrentHostName, 
-                                Integer.parseInt(theCurrentPortNum)));
-
-					theCurrentComponent = null;
-					theCurrentHostName = null;
-					theCurrentPortNum = null;
-				}
+            if (theCurrentComponent != null)
+            {
+               theCurrentList.addComponent(theCurrentComponent);
+               theCurrentComponent = null;
+            }
         	}
       }
    }
@@ -316,10 +327,13 @@ class ComponentListXMLFileHandler implements ContentHandler
    {
       String   data = new String(ch, start, end);
 
+/*
+** KDS: I don't ever use this... don't know why it's here
       if (theCurrentData != null)
       {
          theCurrentData.append(data.trim());
       }
+*/
 
       //System.out.println("Characters: " + data);
    }

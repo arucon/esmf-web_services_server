@@ -27,7 +27,6 @@ import java.util.*;
 public class ComponentList
 {
 	private Vector<Component>		theComponents = new Vector<Component>();
-	private boolean					theAllowDupNamesFlag = false;
 
 
 	/**
@@ -37,17 +36,6 @@ public class ComponentList
 	 */
 	public ComponentList()
 	{
-	}
-
-
-	/**
-	 **************************************************************************
-	 *
-	 **************************************************************************
-	 */
-	public ComponentList(boolean  allowDupNames)
-	{
-		theAllowDupNamesFlag = allowDupNames;
 	}
 
 
@@ -70,9 +58,9 @@ public class ComponentList
 	 *
 	 **************************************************************************
 	 */
-	public void  removeComponent(Component  thisComponent)
+	public void  removeComponent(String  clientId)
 	{
-		int	index = findComponentIndex(thisComponent);
+		int	index = findComponentIndex(clientId);
 
 		if (index >= 0)
 		{
@@ -86,7 +74,7 @@ public class ComponentList
 	 *
 	 **************************************************************************
 	 */
-	public Component  findComponent(Component  findComponent)
+	public Component  findComponent(String  clientId)
 	{
 		Component	foundComponent = null;
 		int			i = 0;
@@ -95,14 +83,7 @@ public class ComponentList
 		{
 			Component	thisComponent = theComponents.elementAt(i);
 
-			if (theAllowDupNamesFlag  &&
-			    (thisComponent.getName().equals(findComponent.getName())))
-			{
-				foundComponent = thisComponent;
-			}
-			else if (thisComponent.getName().equals(findComponent.getName())  &&
-			    thisComponent.getHostName().equals(findComponent.getHostName()) &&
-			    (thisComponent.getPortNum() == findComponent.getPortNum()))
+			if (thisComponent.getClientId().equals(clientId))
 			{
 				foundComponent = thisComponent;
 			}
@@ -121,7 +102,7 @@ public class ComponentList
 	 *
 	 **************************************************************************
 	 */
-	public int  findComponentIndex(Component  findComponent)
+	public int  findComponentIndex(String  clientId)
 	{
 		Component	foundComponent = null;
 		int			i = 0;
@@ -130,14 +111,7 @@ public class ComponentList
 		{
 			Component	thisComponent = theComponents.elementAt(i);
 
-			if (theAllowDupNamesFlag  &&
-			    (thisComponent.getName().equals(findComponent.getName())))
-			{
-				foundComponent = thisComponent;
-			}
-			else if (thisComponent.getName().equals(findComponent.getName())  &&
-			    thisComponent.getHostName().equals(findComponent.getHostName()) &&
-			    (thisComponent.getPortNum() == findComponent.getPortNum()))
+			if (thisComponent.getClientId().equals(clientId))
 			{
 				foundComponent = thisComponent;
 			}
@@ -158,43 +132,94 @@ public class ComponentList
 	}
 
 
-	/**
-	 **************************************************************************
-	 *
-	 **************************************************************************
-	 */
-	public Component  findComponentByName(String  componentName)
-	{
-		Component	foundComponent = null;
-		int			i = 0;
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  removeComponent(Component  thisComponent)
+   {
+      int   index = findComponentIndex(thisComponent);
 
-		while ((foundComponent == null)  &&  (i < theComponents.size()))
-		{
-			Component	thisComponent = theComponents.elementAt(i);
-
-			if (thisComponent.getName().equals(componentName))
-			{
-				foundComponent = thisComponent;
-			}
-			else
-			{
-				++i;
-			}
-		}
-
-		return foundComponent;
-	}
+      if (index >= 0)
+      {
+         theComponents.removeElementAt(index);
+      }
+   }
 
 
-	/**
-	 **************************************************************************
-	 *
-	 **************************************************************************
-	 */
-	public Vector<Component>  components()
-	{
-		return theComponents;
-	}
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public Component  findComponent(Component  findComponent)
+   {
+      Component   foundComponent = null;
+      int         i = 0;
+
+      while ((foundComponent == null)  &&  (i < theComponents.size()))
+      {
+         Component   thisComponent = theComponents.elementAt(i);
+
+         if (thisComponent.getClientId().equals(findComponent.getClientId()))
+         {
+            foundComponent = thisComponent;
+         }
+         else
+         {
+            ++i;
+         }
+      }
+
+      return foundComponent;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public int  findComponentIndex(Component  findComponent)
+   {
+      Component   foundComponent = null;
+      int         i = 0;
+
+      while ((foundComponent == null)  &&  (i < theComponents.size()))
+      {
+         Component   thisComponent = theComponents.elementAt(i);
+
+         if (thisComponent.getClientId().equals(findComponent.getClientId()))
+         {
+            foundComponent = thisComponent;
+         }
+         else
+         {
+            ++i;
+         }
+      }
+
+      if (foundComponent != null)
+      {
+         return i;
+      }
+      else
+      {
+         return -1;
+      }
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public Vector<Component>  components()
+   {
+      return theComponents;
+   }
 
 
 	/**

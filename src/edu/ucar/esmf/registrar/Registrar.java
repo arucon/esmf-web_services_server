@@ -118,10 +118,30 @@ System.out.println("Type: " + messageType);
 				{
 					unregisterService(dataIn, dataOut);
 				}
+            else if (messageType.equalsIgnoreCase("submitted"))
+            {
+               serviceSubmitted(dataIn, dataOut);
+            }
+            else if (messageType.equalsIgnoreCase("started"))
+            {
+               serviceStarted(dataIn, dataOut);
+            }
 				else if (messageType.equalsIgnoreCase("list"))
 				{
 					listServices(dataIn, dataOut);
 				}
+            else if (messageType.equalsIgnoreCase("get"))
+            {
+               getService(dataIn, dataOut);
+            }
+            else if (messageType.equalsIgnoreCase("getstatus"))
+            {
+               getServiceStatus(dataIn, dataOut);
+            }
+            else if (messageType.equalsIgnoreCase("setstatus"))
+            {
+               setServiceStatus(dataIn, dataOut);
+            }
 
 				dataOut.close();
 				dataIn.close();
@@ -223,21 +243,23 @@ System.out.println("Type: " + messageType);
 	{
 		try
 		{
-			String	name = readStringPkg(dataIn);
-			String	desc = readStringPkg(dataIn);
+         String   clientId = readStringPkg(dataIn);
 			String	hostName = readStringPkg(dataIn);
 			String	portNum = readStringPkg(dataIn);
+         String   state = "PENDING";
 
 			// add new component to component list and write to file
-			System.out.println("Register: " + name);
-			System.out.println("   " + desc);
-			System.out.println("   " + hostName + ":" + portNum);
+         System.out.println("** Register **");
+         System.out.println("    Client ID: " + clientId);
+         System.out.println("    Host Name: " + hostName);
+         System.out.println("     Port Num: " + portNum);
 
-			Component	newComponent = new Component(
-														name, 
-                                              desc, 
-                                              hostName, 
-                                              Integer.parseInt(portNum));
+			Component	newComponent = new Component(clientId,
+                                                  "",
+                                                  hostName,
+                                                  portNum);
+
+         newComponent.setCurrentState(state);
 
 			theComponents.addComponent(newComponent);
 			theComponentsFile.setList(theComponents);
@@ -245,7 +267,7 @@ System.out.println("Type: " + messageType);
 			//***
 			// Send status response
 			//***
-			writeStringPkg(dataOut, "OK");
+         writeStringPkg(dataOut, state);
 		}
 		catch (Exception  e)
 		{
@@ -254,6 +276,130 @@ System.out.println("Type: " + messageType);
 			throw e;
 		}
 	}
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   private void  serviceSubmitted(DataInputStream   dataIn,
+                                  DataOutputStream  dataOut)
+      throws Exception
+   {
+      try
+      {
+         String   clientId = readStringPkg(dataIn);
+         String   jobId = readStringPkg(dataIn);
+
+         // add new component to component list and write to file
+         System.out.println("** Update Service **");
+         System.out.println("    Client ID: " + clientId);
+         System.out.println("       Job ID: " + jobId);
+
+         Component   thisComponent = theComponents.findComponent(clientId);
+
+         if (thisComponent != null)
+         {
+            thisComponent.setJobId(jobId);
+
+            //***
+            // This gets a bit tricky because of timing... If the component
+            // service is started using the "fork" method, then the service
+            // itself will probably indicate the job has started before the
+            // process controller has time to indicate the job has been
+            // submitted.  In either case, we want to make sure the job id
+            // gets set, but if the job has already started, we don't want
+            // the state to revert to submitted... it should stay at ready.
+            //***
+            if (!(thisComponent.getCurrentState().equalsIgnoreCase("READY")))
+            {
+               System.out.println("Component Service submitted.");
+               thisComponent.setCurrentState("SUBMITTED");
+            }
+            else
+            {
+               System.out.println("Component Service already started.");
+            }
+
+            theComponentsFile.setList(theComponents);
+
+            //***
+            // Send status response
+            //***
+            writeStringPkg(dataOut, thisComponent.getCurrentState());
+         }
+         else
+         {
+            //***
+            // Send error response
+            //***
+            writeStringPkg(dataOut, "NOTFOUND");
+         }
+      }
+      catch (Exception  e)
+      {
+         String   msg = "Error updating service as started: " + e.getMessage();
+         System.out.println(msg);
+         throw e;
+      }
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   private void  serviceStarted(DataInputStream   dataIn,
+                                DataOutputStream  dataOut)
+      throws Exception
+   {
+      try
+      {
+         String   clientId = readStringPkg(dataIn);
+         String   name = readStringPkg(dataIn);
+         String   desc = readStringPkg(dataIn);
+         String   physHostName = readStringPkg(dataIn);
+
+         // add new component to component list and write to file
+         System.out.println("** Update Service **");
+         System.out.println("    Client ID: " + clientId);
+         System.out.println("         Name: " + name);
+         System.out.println("         Desc: " + desc);
+         System.out.println("    Host Name: " + physHostName);
+
+         Component   thisComponent = theComponents.findComponent(clientId);
+
+         if (thisComponent != null)
+         {
+            thisComponent.setName(name);
+            thisComponent.setDescription(desc);
+            thisComponent.setPhysicalHostName(physHostName);
+            thisComponent.setCurrentState("READY");
+
+            theComponentsFile.setList(theComponents);
+
+            //***
+            // Send status response
+            //***
+            writeStringPkg(dataOut, "READY");
+         }
+         else
+         {
+            //***
+            // Send error response
+            //***
+            writeStringPkg(dataOut, "NOTFOUND");
+         }
+      }
+      catch (Exception  e)
+      {
+         String   msg = "Error updating service as started: " + e.getMessage();
+         System.out.println(msg);
+         throw e;
+      }
+   }
 
 
 	/**
@@ -267,21 +413,12 @@ System.out.println("Type: " + messageType);
 	{
 		try
 		{
-			String	name = readStringPkg(dataIn);
-			String	hostName = readStringPkg(dataIn);
-			String	portNum = readStringPkg(dataIn);
+			String	clientId = readStringPkg(dataIn);
 
 			// add new component to component list and write to file
-			System.out.println("Unregister: " + name);
-			System.out.println("   " + hostName + ":" + portNum);
+			System.out.println("Unregister: " + clientId);
 
-			Component	delComponent = new Component(
-														name, 
-                                          "", 
-                                          hostName, 
-                                          Integer.parseInt(portNum));
-
-			theComponents.removeComponent(delComponent);
+			theComponents.removeComponent(clientId);
 			theComponentsFile.setList(theComponents);
 
 			//***
@@ -331,4 +468,156 @@ System.out.println("Type: " + messageType);
 			throw e;
 		}
 	}
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   private void  getService(DataInputStream   dataIn,
+                            DataOutputStream  dataOut)
+      throws Exception
+   {
+      try
+      {
+         //***
+         // First, read the client id from the socket
+         //***
+         String   clientId = readStringPkg(dataIn);
+
+         System.out.println("Get Component for client ID: " + clientId);
+
+         //***
+         // Find the component
+         //***
+         int         numComps = 1;
+         Component   thisComponent = theComponents.findComponent(clientId);
+
+         if (thisComponent == null)
+         {
+            numComps = 0;
+         }
+
+         //***
+         // First, write out the number of services (1 if found, 0 otherwise)
+         //***
+         writeStringPkg(dataOut, String.valueOf(numComps));
+
+         //***
+         // Then, if it was found, write out the service information
+         //***
+         if (thisComponent != null)
+         {
+            writeStringPkg(dataOut, thisComponent.getClientId());
+            writeStringPkg(dataOut, thisComponent.getJobId());
+            writeStringPkg(dataOut, thisComponent.getHostName());
+            writeStringPkg(dataOut, thisComponent.getPortNum());
+            writeStringPkg(dataOut, thisComponent.getName());
+            writeStringPkg(dataOut, thisComponent.getDescription());
+            writeStringPkg(dataOut, thisComponent.getPhysicalHostName());
+            writeStringPkg(dataOut, thisComponent.getCurrentState());
+         }
+      }
+      catch (Exception  e)
+      {
+         String   msg = "Error getting service: " + e.getMessage();
+         System.out.println(msg);
+         throw e;
+      }
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   private void  getServiceStatus(DataInputStream   dataIn,
+                                  DataOutputStream  dataOut)
+      throws Exception
+   {
+      try
+      {
+         //***
+         // First, read the client id from the socket
+         //***
+         String   clientId = readStringPkg(dataIn);
+
+         System.out.println("Get Component for client ID: " + clientId);
+
+         //***
+         // Find the component
+         //***
+         Component   thisComponent = theComponents.findComponent(clientId);
+
+         //***
+         // Then, if it was found, write out the service information
+         //***
+         if (thisComponent != null)
+         {
+            writeStringPkg(dataOut, thisComponent.getCurrentState());
+         }
+         else
+         {
+            writeStringPkg(dataOut, "NOTFOUND");
+         }
+      }
+      catch (Exception  e)
+      {
+         String   msg = "Error getting service: " + e.getMessage();
+         System.out.println(msg);
+         throw e;
+      }
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   private void  setServiceStatus(DataInputStream   dataIn,
+                                  DataOutputStream  dataOut)
+      throws Exception
+   {
+      try
+      {
+         String   clientId = readStringPkg(dataIn);
+         String   state = readStringPkg(dataIn);
+
+         // add new component to component list and write to file
+         System.out.println("** Update Service **");
+         System.out.println("    Client ID: " + clientId);
+         System.out.println("        State: " + state);
+
+         Component   thisComponent = theComponents.findComponent(clientId);
+
+         if (thisComponent != null)
+         {
+            thisComponent.setCurrentState(state);
+
+            theComponentsFile.setList(theComponents);
+
+            //***
+            // Send status response
+            //***
+            System.out.println("   Returning: " + state);
+            writeStringPkg(dataOut, state);
+         }
+         else
+         {
+            //***
+            // Send error response
+            //***
+            writeStringPkg(dataOut, "NOTFOUND");
+         }
+      }
+      catch (Exception  e)
+      {
+         String   msg = "Error updating service status: " + e.getMessage();
+         System.out.println(msg);
+         throw e;
+      }
+   }
 }

@@ -26,10 +26,24 @@ import java.util.*;
  */
 public class Component
 {
+   private String          theClientId = "";
+   private String          theJobId = "";
+	private String				theHostName = "";
+	private String				thePortNum = "";
 	private String				theName = "";
 	private String				theDescription = "";
-	private String				theHostName = "";
-	private int					thePortNum = 0;
+   private String          thePhysicalHostName = "";
+   private String          theCurrentState = "";
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public Component()
+   {
+   }
 
 
 	/**
@@ -37,38 +51,127 @@ public class Component
 	 *
 	 **************************************************************************
 	 */
-	public Component(String  name,
-                    String  description,
+   public Component(String  clientId,
+                    String  jobId,
                     String  hostName,
-                    int     portNum)
+                    String  portNum)
 	{
-		theName = name;
-		theDescription = description;
-		theHostName = hostName;
-		thePortNum = portNum;
+      theClientId = clientId;
+      theJobId = jobId;
+      theHostName = hostName;
+      thePortNum = portNum;
+      thePhysicalHostName = hostName;
 	}
 
 
-	/**
-	 **************************************************************************
-	 *
-	 **************************************************************************
-	 */
-	public String  getName()
-	{
-		return theName;
-	}
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setClientId(String  clientId)
+   {
+      theClientId = clientId;
+   }
 
 
-	/**
-	 **************************************************************************
-	 *
-	 **************************************************************************
-	 */
-	public String  getDescription()
-	{
-		return theDescription;
-	}
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setJobId(String  jobId)
+   {
+      theJobId = jobId;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setHostName(String  hostName)
+   {
+      theHostName = hostName;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setPortNum(String  portNum)
+   {
+      thePortNum = portNum;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setName(String  name)
+   {
+      theName = name;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setDescription(String  description)
+   {
+      theDescription = description;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setPhysicalHostName(String  hostName)
+   {
+      thePhysicalHostName = hostName;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public void  setCurrentState(String  state)
+   {
+      theCurrentState = state;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public String  getClientId()
+   {
+      return theClientId;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public String  getJobId()
+   {
+      return theJobId;
+   }
 
 
 	/**
@@ -87,10 +190,54 @@ public class Component
 	 *
 	 **************************************************************************
 	 */
-	public int  getPortNum()
+	public String  getPortNum()
 	{
 		return thePortNum;
 	}
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public String  getName()
+   {
+      return theName;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public String  getDescription()
+   {
+      return theDescription;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public String  getPhysicalHostName()
+   {
+      return thePhysicalHostName;
+   }
+
+
+   /**
+    **************************************************************************
+    *
+    **************************************************************************
+    */
+   public String  getCurrentState()
+   {
+      return theCurrentState;
+   }
 
 
 	/**
@@ -101,10 +248,14 @@ public class Component
 	public void  print()
 	{
 		System.out.println("************** BEGIN Component *****************");
-		System.out.println("Name        : " + theName);
-		System.out.println("Description : " + theDescription);
-		System.out.println("Host Name   : " + theHostName);
-		System.out.println("Port Num    : " + thePortNum);
+      System.out.println("Client ID     : " + theClientId);
+      System.out.println("Job ID        : " + theJobId);
+      System.out.println("Host Name     : " + theHostName);
+      System.out.println("Port Num      : " + thePortNum);
+      System.out.println("Name          : " + theName);
+      System.out.println("Description   : " + theDescription);
+      System.out.println("Physical Host : " + thePhysicalHostName);
+      System.out.println("Current State : " + theCurrentState);
 		System.out.println("************** END Component *****************");
 	}
 }

@@ -56,30 +56,6 @@ public class ComponentListXML
 	}
 
 
-	/**
-	 **************************************************************************
-	 *
-	 **************************************************************************
-	 */
-	public ComponentListXML(String   filename,
-                           boolean  allowDupNames)
-		throws IOException
-	{
-      theFilename = filename;
-      theFile = new File(theFilename);
-
-      if (theFile.exists())
-      {
-         theList = readListFile();
-      }
-		else
-		{
-			theList = new ComponentList(allowDupNames);
-			writeListFile();
-		}
-	}
-
-
    /**
     **************************************************************************
     *
@@ -141,7 +117,12 @@ public class ComponentListXML
       {
 			Component	thisComponent = components.elementAt(i);
 
-         writer.write("   <component name=\"" + thisComponent.getName() + "\"");
+         writer.write("   <component clientid=\"" +
+            thisComponent.getClientId() + "\"");
+         writer.newLine();
+
+         writer.write("              jobid=\"" +
+            thisComponent.getJobId() + "\"");
          writer.newLine();
 
          writer.write("              hostname=\"" + 
@@ -150,6 +131,22 @@ public class ComponentListXML
 
          writer.write("              portnum=\"" + 
 				thisComponent.getPortNum() + "\">");
+         writer.newLine();
+
+         writer.write("              name=\"" +
+            thisComponent.getName() + "\"");
+         writer.newLine();
+
+         writer.write("              desc=\"" +
+            thisComponent.getDescription() + "\"");
+         writer.newLine();
+
+         writer.write("              physhost=\"" +
+            thisComponent.getPhysicalHostName() + "\"");
+         writer.newLine();
+
+         writer.write("              state=\"" +
+            thisComponent.getCurrentState() + "\">");
          writer.newLine();
 
          writer.write("   </component>");

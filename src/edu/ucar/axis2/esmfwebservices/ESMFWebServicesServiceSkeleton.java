@@ -85,13 +85,13 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
 		// Make the call, passing the client name
 		//***
-		int	clientId = connector.newClient(request.getServerName());
+		int	clientId = connector.newClient("fflintstone", "bambam");
 
 		//***
 		// Convert the client id to a string and pass it back
@@ -108,8 +108,36 @@ public class ESMFWebServicesServiceSkeleton
 
 		return response;
    }
+
+
+   /**
+    * @param SetOutputVariablesRequest
+    */
+   public SetOutputVariablesResponse
+      SetOutputVariables(SetOutputVariablesRequest  request)
+   {
+/*
+      System.out.println("ESMFWebServices::SetOutputVariables()");
+      System.out.println("Server Name: " + request.getServerName());
+      System.out.println("Client ID: " + request.getClientId());
+
+      ArrayOfString  importFiles = request.getImportFiles();
+      String[]       importFilenames = importFiles.getItem();
+      for (int i = 0; i < importFilenames.length; ++i)
+      {
+         System.out.println("Import Filename: " + importFilenames[i]);
+      }
+*/
+
+
+      //TODO : fill this with the necessary business logic
+      throw new  java.lang.UnsupportedOperationException(
+                     "Please implement " +
+                     this.getClass().getName() +
+                     "#SetOutputVariables");
+   }
+
      
-         
    /**
     * Auto generated method signature
     * 
@@ -138,7 +166,7 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
@@ -182,7 +210,7 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
@@ -207,6 +235,53 @@ public class ESMFWebServicesServiceSkeleton
 
 		return response;
    }
+
+
+   /**
+    * Auto generated method signature
+    *
+    * @param timestepComponentRequest
+    */
+   public TimestepComponentResponse
+               TimestepComponent(TimestepComponentRequest  request)
+   {
+      System.out.println("ESMFWebServices::TimestepComponent()");
+      System.out.println("Server Name: " + request.getServerName());
+      System.out.println("Client ID: " + request.getClientId());
+      System.out.println("Num Timesteps: " + request.getNumTimeSteps());
+
+      //***
+      // Connect to the component service
+      //***
+      Component   esmfComponent = new Component("CAM Comp",
+                                                "CAM Component",
+                                                "localhost",
+                                                "27071");
+      ComponentConnector   connector = new ComponentConnector(esmfComponent);
+
+      //***
+      // Make the call, passing the client id (after parsing the integer
+      // from the string)
+      //***
+      System.out.println("Client ID: " + request.getClientId());
+      int   clientId = Integer.parseInt(request.getClientId());
+      int   numTimeSteps = Integer.parseInt(request.getNumTimeSteps());
+      int   statusCode = connector.compTimestep(clientId, numTimeSteps);
+
+      //***
+      // Convert the status to a string and pass it back
+      //***
+      String   statusStr = String.valueOf(statusCode);
+
+      TimestepComponentResponse     response = new TimestepComponentResponse();
+
+      StatusMsg      status = new StatusMsg();
+      status.setCode(statusStr);
+      status.setMsg("Operation successful");
+      response.setStatus(status);
+
+      return response;
+   }
      
          
    /**
@@ -227,7 +302,7 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
@@ -272,7 +347,7 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
@@ -317,7 +392,7 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("Test Comp1", 
                                                 "blah", 
                                                 "localhost", 
-                                                27060);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
@@ -350,6 +425,83 @@ public class ESMFWebServicesServiceSkeleton
 
 		return response;
    }
+
+   /**
+    * Auto generated method signature
+    *
+    * @param GetOutputDataDescRequest
+    */
+   public GetOutputDataDescResponse
+      GetOutputDataDesc(GetOutputDataDescRequest  request)
+   {
+      //***
+      // Connect to the component service
+      //***
+      Component   esmfComponent = new Component("CAM Comp",
+                                                "CAM Component",
+                                                "localhost",
+                                                "27071");
+      ComponentConnector   connector = new ComponentConnector(esmfComponent);
+
+      //***
+      // Get the input information
+      //***
+      System.out.println("Server Name: " + request.getServerName());
+      System.out.println("Client ID: " + request.getClientId());
+
+      int   clientId = Integer.parseInt(request.getClientId());
+
+      //***
+      // Call the server
+      //***
+      // Temporary fill-in until I actually call the appropriate operation
+      DataDescResponse  resp = connector.dataDesc(clientId);
+      //resp.print();
+
+      //***
+      // Create the response and set its values
+      //***
+      GetOutputDataDescResponse     response = new GetOutputDataDescResponse();
+
+      // Data Description
+      ArrayOfString     varNames = new ArrayOfString();
+      ArrayOfDouble     latValues = new ArrayOfDouble();
+      ArrayOfDouble     lonValues = new ArrayOfDouble();
+
+      String[]    theseVarNames = resp.getVarNames();
+      varNames.setItem(theseVarNames);
+
+      double[]    theseLatValues = resp.getLatValues();
+      latValues.setItem(theseLatValues);
+
+      double[]    theseLonValues = resp.getLonValues();
+      lonValues.setItem(theseLonValues);
+
+      DataDesc       dataDesc = new DataDesc();
+
+      dataDesc.setNumberOfVariables(resp.getNumVars());
+      dataDesc.setVariableNames(varNames);
+      dataDesc.setNumberOfLatValues(resp.getNumLats());
+      dataDesc.setLatitudeValues(latValues);
+      dataDesc.setNumberOfLonValues(resp.getNumLons());
+      dataDesc.setLongitudeValues(lonValues);
+
+      response.setOutputDataDesc(dataDesc);
+
+      // Status
+      StatusMsg      status = new StatusMsg();
+      String         statusStr = String.valueOf(resp.getStatus());
+
+      status.setCode(statusStr);
+      status.setMsg("Operation successful");
+
+      response.setStatus(status);
+
+      //***
+      // Return
+      //***
+      return response;
+   }
      
          
    /**
@@ -362,10 +514,7 @@ public class ESMFWebServicesServiceSkeleton
 		System.out.println("ESMFWebServices::GetOutputData()");
 		System.out.println("Server Name   : " + request.getServerName());
 		System.out.println("Client ID     : " + request.getClientId());
-		System.out.println("Variable Name : " + request.getVariableName());
 		System.out.println("Time          : " + request.getTime());
-		System.out.println("Lat           : " + request.getLat());
-		System.out.println("Lon           : " + request.getLon());
 
 		//***
 		// Connect to the component service
@@ -373,8 +522,9 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
+System.out.println("Connected");
 
 		//***
 		// Make the call, passing the client id (after parsing the integer
@@ -383,37 +533,44 @@ public class ESMFWebServicesServiceSkeleton
 		System.out.println("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 
-		String	dataValue = connector.getOutputData(clientId,
-                                                   request.getVariableName(),
-                                                   request.getTime(),
-                                                   request.getLat(),
-                                                   request.getLon());
-
-		int	statusCode = connector.compState(clientId);
+      OutputDataResponse   resp = connector.outputData(clientId,
+                                                       request.getTime());
+      resp.print();
 
 		//***
 		// Convert the status to a string and pass it back
 		//***
-		String	exportFilename = "/home/ksaint/some/file/name.nc";
+		GetOutputDataResponse	response = new GetOutputDataResponse();
 
-		GetOutputDataResponse		response = new GetOutputDataResponse();
+      // Data Description
+      ArrayOfString     varNames = new ArrayOfString();
+      String[]          theseVarNames = resp.getVarNames();
+      varNames.setItem(theseVarNames);
 
-/*
-		String[]			values = new String[1];
-		values[0] = dataValue;
+      response.setNumberOfVariables(resp.getNumVars());
+      response.setVariableNames(varNames);
+      response.setNumberOfLatValues(resp.getNumLats());
+      response.setNumberOfLonValues(resp.getNumLons());
 
-		ArrayOfString	dataValues = new ArrayOfString();
-		dataValues.setItem(values);
-		response.setValues(dataValues);
-*/
-		response.setValues(dataValue);
+      // Data Values
+      ArrayOfDouble     dataValues = new ArrayOfDouble();
+      double[]          theseDataValues = resp.getDataValues();
+      dataValues.setItem(theseDataValues);
 
+      response.setValues(dataValues);
+
+      // Status
 		StatusMsg		status = new StatusMsg();
-		String			statusStr = String.valueOf(statusCode);
+		String			statusStr = String.valueOf(resp.getStatus());
+
 		status.setCode(statusStr);
 		status.setMsg("Operation successful");
+
 		response.setStatus(status);
 
+      //***
+      // Return
+      //***
 		return response;
    }
      
@@ -435,7 +592,7 @@ public class ESMFWebServicesServiceSkeleton
 		Component	esmfComponent = new Component("CAM Comp", 
                                                 "CAM Component", 
                                                 "localhost", 
-                                                27001);
+                                                "27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
 
 		//***
@@ -460,5 +617,37 @@ public class ESMFWebServicesServiceSkeleton
 
 		return response;
    }
+
+
+   /**
+    * Auto generated method signature
+    *
+    * @param setInputDataDescRequest
+    */
+   public SetInputDataDescResponse
+      SetInputDataDesc(SetInputDataDescRequest request)
+   {
+      //TODO : fill this with the necessary business logic
+      throw new  java.lang.UnsupportedOperationException(
+                     "Please implement " +
+                     this.getClass().getName() +
+                     "#SetInputDataDesc");
+   }
+
+
+   /**
+    * Auto generated method signature
+    *
+    * @param setInputDataRequest
+    */
+   public SetInputDataResponse  SetInputData(SetInputDataRequest  reqeust)
+   {
+      //TODO : fill this with the necessary business logic
+      throw new  java.lang.UnsupportedOperationException(
+                  "Please implement " +
+                  this.getClass().getName() +
+                  "#SetInputData");
+   }
+
 }
     
