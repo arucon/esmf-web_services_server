@@ -23,7 +23,7 @@ public class ESMFWebServicesServiceSkeleton
     * 
     * @param listServersRequest
     */
-	public ListServersResponse  ListServers(ListServersRequest  request)
+	public ListServersResponse  listServers(ListServersRequest  request)
    {
 		System.out.println("ESMFWebServices::ListServers()");
 		System.out.println("Registrar Host Name: " + 
@@ -74,7 +74,7 @@ public class ESMFWebServicesServiceSkeleton
     * 
     * @param newClientRequest
     */
-	public NewClientResponse  NewClient(NewClientRequest  request)
+	public NewClientResponse  newClient(NewClientRequest  request)
    {
 		System.out.println("ESMFWebServices::NewClient()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -114,7 +114,7 @@ public class ESMFWebServicesServiceSkeleton
     * @param SetOutputVariablesRequest
     */
    public SetOutputVariablesResponse
-      SetOutputVariables(SetOutputVariablesRequest  request)
+      setOutputVariables(SetOutputVariablesRequest  request)
    {
 /*
       System.out.println("ESMFWebServices::SetOutputVariables()");
@@ -143,7 +143,7 @@ public class ESMFWebServicesServiceSkeleton
     * 
     * @param initComponentRequest
     */
-   public InitComponentResponse  InitComponent(InitComponentRequest  request)
+   public InitComponentResponse  initComponent(InitComponentRequest  request)
    {
 		System.out.println("ESMFWebServices::InitComponent()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -198,7 +198,7 @@ public class ESMFWebServicesServiceSkeleton
     * 
     * @param runComponentRequest
     */
-   public RunComponentResponse  RunComponent(RunComponentRequest  request)
+   public RunComponentResponse  runComponent(RunComponentRequest  request)
    {
 		System.out.println("ESMFWebServices::RunComponent()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -243,7 +243,7 @@ public class ESMFWebServicesServiceSkeleton
     * @param timestepComponentRequest
     */
    public TimestepComponentResponse
-               TimestepComponent(TimestepComponentRequest  request)
+               timestepComponent(TimestepComponentRequest  request)
    {
       System.out.println("ESMFWebServices::TimestepComponent()");
       System.out.println("Server Name: " + request.getServerName());
@@ -290,7 +290,7 @@ public class ESMFWebServicesServiceSkeleton
     * @param finalizeComponentRequest
     */
    public FinalizeComponentResponse  
-		FinalizeComponent(FinalizeComponentRequest  request)
+		finalizeComponent(FinalizeComponentRequest  request)
    {
 		System.out.println("ESMFWebServices::FinalizeComponent()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -335,7 +335,7 @@ public class ESMFWebServicesServiceSkeleton
     * @param componentStatusRequest
     */
    public ComponentStatusResponse  
-		ComponentStatus(ComponentStatusRequest  request)
+		componentStatus(ComponentStatusRequest  request)
    {
 		System.out.println("ESMFWebServices::ComponentStatus()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -379,7 +379,7 @@ public class ESMFWebServicesServiceSkeleton
     * 
     * @param componentStatusRequest
     */
-   public GetFilesResponse  GetFiles(GetFilesRequest  request)
+   public GetFilesResponse  getFiles(GetFilesRequest  request)
    {
 		System.out.println("ESMFWebServices::GetFiles()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -432,7 +432,7 @@ public class ESMFWebServicesServiceSkeleton
     * @param GetOutputDataDescRequest
     */
    public GetOutputDataDescResponse
-      GetOutputDataDesc(GetOutputDataDescRequest  request)
+      getOutputDataDesc(GetOutputDataDescRequest  request)
    {
       //***
       // Connect to the component service
@@ -509,7 +509,7 @@ public class ESMFWebServicesServiceSkeleton
     * 
     * @param GetOutputDataRequest
     */
-   public GetOutputDataResponse  GetOutputData(GetOutputDataRequest  request)
+   public GetOutputDataResponse  getOutputData(GetOutputDataRequest  request)
    {
 		System.out.println("ESMFWebServices::GetOutputData()");
 		System.out.println("Server Name   : " + request.getServerName());
@@ -580,7 +580,7 @@ System.out.println("Connected");
     * 
     * @param endClientRequest
     */
-   public EndClientResponse  EndClient(EndClientRequest  request)
+   public EndClientResponse  endClient(EndClientRequest  request)
    {
 		System.out.println("ESMFWebServices::EndClient()");
 		System.out.println("Server Name: " + request.getServerName());
@@ -625,7 +625,7 @@ System.out.println("Connected");
     * @param setInputDataDescRequest
     */
    public SetInputDataDescResponse
-      SetInputDataDesc(SetInputDataDescRequest request)
+      setInputDataDesc(SetInputDataDescRequest request)
    {
       //TODO : fill this with the necessary business logic
       throw new  java.lang.UnsupportedOperationException(
@@ -640,7 +640,7 @@ System.out.println("Connected");
     *
     * @param setInputDataRequest
     */
-   public SetInputDataResponse  SetInputData(SetInputDataRequest  reqeust)
+   public SetInputDataResponse  setInputData(SetInputDataRequest  reqeust)
    {
       //TODO : fill this with the necessary business logic
       throw new  java.lang.UnsupportedOperationException(
