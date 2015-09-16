@@ -104,8 +104,9 @@
             </batchtest>
         </junit>
     </target>
-    <target depends="compile.src" name="registrar" if="jars.ok">
-        <jar destfile="${lib}/registrar.jar">
+    <target depends="init" name="registrar" if="jars.ok">
+      <javac debug="on" includeantruntime="false" fork="true" destdir="${classes}" srcdir="${src}/edu/ucar/esmf"/>  
+      <jar destfile="${lib}/registrar.jar">
             <manifest>
                 <attribute name="Main-Class" value="edu.ucar.esmf.registrar.RegistrarMain"/>
             </manifest>
