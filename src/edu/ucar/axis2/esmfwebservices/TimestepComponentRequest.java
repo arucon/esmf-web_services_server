@@ -22,15 +22,37 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
      */
     protected java.lang.String localServerName;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localServerNameTracker = false;
+
     /**
      * field for ClientId
      */
     protected java.lang.String localClientId;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localClientIdTracker = false;
+
     /**
      * field for NumTimeSteps
      */
     protected java.lang.String localNumTimeSteps;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localNumTimeStepsTracker = false;
+
+    public boolean isServerNameSpecified() {
+        return localServerNameTracker;
+    }
 
     /**
      * Auto generated getter method
@@ -45,7 +67,13 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
      * @param param ServerName
      */
     public void setServerName(java.lang.String param) {
+        localServerNameTracker = param != null;
+
         this.localServerName = param;
+    }
+
+    public boolean isClientIdSpecified() {
+        return localClientIdTracker;
     }
 
     /**
@@ -61,7 +89,13 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
      * @param param ClientId
      */
     public void setClientId(java.lang.String param) {
+        localClientIdTracker = param != null;
+
         this.localClientId = param;
+    }
+
+    public boolean isNumTimeStepsSpecified() {
+        return localNumTimeStepsTracker;
     }
 
     /**
@@ -77,6 +111,8 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
      * @param param NumTimeSteps
      */
     public void setNumTimeSteps(java.lang.String param) {
+        localNumTimeStepsTracker = param != null;
+
         this.localNumTimeSteps = param;
     }
 
@@ -131,44 +167,50 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
             }
         }
 
-        namespace = "";
-        writeStartElement(null, namespace, "ServerName", xmlWriter);
+        if (localServerNameTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "ServerName", xmlWriter);
 
-        if (localServerName == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerName cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localServerName);
+            if (localServerName == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerName cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localServerName);
+            }
+
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localClientIdTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "ClientId", xmlWriter);
 
-        namespace = "";
-        writeStartElement(null, namespace, "ClientId", xmlWriter);
+            if (localClientId == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ClientId cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localClientId);
+            }
 
-        if (localClientId == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "ClientId cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localClientId);
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localNumTimeStepsTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "NumTimeSteps", xmlWriter);
 
-        namespace = "";
-        writeStartElement(null, namespace, "NumTimeSteps", xmlWriter);
+            if (localNumTimeSteps == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "NumTimeSteps cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localNumTimeSteps);
+            }
 
-        if (localNumTimeSteps == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "NumTimeSteps cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localNumTimeSteps);
+            xmlWriter.writeEndElement();
         }
-
-        xmlWriter.writeEndElement();
 
         xmlWriter.writeEndElement();
     }
@@ -381,34 +423,40 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "ServerName"));
+        if (localServerNameTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "ServerName"));
 
-        if (localServerName != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localServerName));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerName cannot be null!!");
+            if (localServerName != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localServerName));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerName cannot be null!!");
+            }
         }
 
-        elementList.add(new javax.xml.namespace.QName("", "ClientId"));
+        if (localClientIdTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "ClientId"));
 
-        if (localClientId != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localClientId));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ClientId cannot be null!!");
+            if (localClientId != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localClientId));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ClientId cannot be null!!");
+            }
         }
 
-        elementList.add(new javax.xml.namespace.QName("", "NumTimeSteps"));
+        if (localNumTimeStepsTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "NumTimeSteps"));
 
-        if (localNumTimeSteps != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localNumTimeSteps));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "NumTimeSteps cannot be null!!");
+            if (localNumTimeSteps != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localNumTimeSteps));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "NumTimeSteps cannot be null!!");
+            }
         }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
@@ -478,7 +526,7 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "ServerName").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "ServerName").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -499,16 +547,13 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "ClientId").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "ClientId").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -528,16 +573,13 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "NumTimeSteps").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "NumTimeSteps").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -558,9 +600,6 @@ public class TimestepComponentRequest implements org.apache.axis2.databinding.AD
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

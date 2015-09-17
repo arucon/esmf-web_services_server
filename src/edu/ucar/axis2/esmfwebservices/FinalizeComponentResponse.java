@@ -22,6 +22,16 @@ public class FinalizeComponentResponse implements org.apache.axis2.databinding.A
      */
     protected edu.ucar.axis2.esmfwebservices.StatusMsg localStatus;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localStatusTracker = false;
+
+    public boolean isStatusSpecified() {
+        return localStatusTracker;
+    }
+
     /**
      * Auto generated getter method
      * @return edu.ucar.axis2.esmfwebservices.StatusMsg
@@ -35,6 +45,8 @@ public class FinalizeComponentResponse implements org.apache.axis2.databinding.A
      * @param param Status
      */
     public void setStatus(edu.ucar.axis2.esmfwebservices.StatusMsg param) {
+        localStatusTracker = param != null;
+
         this.localStatus = param;
     }
 
@@ -89,13 +101,15 @@ public class FinalizeComponentResponse implements org.apache.axis2.databinding.A
             }
         }
 
-        if (localStatus == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "Status cannot be null!!");
-        }
+        if (localStatusTracker) {
+            if (localStatus == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "Status cannot be null!!");
+            }
 
-        localStatus.serialize(new javax.xml.namespace.QName("", "Status"),
-            xmlWriter);
+            localStatus.serialize(new javax.xml.namespace.QName("", "Status"),
+                xmlWriter);
+        }
 
         xmlWriter.writeEndElement();
     }
@@ -308,14 +322,16 @@ public class FinalizeComponentResponse implements org.apache.axis2.databinding.A
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "Status"));
+        if (localStatusTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "Status"));
 
-        if (localStatus == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "Status cannot be null!!");
+            if (localStatus == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "Status cannot be null!!");
+            }
+
+            elementList.add(localStatus);
         }
-
-        elementList.add(localStatus);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -384,7 +400,7 @@ public class FinalizeComponentResponse implements org.apache.axis2.databinding.A
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "Status").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "Status").equals(
                             reader.getName())) {
                     object.setStatus(edu.ucar.axis2.esmfwebservices.StatusMsg.Factory.parse(
                             reader));
@@ -393,9 +409,6 @@ public class FinalizeComponentResponse implements org.apache.axis2.databinding.A
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

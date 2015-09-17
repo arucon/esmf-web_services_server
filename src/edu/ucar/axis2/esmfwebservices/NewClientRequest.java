@@ -22,6 +22,16 @@ public class NewClientRequest implements org.apache.axis2.databinding.ADBBean {
      */
     protected java.lang.String localServerName;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localServerNameTracker = false;
+
+    public boolean isServerNameSpecified() {
+        return localServerNameTracker;
+    }
+
     /**
      * Auto generated getter method
      * @return java.lang.String
@@ -35,6 +45,8 @@ public class NewClientRequest implements org.apache.axis2.databinding.ADBBean {
      * @param param ServerName
      */
     public void setServerName(java.lang.String param) {
+        localServerNameTracker = param != null;
+
         this.localServerName = param;
     }
 
@@ -89,18 +101,20 @@ public class NewClientRequest implements org.apache.axis2.databinding.ADBBean {
             }
         }
 
-        namespace = "";
-        writeStartElement(null, namespace, "ServerName", xmlWriter);
+        if (localServerNameTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "ServerName", xmlWriter);
 
-        if (localServerName == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerName cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localServerName);
+            if (localServerName == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerName cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localServerName);
+            }
+
+            xmlWriter.writeEndElement();
         }
-
-        xmlWriter.writeEndElement();
 
         xmlWriter.writeEndElement();
     }
@@ -313,14 +327,16 @@ public class NewClientRequest implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "ServerName"));
+        if (localServerNameTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "ServerName"));
 
-        if (localServerName != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localServerName));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerName cannot be null!!");
+            if (localServerName != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localServerName));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerName cannot be null!!");
+            }
         }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
@@ -390,7 +406,7 @@ public class NewClientRequest implements org.apache.axis2.databinding.ADBBean {
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "ServerName").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "ServerName").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -411,9 +427,6 @@ public class NewClientRequest implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

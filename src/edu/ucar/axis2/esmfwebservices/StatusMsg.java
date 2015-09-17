@@ -25,10 +25,26 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
      */
     protected java.lang.String localCode;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localCodeTracker = false;
+
     /**
      * field for Msg
      */
     protected java.lang.String localMsg;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localMsgTracker = false;
+
+    public boolean isCodeSpecified() {
+        return localCodeTracker;
+    }
 
     /**
      * Auto generated getter method
@@ -43,7 +59,13 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
      * @param param Code
      */
     public void setCode(java.lang.String param) {
+        localCodeTracker = param != null;
+
         this.localCode = param;
+    }
+
+    public boolean isMsgSpecified() {
+        return localMsgTracker;
     }
 
     /**
@@ -59,6 +81,8 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
      * @param param Msg
      */
     public void setMsg(java.lang.String param) {
+        localMsgTracker = param != null;
+
         this.localMsg = param;
     }
 
@@ -113,31 +137,35 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
             }
         }
 
-        namespace = "";
-        writeStartElement(null, namespace, "code", xmlWriter);
+        if (localCodeTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "code", xmlWriter);
 
-        if (localCode == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "code cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localCode);
+            if (localCode == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "code cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localCode);
+            }
+
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localMsgTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "msg", xmlWriter);
 
-        namespace = "";
-        writeStartElement(null, namespace, "msg", xmlWriter);
+            if (localMsg == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "msg cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localMsg);
+            }
 
-        if (localMsg == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "msg cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localMsg);
+            xmlWriter.writeEndElement();
         }
-
-        xmlWriter.writeEndElement();
 
         xmlWriter.writeEndElement();
     }
@@ -350,24 +378,28 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "code"));
+        if (localCodeTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "code"));
 
-        if (localCode != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localCode));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "code cannot be null!!");
+            if (localCode != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localCode));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "code cannot be null!!");
+            }
         }
 
-        elementList.add(new javax.xml.namespace.QName("", "msg"));
+        if (localMsgTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "msg"));
 
-        if (localMsg != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localMsg));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "msg cannot be null!!");
+            if (localMsg != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localMsg));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "msg cannot be null!!");
+            }
         }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
@@ -437,7 +469,7 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "code").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "code").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -457,16 +489,13 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "msg").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "msg").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -486,9 +515,6 @@ public class StatusMsg implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

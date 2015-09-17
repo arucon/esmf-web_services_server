@@ -22,15 +22,37 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
      */
     protected java.lang.String localServerName;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localServerNameTracker = false;
+
     /**
      * field for ClientId
      */
     protected java.lang.String localClientId;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localClientIdTracker = false;
+
     /**
      * field for InputDataDesc
      */
     protected edu.ucar.axis2.esmfwebservices.DataDesc localInputDataDesc;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localInputDataDescTracker = false;
+
+    public boolean isServerNameSpecified() {
+        return localServerNameTracker;
+    }
 
     /**
      * Auto generated getter method
@@ -45,7 +67,13 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
      * @param param ServerName
      */
     public void setServerName(java.lang.String param) {
+        localServerNameTracker = param != null;
+
         this.localServerName = param;
+    }
+
+    public boolean isClientIdSpecified() {
+        return localClientIdTracker;
     }
 
     /**
@@ -61,7 +89,13 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
      * @param param ClientId
      */
     public void setClientId(java.lang.String param) {
+        localClientIdTracker = param != null;
+
         this.localClientId = param;
+    }
+
+    public boolean isInputDataDescSpecified() {
+        return localInputDataDescTracker;
     }
 
     /**
@@ -77,6 +111,8 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
      * @param param InputDataDesc
      */
     public void setInputDataDesc(edu.ucar.axis2.esmfwebservices.DataDesc param) {
+        localInputDataDescTracker = param != null;
+
         this.localInputDataDesc = param;
     }
 
@@ -131,39 +167,45 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
             }
         }
 
-        namespace = "";
-        writeStartElement(null, namespace, "ServerName", xmlWriter);
+        if (localServerNameTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "ServerName", xmlWriter);
 
-        if (localServerName == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerName cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localServerName);
+            if (localServerName == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerName cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localServerName);
+            }
+
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localClientIdTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "ClientId", xmlWriter);
 
-        namespace = "";
-        writeStartElement(null, namespace, "ClientId", xmlWriter);
+            if (localClientId == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ClientId cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(localClientId);
+            }
 
-        if (localClientId == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "ClientId cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localClientId);
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localInputDataDescTracker) {
+            if (localInputDataDesc == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "InputDataDesc cannot be null!!");
+            }
 
-        if (localInputDataDesc == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "InputDataDesc cannot be null!!");
+            localInputDataDesc.serialize(new javax.xml.namespace.QName("",
+                    "InputDataDesc"), xmlWriter);
         }
-
-        localInputDataDesc.serialize(new javax.xml.namespace.QName("",
-                "InputDataDesc"), xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -376,34 +418,40 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "ServerName"));
+        if (localServerNameTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "ServerName"));
 
-        if (localServerName != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localServerName));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerName cannot be null!!");
+            if (localServerName != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localServerName));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerName cannot be null!!");
+            }
         }
 
-        elementList.add(new javax.xml.namespace.QName("", "ClientId"));
+        if (localClientIdTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "ClientId"));
 
-        if (localClientId != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localClientId));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ClientId cannot be null!!");
+            if (localClientId != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localClientId));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ClientId cannot be null!!");
+            }
         }
 
-        elementList.add(new javax.xml.namespace.QName("", "InputDataDesc"));
+        if (localInputDataDescTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "InputDataDesc"));
 
-        if (localInputDataDesc == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "InputDataDesc cannot be null!!");
+            if (localInputDataDesc == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "InputDataDesc cannot be null!!");
+            }
+
+            elementList.add(localInputDataDesc);
         }
-
-        elementList.add(localInputDataDesc);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -472,7 +520,7 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "ServerName").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "ServerName").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -493,16 +541,13 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "ClientId").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "ClientId").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -522,16 +567,13 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "InputDataDesc").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "InputDataDesc").equals(
                             reader.getName())) {
                     object.setInputDataDesc(edu.ucar.axis2.esmfwebservices.DataDesc.Factory.parse(
                             reader));
@@ -540,9 +582,6 @@ public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADB
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

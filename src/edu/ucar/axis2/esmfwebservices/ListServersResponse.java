@@ -22,10 +22,26 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
      */
     protected edu.ucar.axis2.esmfwebservices.ArrayOfString localServerList;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localServerListTracker = false;
+
     /**
      * field for Status
      */
     protected edu.ucar.axis2.esmfwebservices.StatusMsg localStatus;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localStatusTracker = false;
+
+    public boolean isServerListSpecified() {
+        return localServerListTracker;
+    }
 
     /**
      * Auto generated getter method
@@ -41,7 +57,13 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
      */
     public void setServerList(
         edu.ucar.axis2.esmfwebservices.ArrayOfString param) {
+        localServerListTracker = param != null;
+
         this.localServerList = param;
+    }
+
+    public boolean isStatusSpecified() {
+        return localStatusTracker;
     }
 
     /**
@@ -57,6 +79,8 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
      * @param param Status
      */
     public void setStatus(edu.ucar.axis2.esmfwebservices.StatusMsg param) {
+        localStatusTracker = param != null;
+
         this.localStatus = param;
     }
 
@@ -111,21 +135,25 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
             }
         }
 
-        if (localServerList == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerList cannot be null!!");
+        if (localServerListTracker) {
+            if (localServerList == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerList cannot be null!!");
+            }
+
+            localServerList.serialize(new javax.xml.namespace.QName("",
+                    "ServerList"), xmlWriter);
         }
 
-        localServerList.serialize(new javax.xml.namespace.QName("", "ServerList"),
-            xmlWriter);
+        if (localStatusTracker) {
+            if (localStatus == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "Status cannot be null!!");
+            }
 
-        if (localStatus == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "Status cannot be null!!");
+            localStatus.serialize(new javax.xml.namespace.QName("", "Status"),
+                xmlWriter);
         }
-
-        localStatus.serialize(new javax.xml.namespace.QName("", "Status"),
-            xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -338,23 +366,27 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "ServerList"));
+        if (localServerListTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "ServerList"));
 
-        if (localServerList == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "ServerList cannot be null!!");
+            if (localServerList == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ServerList cannot be null!!");
+            }
+
+            elementList.add(localServerList);
         }
 
-        elementList.add(localServerList);
+        if (localStatusTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "Status"));
 
-        elementList.add(new javax.xml.namespace.QName("", "Status"));
+            if (localStatus == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "Status cannot be null!!");
+            }
 
-        if (localStatus == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "Status cannot be null!!");
+            elementList.add(localStatus);
         }
-
-        elementList.add(localStatus);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -423,7 +455,7 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "ServerList").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "ServerList").equals(
                             reader.getName())) {
                     object.setServerList(edu.ucar.axis2.esmfwebservices.ArrayOfString.Factory.parse(
                             reader));
@@ -432,16 +464,13 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "Status").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "Status").equals(
                             reader.getName())) {
                     object.setStatus(edu.ucar.axis2.esmfwebservices.StatusMsg.Factory.parse(
                             reader));
@@ -450,9 +479,6 @@ public class ListServersResponse implements org.apache.axis2.databinding.ADBBean
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

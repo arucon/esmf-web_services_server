@@ -25,30 +25,70 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      */
     protected int localNumberOfVariables;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localNumberOfVariablesTracker = false;
+
     /**
      * field for VariableNames
      */
     protected edu.ucar.axis2.esmfwebservices.ArrayOfString localVariableNames;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localVariableNamesTracker = false;
 
     /**
      * field for NumberOfLatValues
      */
     protected int localNumberOfLatValues;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localNumberOfLatValuesTracker = false;
+
     /**
      * field for LatitudeValues
      */
     protected edu.ucar.axis2.esmfwebservices.ArrayOfDouble localLatitudeValues;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localLatitudeValuesTracker = false;
 
     /**
      * field for NumberOfLonValues
      */
     protected int localNumberOfLonValues;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localNumberOfLonValuesTracker = false;
+
     /**
      * field for LongitudeValues
      */
     protected edu.ucar.axis2.esmfwebservices.ArrayOfDouble localLongitudeValues;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localLongitudeValuesTracker = false;
+
+    public boolean isNumberOfVariablesSpecified() {
+        return localNumberOfVariablesTracker;
+    }
 
     /**
      * Auto generated getter method
@@ -63,7 +103,14 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      * @param param NumberOfVariables
      */
     public void setNumberOfVariables(int param) {
+        // setting primitive attribute tracker to true
+        localNumberOfVariablesTracker = param != java.lang.Integer.MIN_VALUE;
+
         this.localNumberOfVariables = param;
+    }
+
+    public boolean isVariableNamesSpecified() {
+        return localVariableNamesTracker;
     }
 
     /**
@@ -80,7 +127,13 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      */
     public void setVariableNames(
         edu.ucar.axis2.esmfwebservices.ArrayOfString param) {
+        localVariableNamesTracker = param != null;
+
         this.localVariableNames = param;
+    }
+
+    public boolean isNumberOfLatValuesSpecified() {
+        return localNumberOfLatValuesTracker;
     }
 
     /**
@@ -96,7 +149,14 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      * @param param NumberOfLatValues
      */
     public void setNumberOfLatValues(int param) {
+        // setting primitive attribute tracker to true
+        localNumberOfLatValuesTracker = param != java.lang.Integer.MIN_VALUE;
+
         this.localNumberOfLatValues = param;
+    }
+
+    public boolean isLatitudeValuesSpecified() {
+        return localLatitudeValuesTracker;
     }
 
     /**
@@ -113,7 +173,13 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      */
     public void setLatitudeValues(
         edu.ucar.axis2.esmfwebservices.ArrayOfDouble param) {
+        localLatitudeValuesTracker = param != null;
+
         this.localLatitudeValues = param;
+    }
+
+    public boolean isNumberOfLonValuesSpecified() {
+        return localNumberOfLonValuesTracker;
     }
 
     /**
@@ -129,7 +195,14 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      * @param param NumberOfLonValues
      */
     public void setNumberOfLonValues(int param) {
+        // setting primitive attribute tracker to true
+        localNumberOfLonValuesTracker = param != java.lang.Integer.MIN_VALUE;
+
         this.localNumberOfLonValues = param;
+    }
+
+    public boolean isLongitudeValuesSpecified() {
+        return localLongitudeValuesTracker;
     }
 
     /**
@@ -146,6 +219,8 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
      */
     public void setLongitudeValues(
         edu.ucar.axis2.esmfwebservices.ArrayOfDouble param) {
+        localLongitudeValuesTracker = param != null;
+
         this.localLongitudeValues = param;
     }
 
@@ -200,68 +275,80 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
             }
         }
 
-        namespace = "";
-        writeStartElement(null, namespace, "NumberOfVariables", xmlWriter);
+        if (localNumberOfVariablesTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "NumberOfVariables", xmlWriter);
 
-        if (localNumberOfVariables == java.lang.Integer.MIN_VALUE) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "NumberOfVariables cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localNumberOfVariables));
+            if (localNumberOfVariables == java.lang.Integer.MIN_VALUE) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "NumberOfVariables cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localNumberOfVariables));
+            }
+
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localVariableNamesTracker) {
+            if (localVariableNames == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "VariableNames cannot be null!!");
+            }
 
-        if (localVariableNames == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "VariableNames cannot be null!!");
+            localVariableNames.serialize(new javax.xml.namespace.QName("",
+                    "VariableNames"), xmlWriter);
         }
 
-        localVariableNames.serialize(new javax.xml.namespace.QName("",
-                "VariableNames"), xmlWriter);
+        if (localNumberOfLatValuesTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "NumberOfLatValues", xmlWriter);
 
-        namespace = "";
-        writeStartElement(null, namespace, "NumberOfLatValues", xmlWriter);
+            if (localNumberOfLatValues == java.lang.Integer.MIN_VALUE) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "NumberOfLatValues cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localNumberOfLatValues));
+            }
 
-        if (localNumberOfLatValues == java.lang.Integer.MIN_VALUE) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "NumberOfLatValues cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localNumberOfLatValues));
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localLatitudeValuesTracker) {
+            if (localLatitudeValues == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "LatitudeValues cannot be null!!");
+            }
 
-        if (localLatitudeValues == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "LatitudeValues cannot be null!!");
+            localLatitudeValues.serialize(new javax.xml.namespace.QName("",
+                    "LatitudeValues"), xmlWriter);
         }
 
-        localLatitudeValues.serialize(new javax.xml.namespace.QName("",
-                "LatitudeValues"), xmlWriter);
+        if (localNumberOfLonValuesTracker) {
+            namespace = "";
+            writeStartElement(null, namespace, "NumberOfLonValues", xmlWriter);
 
-        namespace = "";
-        writeStartElement(null, namespace, "NumberOfLonValues", xmlWriter);
+            if (localNumberOfLonValues == java.lang.Integer.MIN_VALUE) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "NumberOfLonValues cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localNumberOfLonValues));
+            }
 
-        if (localNumberOfLonValues == java.lang.Integer.MIN_VALUE) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "NumberOfLonValues cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localNumberOfLonValues));
+            xmlWriter.writeEndElement();
         }
 
-        xmlWriter.writeEndElement();
+        if (localLongitudeValuesTracker) {
+            if (localLongitudeValues == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "LongitudeValues cannot be null!!");
+            }
 
-        if (localLongitudeValues == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "LongitudeValues cannot be null!!");
+            localLongitudeValues.serialize(new javax.xml.namespace.QName("",
+                    "LongitudeValues"), xmlWriter);
         }
-
-        localLongitudeValues.serialize(new javax.xml.namespace.QName("",
-                "LongitudeValues"), xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -474,47 +561,62 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        elementList.add(new javax.xml.namespace.QName("", "NumberOfVariables"));
+        if (localNumberOfVariablesTracker) {
+            elementList.add(new javax.xml.namespace.QName("",
+                    "NumberOfVariables"));
 
-        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                localNumberOfVariables));
-
-        elementList.add(new javax.xml.namespace.QName("", "VariableNames"));
-
-        if (localVariableNames == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "VariableNames cannot be null!!");
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localNumberOfVariables));
         }
 
-        elementList.add(localVariableNames);
+        if (localVariableNamesTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "VariableNames"));
 
-        elementList.add(new javax.xml.namespace.QName("", "NumberOfLatValues"));
+            if (localVariableNames == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "VariableNames cannot be null!!");
+            }
 
-        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                localNumberOfLatValues));
-
-        elementList.add(new javax.xml.namespace.QName("", "LatitudeValues"));
-
-        if (localLatitudeValues == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "LatitudeValues cannot be null!!");
+            elementList.add(localVariableNames);
         }
 
-        elementList.add(localLatitudeValues);
+        if (localNumberOfLatValuesTracker) {
+            elementList.add(new javax.xml.namespace.QName("",
+                    "NumberOfLatValues"));
 
-        elementList.add(new javax.xml.namespace.QName("", "NumberOfLonValues"));
-
-        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                localNumberOfLonValues));
-
-        elementList.add(new javax.xml.namespace.QName("", "LongitudeValues"));
-
-        if (localLongitudeValues == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "LongitudeValues cannot be null!!");
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localNumberOfLatValues));
         }
 
-        elementList.add(localLongitudeValues);
+        if (localLatitudeValuesTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "LatitudeValues"));
+
+            if (localLatitudeValues == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "LatitudeValues cannot be null!!");
+            }
+
+            elementList.add(localLatitudeValues);
+        }
+
+        if (localNumberOfLonValuesTracker) {
+            elementList.add(new javax.xml.namespace.QName("",
+                    "NumberOfLonValues"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localNumberOfLonValues));
+        }
+
+        if (localLongitudeValuesTracker) {
+            elementList.add(new javax.xml.namespace.QName("", "LongitudeValues"));
+
+            if (localLongitudeValues == null) {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "LongitudeValues cannot be null!!");
+            }
+
+            elementList.add(localLongitudeValues);
+        }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -583,7 +685,7 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "NumberOfVariables").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "NumberOfVariables").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -604,16 +706,14 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
+                    object.setNumberOfVariables(java.lang.Integer.MIN_VALUE);
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "VariableNames").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "VariableNames").equals(
                             reader.getName())) {
                     object.setVariableNames(edu.ucar.axis2.esmfwebservices.ArrayOfString.Factory.parse(
                             reader));
@@ -622,16 +722,13 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "NumberOfLatValues").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "NumberOfLatValues").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -652,16 +749,14 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
+                    object.setNumberOfLatValues(java.lang.Integer.MIN_VALUE);
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "LatitudeValues").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "LatitudeValues").equals(
                             reader.getName())) {
                     object.setLatitudeValues(edu.ucar.axis2.esmfwebservices.ArrayOfDouble.Factory.parse(
                             reader));
@@ -670,16 +765,13 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "NumberOfLonValues").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "NumberOfLonValues").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -700,16 +792,14 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
+                    object.setNumberOfLonValues(java.lang.Integer.MIN_VALUE);
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "LongitudeValues").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "LongitudeValues").equals(
                             reader.getName())) {
                     object.setLongitudeValues(edu.ucar.axis2.esmfwebservices.ArrayOfDouble.Factory.parse(
                             reader));
@@ -718,9 +808,6 @@ public class DataDesc implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

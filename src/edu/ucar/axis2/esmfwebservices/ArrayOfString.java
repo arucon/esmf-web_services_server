@@ -26,6 +26,16 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
      */
     protected java.lang.String[] localItem;
 
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localItemTracker = false;
+
+    public boolean isItemSpecified() {
+        return localItemTracker;
+    }
+
     /**
      * Auto generated getter method
      * @return java.lang.String[]
@@ -38,10 +48,6 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
      * validate the array for Item
      */
     protected void validateItem(java.lang.String[] param) {
-        if ((param != null) && (param.length < 1)) {
-            throw new java.lang.RuntimeException(
-                "Input values do not follow defined XSD restrictions");
-        }
     }
 
     /**
@@ -50,6 +56,8 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
      */
     public void setItem(java.lang.String[] param) {
         validateItem(param);
+
+        localItemTracker = param != null;
 
         this.localItem = param;
     }
@@ -62,6 +70,9 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
         if (localItem == null) {
             localItem = new java.lang.String[] {  };
         }
+
+        //update the setting tracker
+        localItemTracker = true;
 
         java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localItem);
         list.add(param);
@@ -119,25 +130,26 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
             }
         }
 
-        if (localItem != null) {
-            namespace = "";
+        if (localItemTracker) {
+            if (localItem != null) {
+                namespace = "";
 
-            for (int i = 0; i < localItem.length; i++) {
-                if (localItem[i] != null) {
-                    writeStartElement(null, namespace, "item", xmlWriter);
+                for (int i = 0; i < localItem.length; i++) {
+                    if (localItem[i] != null) {
+                        writeStartElement(null, namespace, "item", xmlWriter);
 
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            localItem[i]));
+                        xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                localItem[i]));
 
-                    xmlWriter.writeEndElement();
-                } else {
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "item cannot be null!!");
+                        xmlWriter.writeEndElement();
+                    } else {
+                        // we have to do nothing since minOccurs is zero
+                    }
                 }
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "item cannot be null!!");
             }
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "item cannot be null!!");
         }
 
         xmlWriter.writeEndElement();
@@ -351,20 +363,21 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        if (localItem != null) {
-            for (int i = 0; i < localItem.length; i++) {
-                if (localItem[i] != null) {
-                    elementList.add(new javax.xml.namespace.QName("", "item"));
-                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            localItem[i]));
-                } else {
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "item cannot be null!!");
+        if (localItemTracker) {
+            if (localItem != null) {
+                for (int i = 0; i < localItem.length; i++) {
+                    if (localItem[i] != null) {
+                        elementList.add(new javax.xml.namespace.QName("", "item"));
+                        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                localItem[i]));
+                    } else {
+                        // have to do nothing
+                    }
                 }
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "item cannot be null!!");
             }
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "item cannot be null!!");
         }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
@@ -436,7 +449,7 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "item").equals(
+                        new javax.xml.namespace.QName("http://ucar.edu/axis2/ESMFWebServices", "item").equals(
                             reader.getName())) {
                     // Process the array and step past its final element's end.
                     list1.add(reader.getElementText());
@@ -477,9 +490,6 @@ public class ArrayOfString implements org.apache.axis2.databinding.ADBBean {
                 } // End of if for expected property start element
 
                 else {
-                    // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
