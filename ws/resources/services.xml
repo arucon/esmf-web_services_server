@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) -->
+<serviceGroup>
+    <service name="ESMF">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.earthsystemmodeling.ws.ESMFMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.earthsystemmodeling.ws.ESMFSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="NewModelService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://earthsystemmodeling.org/ws">
+            <actionMapping>http://earthsystemmodeling.org/ws/NewModelService</actionMapping>
+            <outputActionMapping>http://earthsystemmodeling.org/ws/ESMF/NewModelServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="GetModelServiceStatus" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://earthsystemmodeling.org/ws">
+            <actionMapping>http://earthsystemmodeling.org/ws/ModelServiceStatus</actionMapping>
+            <outputActionMapping>http://earthsystemmodeling.org/ws/ESMF/GetModelServiceStatusResponse</outputActionMapping>
+        </operation>
+        <operation name="TerminateModelService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://earthsystemmodeling.org/ws">
+            <actionMapping>http://earthsystemmodeling.org/ws/TerminateModelService</actionMapping>
+            <outputActionMapping>http://earthsystemmodeling.org/ws/ESMF/TerminateModelServiceResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

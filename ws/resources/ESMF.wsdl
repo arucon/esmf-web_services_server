@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ESMF" targetNamespace="http://earthsystemmodeling.org/ws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:esmf="http://earthsystemmodeling.org/ws" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://earthsystemmodeling.org/ws">
+
+			<xsd:complexType name="RequestResult">
+				<xsd:sequence>
+					<xsd:element name="status" type="esmf:RequestStatus"/>
+					<xsd:element name="message" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:simpleType name="RequestStatus">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="OK"/>
+					<xsd:enumeration value="FAIL"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="ModelServiceStatus">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="PENDING"/>
+					<xsd:enumeration value="READY_TO_INIT"/>
+					<xsd:enumeration value="READY_TO_RUN"/>
+					<xsd:enumeration value="READY_TO_FINALIZE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			
+			
+			<xsd:element name="NewModelService">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="app" type="xsd:string"/>
+						<xsd:element name="compset" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="platform" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="NewModelServiceResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="esmf:RequestResult"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="serviceKey" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+
+			<xsd:element name="TerminateModelService">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="serviceKey" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="TerminateModelServiceResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outparam" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+
+			<xsd:element name="GetModelServiceStatus">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="serviceKey" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="GetModelServiceStatusResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="esmf:RequestResult"/>
+						<xsd:element name="modelServiceStatus" type="esmf:ModelServiceStatus"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="NewModelServiceRequest">
+    <wsdl:part name="parameters" element="esmf:NewModelService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TerminateModelServiceRequest">
+    <wsdl:part name="parameters" element="esmf:TerminateModelService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetModelServiceStatusResponse">
+    <wsdl:part name="parameters" element="esmf:GetModelServiceStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NewModelServiceResponse">
+    <wsdl:part name="parameters" element="esmf:NewModelServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TerminateModelServiceResponse">
+    <wsdl:part name="parameters" element="esmf:TerminateModelServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetModelServiceStatusRequest">
+    <wsdl:part name="parameters" element="esmf:GetModelServiceStatus">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ESMF">
+    <wsdl:operation name="NewModelService">
+      <wsdl:input message="esmf:NewModelServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:NewModelServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TerminateModelService">
+      <wsdl:input message="esmf:TerminateModelServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:TerminateModelServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelServiceStatus">
+      <wsdl:input message="esmf:GetModelServiceStatusRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:GetModelServiceStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ESMFSOAP" type="esmf:ESMF">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="NewModelService">
+      <soap:operation soapAction="http://earthsystemmodeling.org/ws/NewModelService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TerminateModelService">
+      <soap:operation soapAction="http://earthsystemmodeling.org/ws/TerminateModelService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelServiceStatus">
+      <soap:operation soapAction="http://earthsystemmodeling.org/ws/ModelServiceStatus"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ESMF">
+    <wsdl:port name="ESMFSOAP" binding="esmf:ESMFSOAP">
+      <soap:address location="http://localhost:8080/axis2/ESMF/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
