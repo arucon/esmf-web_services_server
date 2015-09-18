@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="registrar">
+    <property environment="env"/>
+
+	<property name="project.base.dir" value="."/>
+    <property name="name" value="ESMFWebServicesRegistrar"/>
+    <property name="src" value="${project.base.dir}/src"/>
+    <property name="build" value="${project.base.dir}/build"/>
+    <property name="classes" value="${build}/classes"/>
+    <property name="lib" value="${build}/lib"/>
+    
+	<target name="init">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${lib}"/>
+    </target>
+    
+	<target depends="init" name="registrar">
+        <javac debug="on" includeantruntime="false" fork="true" destdir="${classes}" srcdir="${src}"/>
+        <jar destfile="${lib}/registrar.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.earthsystemmodeling.ws.registrar.RegistrarMain"/>
+            </manifest>
+            <fileset dir="${classes}">
+                <include name="org/earthsystemmodeling/ws/*/*"/>
+            </fileset>
+        </jar>
+    </target>
+    
+	<!--
+	<target depends="compile.src" name="esmfcomp" if="jars.ok">
+        <jar destfile="${lib}/esmfcomp.jar">
+            <manifest>
+                <attribute name="Main-Class" value="edu.ucar.esmf.componentsvc.Test.TestComponentConnector"/>
+            </manifest>
+            <fileset dir="${classes}">
+                <include name="edu/ucar/esmf/component/*"/>
+                <include name="edu/ucar/esmf/componentsvc/*"/>
+                <include name="edu/ucar/esmf/componentsvc/Test/*"/>
+            </fileset>
+        </jar>
+    </target>
+    -->
+    
+	<target name="clean">
+        <delete dir="${build}"/>
+    </target>
+
+</project>
