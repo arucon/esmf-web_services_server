@@ -9,16 +9,8 @@ package org.earthsystemmodeling.ws.registrar;
 public class RegistrarMain
 {
 
-   /**
-    ************************************************************************
-    *
-    ************************************************************************
-    */
-	public RegistrarMain()
-	{
-	}
-
-
+   public static int DEFAULT_PORT = 45002;
+   
    /**
     ************************************************************************
     *
@@ -36,15 +28,26 @@ public class RegistrarMain
 			}
 
 			String		filename = args[0] + "/registrants.xml";
+			
+			int portToUse = DEFAULT_PORT;
+			if (args.length==2) {
+				try {
+					portToUse = Integer.parseInt(args[1]);
+				}
+				catch (Exception e) {
+					/* ignore and use default port */
+				}
+			}
 
 			System.out.println("********************************************");
 			System.out.println("  Registrar");
-         System.out.println("  Filename: " + filename);
-         System.out.println("  Port Num: " + 45002);
+			System.out.println("  Filename: " + filename);
+			System.out.println("  Port Num: " + portToUse);
 			System.out.println("********************************************");
-			Registrar	thisRegistrar = new Registrar(45002, filename);
-
+			
+			Registrar	thisRegistrar = new Registrar(portToUse, filename);
 			thisRegistrar.registrationLoop();
+			
 		}
 		catch (Exception  e)
 		{
