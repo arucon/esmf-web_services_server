@@ -1,0 +1,21 @@
+ESMF Web Service - Simple Python Client
+=======================================
+
+The sample Python app shows how to connect to the ESMF Web Service
+and issue some simple service requests.
+
+Tested with Python 2.7
+
+This requires pysimplesoap:
+
+https://github.com/pysimplesoap/pysimplesoap/releases
+sudo python setup.py install	
+
+
+If not installed, you'll need setuptools as well before installing above.
+
+https://pypi.python.org/pypi/setuptools
+Download ez_setup.py and run "python ez_setup.py"
+
+
+Type "python SimpleClient.py" to run. 
