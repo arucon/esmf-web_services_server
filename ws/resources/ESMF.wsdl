@@ -26,6 +26,19 @@
 				</xsd:restriction>
 			</xsd:simpleType>
 			
+			<xsd:complexType name="CompsetList">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" name="compset" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+						
+			<xsd:complexType name="ModelService">
+				<xsd:sequence>
+					<xsd:element name="platform" type="xsd:string"/>
+					<xsd:element name="app" type="xsd:string"/>
+					<xsd:element name="compsets" type="esmf:CompsetList"/>
+				</xsd:sequence>
+			</xsd:complexType>
 			
 			
 			<xsd:element name="NewModelService">
@@ -81,8 +94,22 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			
-			
+
+
+			<xsd:element name="ListModelServices">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="dummy" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ListModelServicesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="unbounded" minOccurs="0" name="modelService" type="esmf:ModelService"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:schema>
   </wsdl:types>
   <wsdl:message name="NewModelServiceRequest">
@@ -91,6 +118,10 @@
   </wsdl:message>
   <wsdl:message name="TerminateModelServiceRequest">
     <wsdl:part name="parameters" element="esmf:TerminateModelService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListModelServicesRequest">
+    <wsdl:part name="parameters" element="esmf:ListModelServices">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetModelServiceStatusResponse">
@@ -107,6 +138,10 @@
   </wsdl:message>
   <wsdl:message name="GetModelServiceStatusRequest">
     <wsdl:part name="parameters" element="esmf:GetModelServiceStatus">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListModelServicesResponse">
+    <wsdl:part name="parameters" element="esmf:ListModelServicesResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ESMF">
@@ -126,6 +161,12 @@
       <wsdl:input message="esmf:GetModelServiceStatusRequest">
     </wsdl:input>
       <wsdl:output message="esmf:GetModelServiceStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListModelServices">
+      <wsdl:input message="esmf:ListModelServicesRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:ListModelServicesResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -151,6 +192,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetModelServiceStatus">
       <soap:operation soapAction="http://earthsystemmodeling.org/ws/ModelServiceStatus"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListModelServices">
+      <soap:operation soapAction="http://earthsystemmodeling.org/ws/ListModelServices"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

@@ -4,7 +4,7 @@
     <property environment="env"/>
     <property name="axis2.home" value="${env.AXIS2_HOME}"/>
     <property name="project.base.dir" value="."/>
-    <property name="maven.class.path" value=""/>
+	<property name="maven.class.path" value=""/>
     <property name="name" value="ESMF"/>
     <property name="src" value="${project.base.dir}/src"/>
     <property name="test" value="${project.base.dir}/test"/>
@@ -23,7 +23,7 @@
     <target name="init">
         <mkdir dir="${build}"/>
         <mkdir dir="${classes}"/>
-        <mkdir dir="${lib}"/>
+        <mkdir dir="${lib}"/>  	
     </target>
     <target depends="init" name="pre.compile.test">
         <!--Test the classpath for the availability of necesary classes-->
@@ -44,6 +44,7 @@
             <classpath refid="axis2.class.path"/>
         </javac>
     </target>
+	
     <target depends="compile.src" name="compile.test" if="jars.ok">
         <javac debug="on" memoryMaximumSize="256m" memoryInitialSize="256m" fork="true" destdir="${classes}">
             <src path="${test}"/>
@@ -104,6 +105,22 @@
             </batchtest>
         </junit>
     </target>
+	
+	<target depends="compile.src" name="registrar">
+	    <!--    
+		<javac debug="on" includeantruntime="false" fork="true" destdir="${classes}" srcdir="${src}"/>
+		-->
+	        <jar destfile="${lib}/registrar.jar">
+	            <manifest>
+	                <attribute name="Main-Class" value="org.earthsystemmodeling.ws.registrar.RegistrarMain"/>
+	            </manifest>
+	            <fileset dir="${classes}">
+	                <include name="org/earthsystemmodeling/ws/*/*"/>
+	            </fileset>
+	        </jar>
+	    </target>
+	
+	
     <target name="clean">
         <delete dir="${build}"/>
     </target>

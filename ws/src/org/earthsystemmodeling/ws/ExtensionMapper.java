@@ -23,8 +23,18 @@ public class ExtensionMapper {
         }
 
         if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
+                "ModelService".equals(typeName)) {
+            return org.earthsystemmodeling.ws.ModelService.Factory.parse(reader);
+        }
+
+        if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
                 "ModelServiceStatus".equals(typeName)) {
             return org.earthsystemmodeling.ws.ModelServiceStatus.Factory.parse(reader);
+        }
+
+        if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
+                "CompsetList".equals(typeName)) {
+            return org.earthsystemmodeling.ws.CompsetList.Factory.parse(reader);
         }
 
         if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&

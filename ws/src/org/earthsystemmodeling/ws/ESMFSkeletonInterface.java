@@ -29,6 +29,14 @@ public interface ESMFSkeletonInterface {
     /**
      * Auto generated method signature
      *
+     * @param listModelServices
+     */
+    public org.earthsystemmodeling.ws.ListModelServicesResponse listModelServices(
+        org.earthsystemmodeling.ws.ListModelServices listModelServices);
+
+    /**
+     * Auto generated method signature
+     *
      * @param terminateModelService
      */
     public org.earthsystemmodeling.ws.TerminateModelServiceResponse terminateModelService(

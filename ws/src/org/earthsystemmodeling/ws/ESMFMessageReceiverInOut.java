@@ -39,7 +39,7 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
                     ((methodName = org.apache.axis2.util.JavaUtils.xmlNameToJavaIdentifier(
                             op.getName().getLocalPart())) != null)) {
                 if ("newModelService".equals(methodName)) {
-                    org.earthsystemmodeling.ws.NewModelServiceResponse newModelServiceResponse19 =
+                    org.earthsystemmodeling.ws.NewModelServiceResponse newModelServiceResponse25 =
                         null;
                     org.earthsystemmodeling.ws.NewModelService wrappedParam = (org.earthsystemmodeling.ws.NewModelService) fromOM(msgContext.getEnvelope()
                                                                                                                                             .getBody()
@@ -47,16 +47,16 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
                             org.earthsystemmodeling.ws.NewModelService.class,
                             getEnvelopeNamespaces(msgContext.getEnvelope()));
 
-                    newModelServiceResponse19 = skel.newModelService(wrappedParam);
+                    newModelServiceResponse25 = skel.newModelService(wrappedParam);
 
                     envelope = toEnvelope(getSOAPFactory(msgContext),
-                            newModelServiceResponse19, false,
+                            newModelServiceResponse25, false,
                             new javax.xml.namespace.QName(
                                 "http://earthsystemmodeling.org/ws",
                                 "newModelService"));
                 } else
                  if ("getModelServiceStatus".equals(methodName)) {
-                    org.earthsystemmodeling.ws.GetModelServiceStatusResponse getModelServiceStatusResponse21 =
+                    org.earthsystemmodeling.ws.GetModelServiceStatusResponse getModelServiceStatusResponse27 =
                         null;
                     org.earthsystemmodeling.ws.GetModelServiceStatus wrappedParam =
                         (org.earthsystemmodeling.ws.GetModelServiceStatus) fromOM(msgContext.getEnvelope()
@@ -65,16 +65,33 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
                             org.earthsystemmodeling.ws.GetModelServiceStatus.class,
                             getEnvelopeNamespaces(msgContext.getEnvelope()));
 
-                    getModelServiceStatusResponse21 = skel.getModelServiceStatus(wrappedParam);
+                    getModelServiceStatusResponse27 = skel.getModelServiceStatus(wrappedParam);
 
                     envelope = toEnvelope(getSOAPFactory(msgContext),
-                            getModelServiceStatusResponse21, false,
+                            getModelServiceStatusResponse27, false,
                             new javax.xml.namespace.QName(
                                 "http://earthsystemmodeling.org/ws",
                                 "getModelServiceStatus"));
                 } else
+                 if ("listModelServices".equals(methodName)) {
+                    org.earthsystemmodeling.ws.ListModelServicesResponse listModelServicesResponse29 =
+                        null;
+                    org.earthsystemmodeling.ws.ListModelServices wrappedParam = (org.earthsystemmodeling.ws.ListModelServices) fromOM(msgContext.getEnvelope()
+                                                                                                                                                .getBody()
+                                                                                                                                                .getFirstElement(),
+                            org.earthsystemmodeling.ws.ListModelServices.class,
+                            getEnvelopeNamespaces(msgContext.getEnvelope()));
+
+                    listModelServicesResponse29 = skel.listModelServices(wrappedParam);
+
+                    envelope = toEnvelope(getSOAPFactory(msgContext),
+                            listModelServicesResponse29, false,
+                            new javax.xml.namespace.QName(
+                                "http://earthsystemmodeling.org/ws",
+                                "listModelServices"));
+                } else
                  if ("terminateModelService".equals(methodName)) {
-                    org.earthsystemmodeling.ws.TerminateModelServiceResponse terminateModelServiceResponse23 =
+                    org.earthsystemmodeling.ws.TerminateModelServiceResponse terminateModelServiceResponse31 =
                         null;
                     org.earthsystemmodeling.ws.TerminateModelService wrappedParam =
                         (org.earthsystemmodeling.ws.TerminateModelService) fromOM(msgContext.getEnvelope()
@@ -83,10 +100,10 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
                             org.earthsystemmodeling.ws.TerminateModelService.class,
                             getEnvelopeNamespaces(msgContext.getEnvelope()));
 
-                    terminateModelServiceResponse23 = skel.terminateModelService(wrappedParam);
+                    terminateModelServiceResponse31 = skel.terminateModelService(wrappedParam);
 
                     envelope = toEnvelope(getSOAPFactory(msgContext),
-                            terminateModelServiceResponse23, false,
+                            terminateModelServiceResponse31, false,
                             new javax.xml.namespace.QName(
                                 "http://earthsystemmodeling.org/ws",
                                 "terminateModelService"));
@@ -140,6 +157,28 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
         boolean optimizeContent) throws org.apache.axis2.AxisFault {
         try {
             return param.getOMElement(org.earthsystemmodeling.ws.GetModelServiceStatusResponse.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.apache.axiom.om.OMElement toOM(
+        org.earthsystemmodeling.ws.ListModelServices param,
+        boolean optimizeContent) throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(org.earthsystemmodeling.ws.ListModelServices.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.apache.axiom.om.OMElement toOM(
+        org.earthsystemmodeling.ws.ListModelServicesResponse param,
+        boolean optimizeContent) throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(org.earthsystemmodeling.ws.ListModelServicesResponse.MY_QNAME,
                 org.apache.axiom.om.OMAbstractFactory.getOMFactory());
         } catch (org.apache.axis2.databinding.ADBException e) {
             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -220,6 +259,31 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
 
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
+        org.earthsystemmodeling.ws.ListModelServicesResponse param,
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
+        throws org.apache.axis2.AxisFault {
+        try {
+            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+
+            emptyEnvelope.getBody()
+                         .addChild(param.getOMElement(
+                    org.earthsystemmodeling.ws.ListModelServicesResponse.MY_QNAME,
+                    factory));
+
+            return emptyEnvelope;
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.earthsystemmodeling.ws.ListModelServicesResponse wrapListModelServices() {
+        org.earthsystemmodeling.ws.ListModelServicesResponse wrappedElement = new org.earthsystemmodeling.ws.ListModelServicesResponse();
+
+        return wrappedElement;
+    }
+
+    private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
+        org.apache.axiom.soap.SOAPFactory factory,
         org.earthsystemmodeling.ws.TerminateModelServiceResponse param,
         boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
@@ -263,6 +327,15 @@ public class ESMFMessageReceiverInOut extends org.apache.axis2.receivers.Abstrac
             if (org.earthsystemmodeling.ws.GetModelServiceStatusResponse.class.equals(
                         type)) {
                 return org.earthsystemmodeling.ws.GetModelServiceStatusResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+
+            if (org.earthsystemmodeling.ws.ListModelServices.class.equals(type)) {
+                return org.earthsystemmodeling.ws.ListModelServices.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+
+            if (org.earthsystemmodeling.ws.ListModelServicesResponse.class.equals(
+                        type)) {
+                return org.earthsystemmodeling.ws.ListModelServicesResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
 
             if (org.earthsystemmodeling.ws.NewModelService.class.equals(type)) {

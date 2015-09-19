@@ -17,6 +17,10 @@
             <actionMapping>http://earthsystemmodeling.org/ws/ModelServiceStatus</actionMapping>
             <outputActionMapping>http://earthsystemmodeling.org/ws/ESMF/GetModelServiceStatusResponse</outputActionMapping>
         </operation>
+        <operation name="ListModelServices" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://earthsystemmodeling.org/ws">
+            <actionMapping>http://earthsystemmodeling.org/ws/ListModelServices</actionMapping>
+            <outputActionMapping>http://earthsystemmodeling.org/ws/ESMF/ListModelServicesResponse</outputActionMapping>
+        </operation>
         <operation name="TerminateModelService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://earthsystemmodeling.org/ws">
             <actionMapping>http://earthsystemmodeling.org/ws/TerminateModelService</actionMapping>
             <outputActionMapping>http://earthsystemmodeling.org/ws/ESMF/TerminateModelServiceResponse</outputActionMapping>
