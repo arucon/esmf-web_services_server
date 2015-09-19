@@ -1,0 +1,6 @@
+ESMF Web Services
+=================
+
+Server files are in the "ws" directory.
+
+A simple Python client is in the "pythonclient" directory.
