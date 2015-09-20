@@ -1,5 +1,5 @@
 /**
- * TerminateModelServiceResponse.java
+ * ComponentStatusResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,34 +8,34 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  TerminateModelServiceResponse bean class
+ *  ComponentStatusResponse bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class TerminateModelServiceResponse implements org.apache.axis2.databinding.ADBBean {
+public class ComponentStatusResponse implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "TerminateModelServiceResponse", "ns1");
+            "ComponentStatusResponse", "ns1");
 
     /**
-     * field for Outparam
+     * field for Status
      */
-    protected java.lang.String localOutparam;
+    protected org.earthsystemmodeling.ws.StatusMsg localStatus;
 
     /**
      * Auto generated getter method
-     * @return java.lang.String
+     * @return org.earthsystemmodeling.ws.StatusMsg
      */
-    public java.lang.String getOutparam() {
-        return localOutparam;
+    public org.earthsystemmodeling.ws.StatusMsg getStatus() {
+        return localStatus;
     }
 
     /**
      * Auto generated setter method
-     * @param param Outparam
+     * @param param Status
      */
-    public void setOutparam(java.lang.String param) {
-        this.localOutparam = param;
+    public void setStatus(org.earthsystemmodeling.ws.StatusMsg param) {
+        this.localStatus = param;
     }
 
     /**
@@ -81,27 +81,21 @@ public class TerminateModelServiceResponse implements org.apache.axis2.databindi
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":TerminateModelServiceResponse",
-                    xmlWriter);
+                    namespacePrefix + ":ComponentStatusResponse", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "TerminateModelServiceResponse", xmlWriter);
+                    "ComponentStatusResponse", xmlWriter);
             }
         }
 
-        namespace = "http://earthsystemmodeling.org/ws";
-        writeStartElement(null, namespace, "outparam", xmlWriter);
-
-        if (localOutparam == null) {
-            // write the nil attribute
+        if (localStatus == null) {
             throw new org.apache.axis2.databinding.ADBException(
-                "outparam cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(localOutparam);
+                "Status cannot be null!!");
         }
 
-        xmlWriter.writeEndElement();
+        localStatus.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "Status"), xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -315,15 +309,14 @@ public class TerminateModelServiceResponse implements org.apache.axis2.databindi
         java.util.ArrayList attribList = new java.util.ArrayList();
 
         elementList.add(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "outparam"));
+                "http://earthsystemmodeling.org/ws", "Status"));
 
-        if (localOutparam != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localOutparam));
-        } else {
+        if (localStatus == null) {
             throw new org.apache.axis2.databinding.ADBException(
-                "outparam cannot be null!!");
+                "Status cannot be null!!");
         }
+
+        elementList.add(localStatus);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -340,9 +333,9 @@ public class TerminateModelServiceResponse implements org.apache.axis2.databindi
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static TerminateModelServiceResponse parse(
+        public static ComponentStatusResponse parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            TerminateModelServiceResponse object = new TerminateModelServiceResponse();
+            ComponentStatusResponse object = new ComponentStatusResponse();
 
             int event;
             java.lang.String nillableValue = null;
@@ -371,12 +364,12 @@ public class TerminateModelServiceResponse implements org.apache.axis2.databindi
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"TerminateModelServiceResponse".equals(type)) {
+                        if (!"ComponentStatusResponse".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (TerminateModelServiceResponse) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (ComponentStatusResponse) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -393,21 +386,10 @@ public class TerminateModelServiceResponse implements org.apache.axis2.databindi
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "outparam").equals(
+                            "http://earthsystemmodeling.org/ws", "Status").equals(
                             reader.getName())) {
-                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                            "nil");
-
-                    if ("true".equals(nillableValue) ||
-                            "1".equals(nillableValue)) {
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "outparam" + "  cannot be null");
-                    }
-
-                    java.lang.String content = reader.getElementText();
-
-                    object.setOutparam(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            content));
+                    object.setStatus(org.earthsystemmodeling.ws.StatusMsg.Factory.parse(
+                            reader));
 
                     reader.next();
                 } // End of if for expected property start element

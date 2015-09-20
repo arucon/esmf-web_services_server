@@ -1,5 +1,5 @@
 /**
- * ListModelServices.java
+ * ArrayOfDouble.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,46 +8,50 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  ListModelServices bean class
+ *  ArrayOfDouble bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
-    public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "ListModelServices", "ns1");
+public class ArrayOfDouble implements org.apache.axis2.databinding.ADBBean {
+    /* This type was generated from the piece of schema that had
+       name = ArrayOfDouble
+       Namespace URI = http://earthsystemmodeling.org/ws
+       Namespace Prefix = ns1
+     */
 
     /**
-     * field for Dummy
+     * field for Item
+     * This was an Array!
      */
-    protected java.lang.String localDummy;
-
-    /*  This tracker boolean wil be used to detect whether the user called the set method
-     *   for this attribute. It will be used to determine whether to include this field
-     *   in the serialized XML
-     */
-    protected boolean localDummyTracker = false;
-
-    public boolean isDummySpecified() {
-        return localDummyTracker;
-    }
+    protected double[] localItem;
 
     /**
      * Auto generated getter method
-     * @return java.lang.String
+     * @return double[]
      */
-    public java.lang.String getDummy() {
-        return localDummy;
+    public double[] getItem() {
+        return localItem;
+    }
+
+    /**
+     * validate the array for Item
+     */
+    protected void validateItem(double[] param) {
+        if ((param != null) && (param.length < 1)) {
+            throw new java.lang.RuntimeException(
+                "Input values do not follow defined XSD restrictions");
+        }
     }
 
     /**
      * Auto generated setter method
-     * @param param Dummy
+     * @param param Item
      */
-    public void setDummy(java.lang.String param) {
-        localDummyTracker = param != null;
+    public void setItem(double[] param) {
+        validateItem(param);
 
-        this.localDummy = param;
+        this.localItem = param;
     }
 
     /**
@@ -61,9 +65,9 @@ public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
         final org.apache.axiom.om.OMFactory factory)
         throws org.apache.axis2.databinding.ADBException {
         org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
-                MY_QNAME);
+                parentQName);
 
-        return factory.createOMElement(dataSource, MY_QNAME);
+        return factory.createOMElement(dataSource, parentQName);
     }
 
     public void serialize(final javax.xml.namespace.QName parentQName,
@@ -93,27 +97,32 @@ public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":ListModelServices", xmlWriter);
+                    namespacePrefix + ":ArrayOfDouble", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "ListModelServices", xmlWriter);
+                    "ArrayOfDouble", xmlWriter);
             }
         }
 
-        if (localDummyTracker) {
+        if (localItem != null) {
             namespace = "http://earthsystemmodeling.org/ws";
-            writeStartElement(null, namespace, "dummy", xmlWriter);
 
-            if (localDummy == null) {
-                // write the nil attribute
-                throw new org.apache.axis2.databinding.ADBException(
-                    "dummy cannot be null!!");
-            } else {
-                xmlWriter.writeCharacters(localDummy);
+            for (int i = 0; i < localItem.length; i++) {
+                if (!java.lang.Double.isNaN(localItem[i])) {
+                    writeStartElement(null, namespace, "item", xmlWriter);
+
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localItem[i]));
+                    xmlWriter.writeEndElement();
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "item cannot be null!!");
+                }
             }
-
-            xmlWriter.writeEndElement();
+        } else {
+            throw new org.apache.axis2.databinding.ADBException(
+                "item cannot be null!!");
         }
 
         xmlWriter.writeEndElement();
@@ -327,17 +336,16 @@ public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        if (localDummyTracker) {
-            elementList.add(new javax.xml.namespace.QName(
-                    "http://earthsystemmodeling.org/ws", "dummy"));
-
-            if (localDummy != null) {
+        if (localItem != null) {
+            for (int i = 0; i < localItem.length; i++) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://earthsystemmodeling.org/ws", "item"));
                 elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        localDummy));
-            } else {
-                throw new org.apache.axis2.databinding.ADBException(
-                    "dummy cannot be null!!");
+                        localItem[i]));
             }
+        } else {
+            throw new org.apache.axis2.databinding.ADBException(
+                "item cannot be null!!");
         }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
@@ -355,9 +363,9 @@ public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static ListModelServices parse(
+        public static ArrayOfDouble parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            ListModelServices object = new ListModelServices();
+            ArrayOfDouble object = new ArrayOfDouble();
 
             int event;
             java.lang.String nillableValue = null;
@@ -386,12 +394,12 @@ public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"ListModelServices".equals(type)) {
+                        if (!"ArrayOfDouble".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (ListModelServices) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (ArrayOfDouble) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -403,31 +411,58 @@ public class ListModelServices implements org.apache.axis2.databinding.ADBBean {
 
                 reader.next();
 
+                java.util.ArrayList list1 = new java.util.ArrayList();
+
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "dummy").equals(
+                            "http://earthsystemmodeling.org/ws", "item").equals(
                             reader.getName())) {
-                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                            "nil");
+                    // Process the array and step past its final element's end.
+                    list1.add(reader.getElementText());
 
-                    if ("true".equals(nillableValue) ||
-                            "1".equals(nillableValue)) {
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "dummy" + "  cannot be null");
+                    //loop until we find a start element that is not part of this array
+                    boolean loopDone1 = false;
+
+                    while (!loopDone1) {
+                        // Ensure we are at the EndElement
+                        while (!reader.isEndElement()) {
+                            reader.next();
+                        }
+
+                        // Step out of this element
+                        reader.next();
+
+                        // Step to next element event.
+                        while (!reader.isStartElement() &&
+                                !reader.isEndElement())
+                            reader.next();
+
+                        if (reader.isEndElement()) {
+                            //two continuous end elements means we are exiting the xml structure
+                            loopDone1 = true;
+                        } else {
+                            if (new javax.xml.namespace.QName(
+                                        "http://earthsystemmodeling.org/ws",
+                                        "item").equals(reader.getName())) {
+                                list1.add(reader.getElementText());
+                            } else {
+                                loopDone1 = true;
+                            }
+                        }
                     }
 
-                    java.lang.String content = reader.getElementText();
-
-                    object.setDummy(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            content));
-
-                    reader.next();
+                    // call the converter utility  to convert and set the array
+                    object.setItem((double[]) org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
+                            double.class, list1));
                 } // End of if for expected property start element
 
                 else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

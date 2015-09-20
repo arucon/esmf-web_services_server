@@ -1,5 +1,5 @@
 /**
- * RequestStatus.java
+ * FinalizeComponentRequest.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,50 +8,55 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  RequestStatus bean class
+ *  FinalizeComponentRequest bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class RequestStatus implements org.apache.axis2.databinding.ADBBean {
+public class FinalizeComponentRequest implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "RequestStatus", "ns1");
-    private static java.util.HashMap _table_ = new java.util.HashMap();
-    public static final java.lang.String _OK = org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-            "OK");
-    public static final java.lang.String _FAIL = org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-            "FAIL");
-    public static final RequestStatus OK = new RequestStatus(_OK, true);
-    public static final RequestStatus FAIL = new RequestStatus(_FAIL, true);
+            "FinalizeComponentRequest", "ns1");
 
     /**
-     * field for RequestStatus
+     * field for ServerName
      */
-    protected java.lang.String localRequestStatus;
+    protected java.lang.String localServerName;
 
-    // Constructor
-    protected RequestStatus(java.lang.String value, boolean isRegisterValue) {
-        localRequestStatus = value;
+    /**
+     * field for ClientId
+     */
+    protected java.lang.String localClientId;
 
-        if (isRegisterValue) {
-            _table_.put(localRequestStatus, this);
-        }
+    /**
+     * Auto generated getter method
+     * @return java.lang.String
+     */
+    public java.lang.String getServerName() {
+        return localServerName;
     }
 
-    public java.lang.String getValue() {
-        return localRequestStatus;
+    /**
+     * Auto generated setter method
+     * @param param ServerName
+     */
+    public void setServerName(java.lang.String param) {
+        this.localServerName = param;
     }
 
-    public boolean equals(java.lang.Object obj) {
-        return (obj == this);
+    /**
+     * Auto generated getter method
+     * @return java.lang.String
+     */
+    public java.lang.String getClientId() {
+        return localClientId;
     }
 
-    public int hashCode() {
-        return toString().hashCode();
-    }
-
-    public java.lang.String toString() {
-        return localRequestStatus.toString();
+    /**
+     * Auto generated setter method
+     * @param param ClientId
+     */
+    public void setClientId(java.lang.String param) {
+        this.localClientId = param;
     }
 
     /**
@@ -81,13 +86,14 @@ public class RequestStatus implements org.apache.axis2.databinding.ADBBean {
         javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
         throws javax.xml.stream.XMLStreamException,
             org.apache.axis2.databinding.ADBException {
-        //We can safely assume an element has only one type associated with it
-        java.lang.String namespace = parentQName.getNamespaceURI();
-        java.lang.String _localName = parentQName.getLocalPart();
+        java.lang.String prefix = null;
+        java.lang.String namespace = null;
 
-        writeStartElement(null, namespace, _localName, xmlWriter);
+        prefix = parentQName.getPrefix();
+        namespace = parentQName.getNamespaceURI();
+        writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+            xmlWriter);
 
-        // add the type details if this is used in a simple type
         if (serializeType) {
             java.lang.String namespacePrefix = registerPrefix(xmlWriter,
                     "http://earthsystemmodeling.org/ws");
@@ -96,20 +102,39 @@ public class RequestStatus implements org.apache.axis2.databinding.ADBBean {
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":RequestStatus", xmlWriter);
+                    namespacePrefix + ":FinalizeComponentRequest", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "RequestStatus", xmlWriter);
+                    "FinalizeComponentRequest", xmlWriter);
             }
         }
 
-        if (localRequestStatus == null) {
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "ServerName", xmlWriter);
+
+        if (localServerName == null) {
+            // write the nil attribute
             throw new org.apache.axis2.databinding.ADBException(
-                "RequestStatus cannot be null !!");
+                "ServerName cannot be null!!");
         } else {
-            xmlWriter.writeCharacters(localRequestStatus);
+            xmlWriter.writeCharacters(localServerName);
         }
+
+        xmlWriter.writeEndElement();
+
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "ClientId", xmlWriter);
+
+        if (localClientId == null) {
+            // write the nil attribute
+            throw new org.apache.axis2.databinding.ADBException(
+                "ClientId cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(localClientId);
+        }
+
+        xmlWriter.writeEndElement();
 
         xmlWriter.writeEndElement();
     }
@@ -319,57 +344,39 @@ public class RequestStatus implements org.apache.axis2.databinding.ADBBean {
     public javax.xml.stream.XMLStreamReader getPullParser(
         javax.xml.namespace.QName qName)
         throws org.apache.axis2.databinding.ADBException {
-        //We can safely assume an element has only one type associated with it
-        return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
-            new java.lang.Object[] {
-                org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
-                org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localRequestStatus)
-            }, null);
+        java.util.ArrayList elementList = new java.util.ArrayList();
+        java.util.ArrayList attribList = new java.util.ArrayList();
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "ServerName"));
+
+        if (localServerName != null) {
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localServerName));
+        } else {
+            throw new org.apache.axis2.databinding.ADBException(
+                "ServerName cannot be null!!");
+        }
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "ClientId"));
+
+        if (localClientId != null) {
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localClientId));
+        } else {
+            throw new org.apache.axis2.databinding.ADBException(
+                "ClientId cannot be null!!");
+        }
+
+        return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+            elementList.toArray(), attribList.toArray());
     }
 
     /**
      *  Factory class that keeps the parse method
      */
     public static class Factory {
-        public static RequestStatus fromValue(java.lang.String value)
-            throws java.lang.IllegalArgumentException {
-            RequestStatus enumeration = (RequestStatus) _table_.get(value);
-
-            if ((enumeration == null) &&
-                    !((value == null) || (value.equals("")))) {
-                throw new java.lang.IllegalArgumentException();
-            }
-
-            return enumeration;
-        }
-
-        public static RequestStatus fromString(java.lang.String value,
-            java.lang.String namespaceURI)
-            throws java.lang.IllegalArgumentException {
-            try {
-                return fromValue(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        value));
-            } catch (java.lang.Exception e) {
-                throw new java.lang.IllegalArgumentException();
-            }
-        }
-
-        public static RequestStatus fromString(
-            javax.xml.stream.XMLStreamReader xmlStreamReader,
-            java.lang.String content) {
-            if (content.indexOf(":") > -1) {
-                java.lang.String prefix = content.substring(0,
-                        content.indexOf(":"));
-                java.lang.String namespaceUri = xmlStreamReader.getNamespaceContext()
-                                                               .getNamespaceURI(prefix);
-
-                return RequestStatus.Factory.fromString(content, namespaceUri);
-            } else {
-                return RequestStatus.Factory.fromString(content, "");
-            }
-        }
-
         /**
          * static method to create the object
          * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -377,13 +384,9 @@ public class RequestStatus implements org.apache.axis2.databinding.ADBBean {
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static RequestStatus parse(
+        public static FinalizeComponentRequest parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            RequestStatus object = null;
-
-            // initialize a hash map to keep values
-            java.util.Map attributeMap = new java.util.HashMap();
-            java.util.List extraAttributeList = new java.util.ArrayList<org.apache.axiom.om.OMAttribute>();
+            FinalizeComponentRequest object = new FinalizeComponentRequest();
 
             int event;
             java.lang.String nillableValue = null;
@@ -394,40 +397,110 @@ public class RequestStatus implements org.apache.axis2.databinding.ADBBean {
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
+                if (reader.getAttributeValue(
+                            "http://www.w3.org/2001/XMLSchema-instance", "type") != null) {
+                    java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "type");
+
+                    if (fullTypeName != null) {
+                        java.lang.String nsPrefix = null;
+
+                        if (fullTypeName.indexOf(":") > -1) {
+                            nsPrefix = fullTypeName.substring(0,
+                                    fullTypeName.indexOf(":"));
+                        }
+
+                        nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                        java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                    ":") + 1);
+
+                        if (!"FinalizeComponentRequest".equals(type)) {
+                            //find namespace for the prefix
+                            java.lang.String nsUri = reader.getNamespaceContext()
+                                                           .getNamespaceURI(nsPrefix);
+
+                            return (FinalizeComponentRequest) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                                type, reader);
+                        }
+                    }
+                }
+
                 // Note all attributes that were handled. Used to differ normal attributes
                 // from anyAttributes.
                 java.util.Vector handledAttributes = new java.util.Vector();
 
-                while (!reader.isEndElement()) {
-                    if (reader.isStartElement() || reader.hasText()) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
+                reader.next();
 
-                        if ("true".equals(nillableValue) ||
-                                "1".equals(nillableValue)) {
-                            throw new org.apache.axis2.databinding.ADBException(
-                                "The element: " + "RequestStatus" +
-                                "  cannot be null");
-                        }
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
 
-                        java.lang.String content = reader.getElementText();
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "ServerName").equals(
+                            reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
 
-                        if (content.indexOf(":") > 0) {
-                            // this seems to be a Qname so find the namespace and send
-                            prefix = content.substring(0, content.indexOf(":"));
-                            namespaceuri = reader.getNamespaceURI(prefix);
-                            object = RequestStatus.Factory.fromString(content,
-                                    namespaceuri);
-                        } else {
-                            // this seems to be not a qname send and empty namespace incase of it is
-                            // check is done in fromString method
-                            object = RequestStatus.Factory.fromString(content,
-                                    "");
-                        }
-                    } else {
-                        reader.next();
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ServerName" +
+                            "  cannot be null");
                     }
-                } // end of while loop
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setServerName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "ClientId").equals(
+                            reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ClientId" + "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setClientId(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement()) {
+                    // A start element we are not expecting indicates a trailing invalid property
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
             } catch (javax.xml.stream.XMLStreamException e) {
                 throw new java.lang.Exception(e);
             }

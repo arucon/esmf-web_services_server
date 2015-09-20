@@ -1,5 +1,5 @@
 /**
- * GetModelServiceStatusResponse.java
+ * SetInputDataDescRequest.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,56 +8,76 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  GetModelServiceStatusResponse bean class
+ *  SetInputDataDescRequest bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class GetModelServiceStatusResponse implements org.apache.axis2.databinding.ADBBean {
+public class SetInputDataDescRequest implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "GetModelServiceStatusResponse", "ns1");
+            "SetInputDataDescRequest", "ns1");
 
     /**
-     * field for Result
+     * field for ServerName
      */
-    protected org.earthsystemmodeling.ws.RequestResult localResult;
+    protected java.lang.String localServerName;
 
     /**
-     * field for ModelServiceStatus
+     * field for ClientId
      */
-    protected org.earthsystemmodeling.ws.ModelServiceStatus localModelServiceStatus;
+    protected java.lang.String localClientId;
+
+    /**
+     * field for InputDataDesc
+     */
+    protected org.earthsystemmodeling.ws.DataDesc localInputDataDesc;
 
     /**
      * Auto generated getter method
-     * @return org.earthsystemmodeling.ws.RequestResult
+     * @return java.lang.String
      */
-    public org.earthsystemmodeling.ws.RequestResult getResult() {
-        return localResult;
+    public java.lang.String getServerName() {
+        return localServerName;
     }
 
     /**
      * Auto generated setter method
-     * @param param Result
+     * @param param ServerName
      */
-    public void setResult(org.earthsystemmodeling.ws.RequestResult param) {
-        this.localResult = param;
+    public void setServerName(java.lang.String param) {
+        this.localServerName = param;
     }
 
     /**
      * Auto generated getter method
-     * @return org.earthsystemmodeling.ws.ModelServiceStatus
+     * @return java.lang.String
      */
-    public org.earthsystemmodeling.ws.ModelServiceStatus getModelServiceStatus() {
-        return localModelServiceStatus;
+    public java.lang.String getClientId() {
+        return localClientId;
     }
 
     /**
      * Auto generated setter method
-     * @param param ModelServiceStatus
+     * @param param ClientId
      */
-    public void setModelServiceStatus(
-        org.earthsystemmodeling.ws.ModelServiceStatus param) {
-        this.localModelServiceStatus = param;
+    public void setClientId(java.lang.String param) {
+        this.localClientId = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return org.earthsystemmodeling.ws.DataDesc
+     */
+    public org.earthsystemmodeling.ws.DataDesc getInputDataDesc() {
+        return localInputDataDesc;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param InputDataDesc
+     */
+    public void setInputDataDesc(org.earthsystemmodeling.ws.DataDesc param) {
+        this.localInputDataDesc = param;
     }
 
     /**
@@ -103,31 +123,47 @@ public class GetModelServiceStatusResponse implements org.apache.axis2.databindi
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":GetModelServiceStatusResponse",
-                    xmlWriter);
+                    namespacePrefix + ":SetInputDataDescRequest", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "GetModelServiceStatusResponse", xmlWriter);
+                    "SetInputDataDescRequest", xmlWriter);
             }
         }
 
-        if (localResult == null) {
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "ServerName", xmlWriter);
+
+        if (localServerName == null) {
+            // write the nil attribute
             throw new org.apache.axis2.databinding.ADBException(
-                "result cannot be null!!");
+                "ServerName cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(localServerName);
         }
 
-        localResult.serialize(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "result"), xmlWriter);
+        xmlWriter.writeEndElement();
 
-        if (localModelServiceStatus == null) {
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "ClientId", xmlWriter);
+
+        if (localClientId == null) {
+            // write the nil attribute
             throw new org.apache.axis2.databinding.ADBException(
-                "modelServiceStatus cannot be null!!");
+                "ClientId cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(localClientId);
         }
 
-        localModelServiceStatus.serialize(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "modelServiceStatus"),
-            xmlWriter);
+        xmlWriter.writeEndElement();
+
+        if (localInputDataDesc == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "InputDataDesc cannot be null!!");
+        }
+
+        localInputDataDesc.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "InputDataDesc"), xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -341,24 +377,36 @@ public class GetModelServiceStatusResponse implements org.apache.axis2.databindi
         java.util.ArrayList attribList = new java.util.ArrayList();
 
         elementList.add(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "result"));
+                "http://earthsystemmodeling.org/ws", "ServerName"));
 
-        if (localResult == null) {
+        if (localServerName != null) {
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localServerName));
+        } else {
             throw new org.apache.axis2.databinding.ADBException(
-                "result cannot be null!!");
+                "ServerName cannot be null!!");
         }
-
-        elementList.add(localResult);
 
         elementList.add(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "modelServiceStatus"));
+                "http://earthsystemmodeling.org/ws", "ClientId"));
 
-        if (localModelServiceStatus == null) {
+        if (localClientId != null) {
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localClientId));
+        } else {
             throw new org.apache.axis2.databinding.ADBException(
-                "modelServiceStatus cannot be null!!");
+                "ClientId cannot be null!!");
         }
 
-        elementList.add(localModelServiceStatus);
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "InputDataDesc"));
+
+        if (localInputDataDesc == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "InputDataDesc cannot be null!!");
+        }
+
+        elementList.add(localInputDataDesc);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -375,9 +423,9 @@ public class GetModelServiceStatusResponse implements org.apache.axis2.databindi
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static GetModelServiceStatusResponse parse(
+        public static SetInputDataDescRequest parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            GetModelServiceStatusResponse object = new GetModelServiceStatusResponse();
+            SetInputDataDescRequest object = new SetInputDataDescRequest();
 
             int event;
             java.lang.String nillableValue = null;
@@ -406,12 +454,12 @@ public class GetModelServiceStatusResponse implements org.apache.axis2.databindi
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"GetModelServiceStatusResponse".equals(type)) {
+                        if (!"SetInputDataDescRequest".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (GetModelServiceStatusResponse) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (SetInputDataDescRequest) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -428,10 +476,22 @@ public class GetModelServiceStatusResponse implements org.apache.axis2.databindi
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "result").equals(
+                            "http://earthsystemmodeling.org/ws", "ServerName").equals(
                             reader.getName())) {
-                    object.setResult(org.earthsystemmodeling.ws.RequestResult.Factory.parse(
-                            reader));
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ServerName" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setServerName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            content));
 
                     reader.next();
                 } // End of if for expected property start element
@@ -447,9 +507,39 @@ public class GetModelServiceStatusResponse implements org.apache.axis2.databindi
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws",
-                            "modelServiceStatus").equals(reader.getName())) {
-                    object.setModelServiceStatus(org.earthsystemmodeling.ws.ModelServiceStatus.Factory.parse(
+                            "http://earthsystemmodeling.org/ws", "ClientId").equals(
+                            reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ClientId" + "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setClientId(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "InputDataDesc").equals(
+                            reader.getName())) {
+                    object.setInputDataDesc(org.earthsystemmodeling.ws.DataDesc.Factory.parse(
                             reader));
 
                     reader.next();

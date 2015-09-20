@@ -18,28 +18,23 @@ public class ExtensionMapper {
         java.lang.String namespaceURI, java.lang.String typeName,
         javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
         if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
-                "RequestStatus".equals(typeName)) {
-            return org.earthsystemmodeling.ws.RequestStatus.Factory.parse(reader);
+                "DataDesc".equals(typeName)) {
+            return org.earthsystemmodeling.ws.DataDesc.Factory.parse(reader);
         }
 
         if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
-                "ModelService".equals(typeName)) {
-            return org.earthsystemmodeling.ws.ModelService.Factory.parse(reader);
+                "ArrayOfDouble".equals(typeName)) {
+            return org.earthsystemmodeling.ws.ArrayOfDouble.Factory.parse(reader);
         }
 
         if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
-                "ModelServiceStatus".equals(typeName)) {
-            return org.earthsystemmodeling.ws.ModelServiceStatus.Factory.parse(reader);
+                "ArrayOfString".equals(typeName)) {
+            return org.earthsystemmodeling.ws.ArrayOfString.Factory.parse(reader);
         }
 
         if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
-                "CompsetList".equals(typeName)) {
-            return org.earthsystemmodeling.ws.CompsetList.Factory.parse(reader);
-        }
-
-        if ("http://earthsystemmodeling.org/ws".equals(namespaceURI) &&
-                "RequestResult".equals(typeName)) {
-            return org.earthsystemmodeling.ws.RequestResult.Factory.parse(reader);
+                "StatusMsg".equals(typeName)) {
+            return org.earthsystemmodeling.ws.StatusMsg.Factory.parse(reader);
         }
 
         throw new org.apache.axis2.databinding.ADBException("Unsupported type " +

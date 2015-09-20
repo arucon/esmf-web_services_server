@@ -1,5 +1,5 @@
 /**
- * ListModelServicesResponse.java
+ * GetFilesResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,73 +8,55 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  ListModelServicesResponse bean class
+ *  GetFilesResponse bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class ListModelServicesResponse implements org.apache.axis2.databinding.ADBBean {
+public class GetFilesResponse implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "ListModelServicesResponse", "ns1");
+            "GetFilesResponse", "ns1");
 
     /**
-     * field for ModelService
-     * This was an Array!
+     * field for FileList
      */
-    protected org.earthsystemmodeling.ws.ModelService[] localModelService;
+    protected org.earthsystemmodeling.ws.ArrayOfString localFileList;
 
-    /*  This tracker boolean wil be used to detect whether the user called the set method
-     *   for this attribute. It will be used to determine whether to include this field
-     *   in the serialized XML
+    /**
+     * field for Status
      */
-    protected boolean localModelServiceTracker = false;
-
-    public boolean isModelServiceSpecified() {
-        return localModelServiceTracker;
-    }
+    protected org.earthsystemmodeling.ws.StatusMsg localStatus;
 
     /**
      * Auto generated getter method
-     * @return org.earthsystemmodeling.ws.ModelService[]
+     * @return org.earthsystemmodeling.ws.ArrayOfString
      */
-    public org.earthsystemmodeling.ws.ModelService[] getModelService() {
-        return localModelService;
-    }
-
-    /**
-     * validate the array for ModelService
-     */
-    protected void validateModelService(
-        org.earthsystemmodeling.ws.ModelService[] param) {
+    public org.earthsystemmodeling.ws.ArrayOfString getFileList() {
+        return localFileList;
     }
 
     /**
      * Auto generated setter method
-     * @param param ModelService
+     * @param param FileList
      */
-    public void setModelService(org.earthsystemmodeling.ws.ModelService[] param) {
-        validateModelService(param);
-
-        localModelServiceTracker = param != null;
-
-        this.localModelService = param;
+    public void setFileList(org.earthsystemmodeling.ws.ArrayOfString param) {
+        this.localFileList = param;
     }
 
     /**
-     * Auto generated add method for the array for convenience
-     * @param param org.earthsystemmodeling.ws.ModelService
+     * Auto generated getter method
+     * @return org.earthsystemmodeling.ws.StatusMsg
      */
-    public void addModelService(org.earthsystemmodeling.ws.ModelService param) {
-        if (localModelService == null) {
-            localModelService = new org.earthsystemmodeling.ws.ModelService[] {  };
-        }
+    public org.earthsystemmodeling.ws.StatusMsg getStatus() {
+        return localStatus;
+    }
 
-        //update the setting tracker
-        localModelServiceTracker = true;
-
-        java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localModelService);
-        list.add(param);
-        this.localModelService = (org.earthsystemmodeling.ws.ModelService[]) list.toArray(new org.earthsystemmodeling.ws.ModelService[list.size()]);
+    /**
+     * Auto generated setter method
+     * @param param Status
+     */
+    public void setStatus(org.earthsystemmodeling.ws.StatusMsg param) {
+        this.localStatus = param;
     }
 
     /**
@@ -120,30 +102,29 @@ public class ListModelServicesResponse implements org.apache.axis2.databinding.A
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":ListModelServicesResponse", xmlWriter);
+                    namespacePrefix + ":GetFilesResponse", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "ListModelServicesResponse", xmlWriter);
+                    "GetFilesResponse", xmlWriter);
             }
         }
 
-        if (localModelServiceTracker) {
-            if (localModelService != null) {
-                for (int i = 0; i < localModelService.length; i++) {
-                    if (localModelService[i] != null) {
-                        localModelService[i].serialize(new javax.xml.namespace.QName(
-                                "http://earthsystemmodeling.org/ws",
-                                "modelService"), xmlWriter);
-                    } else {
-                        // we don't have to do any thing since minOccures is zero
-                    }
-                }
-            } else {
-                throw new org.apache.axis2.databinding.ADBException(
-                    "modelService cannot be null!!");
-            }
+        if (localFileList == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "FileList cannot be null!!");
         }
+
+        localFileList.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "FileList"), xmlWriter);
+
+        if (localStatus == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "Status cannot be null!!");
+        }
+
+        localStatus.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "Status"), xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -356,23 +337,25 @@ public class ListModelServicesResponse implements org.apache.axis2.databinding.A
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        if (localModelServiceTracker) {
-            if (localModelService != null) {
-                for (int i = 0; i < localModelService.length; i++) {
-                    if (localModelService[i] != null) {
-                        elementList.add(new javax.xml.namespace.QName(
-                                "http://earthsystemmodeling.org/ws",
-                                "modelService"));
-                        elementList.add(localModelService[i]);
-                    } else {
-                        // nothing to do
-                    }
-                }
-            } else {
-                throw new org.apache.axis2.databinding.ADBException(
-                    "modelService cannot be null!!");
-            }
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "FileList"));
+
+        if (localFileList == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "FileList cannot be null!!");
         }
+
+        elementList.add(localFileList);
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "Status"));
+
+        if (localStatus == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "Status cannot be null!!");
+        }
+
+        elementList.add(localStatus);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -389,9 +372,9 @@ public class ListModelServicesResponse implements org.apache.axis2.databinding.A
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static ListModelServicesResponse parse(
+        public static GetFilesResponse parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            ListModelServicesResponse object = new ListModelServicesResponse();
+            GetFilesResponse object = new GetFilesResponse();
 
             int event;
             java.lang.String nillableValue = null;
@@ -420,12 +403,12 @@ public class ListModelServicesResponse implements org.apache.axis2.databinding.A
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"ListModelServicesResponse".equals(type)) {
+                        if (!"GetFilesResponse".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (ListModelServicesResponse) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (GetFilesResponse) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -437,56 +420,42 @@ public class ListModelServicesResponse implements org.apache.axis2.databinding.A
 
                 reader.next();
 
-                java.util.ArrayList list1 = new java.util.ArrayList();
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "FileList").equals(
+                            reader.getName())) {
+                    object.setFileList(org.earthsystemmodeling.ws.ArrayOfString.Factory.parse(
+                            reader));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "modelService").equals(
+                            "http://earthsystemmodeling.org/ws", "Status").equals(
                             reader.getName())) {
-                    // Process the array and step past its final element's end.
-                    list1.add(org.earthsystemmodeling.ws.ModelService.Factory.parse(
+                    object.setStatus(org.earthsystemmodeling.ws.StatusMsg.Factory.parse(
                             reader));
 
-                    //loop until we find a start element that is not part of this array
-                    boolean loopDone1 = false;
-
-                    while (!loopDone1) {
-                        // We should be at the end element, but make sure
-                        while (!reader.isEndElement())
-                            reader.next();
-
-                        // Step out of this element
-                        reader.next();
-
-                        // Step to next element event.
-                        while (!reader.isStartElement() &&
-                                !reader.isEndElement())
-                            reader.next();
-
-                        if (reader.isEndElement()) {
-                            //two continuous end elements means we are exiting the xml structure
-                            loopDone1 = true;
-                        } else {
-                            if (new javax.xml.namespace.QName(
-                                        "http://earthsystemmodeling.org/ws",
-                                        "modelService").equals(reader.getName())) {
-                                list1.add(org.earthsystemmodeling.ws.ModelService.Factory.parse(
-                                        reader));
-                            } else {
-                                loopDone1 = true;
-                            }
-                        }
-                    }
-
-                    // call the converter utility  to convert and set the array
-                    object.setModelService((org.earthsystemmodeling.ws.ModelService[]) org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                            org.earthsystemmodeling.ws.ModelService.class, list1));
+                    reader.next();
                 } // End of if for expected property start element
 
                 else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())

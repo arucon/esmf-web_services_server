@@ -1,5 +1,5 @@
 /**
- * TerminateModelService.java
+ * DataDesc.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,34 +8,144 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  TerminateModelService bean class
+ *  DataDesc bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class TerminateModelService implements org.apache.axis2.databinding.ADBBean {
-    public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "TerminateModelService", "ns1");
+public class DataDesc implements org.apache.axis2.databinding.ADBBean {
+    /* This type was generated from the piece of schema that had
+       name = DataDesc
+       Namespace URI = http://earthsystemmodeling.org/ws
+       Namespace Prefix = ns1
+     */
 
     /**
-     * field for ServiceKey
+     * field for NumberOfVariables
      */
-    protected java.lang.String localServiceKey;
+    protected int localNumberOfVariables;
+
+    /**
+     * field for VariableNames
+     */
+    protected org.earthsystemmodeling.ws.ArrayOfString localVariableNames;
+
+    /**
+     * field for NumberOfLatValues
+     */
+    protected int localNumberOfLatValues;
+
+    /**
+     * field for LatitudeValues
+     */
+    protected org.earthsystemmodeling.ws.ArrayOfDouble localLatitudeValues;
+
+    /**
+     * field for NumberOfLonValues
+     */
+    protected int localNumberOfLonValues;
+
+    /**
+     * field for LongitudeValues
+     */
+    protected org.earthsystemmodeling.ws.ArrayOfDouble localLongitudeValues;
 
     /**
      * Auto generated getter method
-     * @return java.lang.String
+     * @return int
      */
-    public java.lang.String getServiceKey() {
-        return localServiceKey;
+    public int getNumberOfVariables() {
+        return localNumberOfVariables;
     }
 
     /**
      * Auto generated setter method
-     * @param param ServiceKey
+     * @param param NumberOfVariables
      */
-    public void setServiceKey(java.lang.String param) {
-        this.localServiceKey = param;
+    public void setNumberOfVariables(int param) {
+        this.localNumberOfVariables = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return org.earthsystemmodeling.ws.ArrayOfString
+     */
+    public org.earthsystemmodeling.ws.ArrayOfString getVariableNames() {
+        return localVariableNames;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param VariableNames
+     */
+    public void setVariableNames(org.earthsystemmodeling.ws.ArrayOfString param) {
+        this.localVariableNames = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return int
+     */
+    public int getNumberOfLatValues() {
+        return localNumberOfLatValues;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param NumberOfLatValues
+     */
+    public void setNumberOfLatValues(int param) {
+        this.localNumberOfLatValues = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return org.earthsystemmodeling.ws.ArrayOfDouble
+     */
+    public org.earthsystemmodeling.ws.ArrayOfDouble getLatitudeValues() {
+        return localLatitudeValues;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param LatitudeValues
+     */
+    public void setLatitudeValues(
+        org.earthsystemmodeling.ws.ArrayOfDouble param) {
+        this.localLatitudeValues = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return int
+     */
+    public int getNumberOfLonValues() {
+        return localNumberOfLonValues;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param NumberOfLonValues
+     */
+    public void setNumberOfLonValues(int param) {
+        this.localNumberOfLonValues = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return org.earthsystemmodeling.ws.ArrayOfDouble
+     */
+    public org.earthsystemmodeling.ws.ArrayOfDouble getLongitudeValues() {
+        return localLongitudeValues;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param LongitudeValues
+     */
+    public void setLongitudeValues(
+        org.earthsystemmodeling.ws.ArrayOfDouble param) {
+        this.localLongitudeValues = param;
     }
 
     /**
@@ -49,9 +159,9 @@ public class TerminateModelService implements org.apache.axis2.databinding.ADBBe
         final org.apache.axiom.om.OMFactory factory)
         throws org.apache.axis2.databinding.ADBException {
         org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
-                MY_QNAME);
+                parentQName);
 
-        return factory.createOMElement(dataSource, MY_QNAME);
+        return factory.createOMElement(dataSource, parentQName);
     }
 
     public void serialize(final javax.xml.namespace.QName parentQName,
@@ -81,26 +191,78 @@ public class TerminateModelService implements org.apache.axis2.databinding.ADBBe
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":TerminateModelService", xmlWriter);
+                    namespacePrefix + ":DataDesc", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "TerminateModelService", xmlWriter);
+                    "DataDesc", xmlWriter);
             }
         }
 
         namespace = "http://earthsystemmodeling.org/ws";
-        writeStartElement(null, namespace, "serviceKey", xmlWriter);
+        writeStartElement(null, namespace, "NumberOfVariables", xmlWriter);
 
-        if (localServiceKey == null) {
-            // write the nil attribute
+        if (localNumberOfVariables == java.lang.Integer.MIN_VALUE) {
             throw new org.apache.axis2.databinding.ADBException(
-                "serviceKey cannot be null!!");
+                "NumberOfVariables cannot be null!!");
         } else {
-            xmlWriter.writeCharacters(localServiceKey);
+            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localNumberOfVariables));
         }
 
         xmlWriter.writeEndElement();
+
+        if (localVariableNames == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "VariableNames cannot be null!!");
+        }
+
+        localVariableNames.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "VariableNames"), xmlWriter);
+
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "NumberOfLatValues", xmlWriter);
+
+        if (localNumberOfLatValues == java.lang.Integer.MIN_VALUE) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "NumberOfLatValues cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localNumberOfLatValues));
+        }
+
+        xmlWriter.writeEndElement();
+
+        if (localLatitudeValues == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "LatitudeValues cannot be null!!");
+        }
+
+        localLatitudeValues.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "LatitudeValues"),
+            xmlWriter);
+
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "NumberOfLonValues", xmlWriter);
+
+        if (localNumberOfLonValues == java.lang.Integer.MIN_VALUE) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "NumberOfLonValues cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localNumberOfLonValues));
+        }
+
+        xmlWriter.writeEndElement();
+
+        if (localLongitudeValues == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "LongitudeValues cannot be null!!");
+        }
+
+        localLongitudeValues.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "LongitudeValues"),
+            xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -314,15 +476,52 @@ public class TerminateModelService implements org.apache.axis2.databinding.ADBBe
         java.util.ArrayList attribList = new java.util.ArrayList();
 
         elementList.add(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "serviceKey"));
+                "http://earthsystemmodeling.org/ws", "NumberOfVariables"));
 
-        if (localServiceKey != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localServiceKey));
-        } else {
+        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                localNumberOfVariables));
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "VariableNames"));
+
+        if (localVariableNames == null) {
             throw new org.apache.axis2.databinding.ADBException(
-                "serviceKey cannot be null!!");
+                "VariableNames cannot be null!!");
         }
+
+        elementList.add(localVariableNames);
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "NumberOfLatValues"));
+
+        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                localNumberOfLatValues));
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "LatitudeValues"));
+
+        if (localLatitudeValues == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "LatitudeValues cannot be null!!");
+        }
+
+        elementList.add(localLatitudeValues);
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "NumberOfLonValues"));
+
+        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                localNumberOfLonValues));
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "LongitudeValues"));
+
+        if (localLongitudeValues == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "LongitudeValues cannot be null!!");
+        }
+
+        elementList.add(localLongitudeValues);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -339,9 +538,9 @@ public class TerminateModelService implements org.apache.axis2.databinding.ADBBe
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static TerminateModelService parse(
-            javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            TerminateModelService object = new TerminateModelService();
+        public static DataDesc parse(javax.xml.stream.XMLStreamReader reader)
+            throws java.lang.Exception {
+            DataDesc object = new DataDesc();
 
             int event;
             java.lang.String nillableValue = null;
@@ -370,12 +569,12 @@ public class TerminateModelService implements org.apache.axis2.databinding.ADBBe
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"TerminateModelService".equals(type)) {
+                        if (!"DataDesc".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (TerminateModelService) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (DataDesc) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -392,22 +591,141 @@ public class TerminateModelService implements org.apache.axis2.databinding.ADBBe
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "serviceKey").equals(
-                            reader.getName())) {
+                            "http://earthsystemmodeling.org/ws",
+                            "NumberOfVariables").equals(reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
 
                     if ("true".equals(nillableValue) ||
                             "1".equals(nillableValue)) {
                         throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "serviceKey" +
+                            "The element: " + "NumberOfVariables" +
                             "  cannot be null");
                     }
 
                     java.lang.String content = reader.getElementText();
 
-                    object.setServiceKey(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    object.setNumberOfVariables(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(
                             content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "VariableNames").equals(
+                            reader.getName())) {
+                    object.setVariableNames(org.earthsystemmodeling.ws.ArrayOfString.Factory.parse(
+                            reader));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws",
+                            "NumberOfLatValues").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "NumberOfLatValues" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setNumberOfLatValues(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws",
+                            "LatitudeValues").equals(reader.getName())) {
+                    object.setLatitudeValues(org.earthsystemmodeling.ws.ArrayOfDouble.Factory.parse(
+                            reader));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws",
+                            "NumberOfLonValues").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "NumberOfLonValues" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setNumberOfLonValues(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws",
+                            "LongitudeValues").equals(reader.getName())) {
+                    object.setLongitudeValues(org.earthsystemmodeling.ws.ArrayOfDouble.Factory.parse(
+                            reader));
 
                     reader.next();
                 } // End of if for expected property start element

@@ -3,33 +3,43 @@ ESMF Web Service - Server components
 
 This directory contains the SOAP web service and the Registrar.
 
+This assumes Tomcat and Axis2 have been installed.
 First make sure AXIS2_HOME is set.
 
+$ export AXIS2_HOME=/path/to/axis2
 
-BUILD THE WEB SERVICE
-========================
 
-This assumes Tomcat and Axis2 have been installed.
+BUILD AND DEPLOY THE SOAP WEB SERVICE
+======================================
 
 To build and deploy the SOAP web service, run:
-./deploy.sh
 
-You will likely need to modify this file to adjust
+$ ./deploy.sh
+
+You might need to modify this file to adjust
 directories to your environment.
 
-If (and only if) you change the ESMF.wsdl file, run:
-./generate.sh
+
+
+If (and only if) you change the ESMFWebServices.wsdl file, run:
+
+$ ./generate.sh
+
 which will run wsdl2java.sh to generate Java source files.
 
 The server skeleton code will be overwritten and must be manually
-copied from org.earthsystemmodeling.ws.ESMFSkeletonImpl
-to org.earthsystemmodeling.ws.ESMFSkeleton.
+copied from org.earthsystemmodeling.ws.ESMFWebServicesSkeletonImpl
+to org.earthsystemmodeling.ws.ESMFWebServicesSkeleton.
 
 
 BUILD and RUN THE REGISTRAR
 ============================
 
-Run "ant registrar" to generate build/lib/registrar.jar
+First, to generate build/lib/registrar.jar:
 
-Run "./run_registrar.sh" to start the registrar.
+$ ant registrar
+
+Then, to run the registrar:
+
+$ ./run_registrar.sh
 

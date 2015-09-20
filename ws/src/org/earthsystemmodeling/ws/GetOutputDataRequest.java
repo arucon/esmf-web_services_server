@@ -1,5 +1,5 @@
 /**
- * CompsetList.java
+ * GetOutputDataRequest.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,64 +8,76 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  CompsetList bean class
+ *  GetOutputDataRequest bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class CompsetList implements org.apache.axis2.databinding.ADBBean {
-    /* This type was generated from the piece of schema that had
-       name = CompsetList
-       Namespace URI = http://earthsystemmodeling.org/ws
-       Namespace Prefix = ns1
-     */
+public class GetOutputDataRequest implements org.apache.axis2.databinding.ADBBean {
+    public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
+            "GetOutputDataRequest", "ns1");
 
     /**
-     * field for Compset
-     * This was an Array!
+     * field for ServerName
      */
-    protected java.lang.String[] localCompset;
+    protected java.lang.String localServerName;
+
+    /**
+     * field for ClientId
+     */
+    protected java.lang.String localClientId;
+
+    /**
+     * field for Time
+     */
+    protected double localTime;
 
     /**
      * Auto generated getter method
-     * @return java.lang.String[]
+     * @return java.lang.String
      */
-    public java.lang.String[] getCompset() {
-        return localCompset;
-    }
-
-    /**
-     * validate the array for Compset
-     */
-    protected void validateCompset(java.lang.String[] param) {
-        if ((param != null) && (param.length < 1)) {
-            throw new java.lang.RuntimeException(
-                "Input values do not follow defined XSD restrictions");
-        }
+    public java.lang.String getServerName() {
+        return localServerName;
     }
 
     /**
      * Auto generated setter method
-     * @param param Compset
+     * @param param ServerName
      */
-    public void setCompset(java.lang.String[] param) {
-        validateCompset(param);
-
-        this.localCompset = param;
+    public void setServerName(java.lang.String param) {
+        this.localServerName = param;
     }
 
     /**
-     * Auto generated add method for the array for convenience
-     * @param param java.lang.String
+     * Auto generated getter method
+     * @return java.lang.String
      */
-    public void addCompset(java.lang.String param) {
-        if (localCompset == null) {
-            localCompset = new java.lang.String[] {  };
-        }
+    public java.lang.String getClientId() {
+        return localClientId;
+    }
 
-        java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localCompset);
-        list.add(param);
-        this.localCompset = (java.lang.String[]) list.toArray(new java.lang.String[list.size()]);
+    /**
+     * Auto generated setter method
+     * @param param ClientId
+     */
+    public void setClientId(java.lang.String param) {
+        this.localClientId = param;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return double
+     */
+    public double getTime() {
+        return localTime;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param Time
+     */
+    public void setTime(double param) {
+        this.localTime = param;
     }
 
     /**
@@ -79,9 +91,9 @@ public class CompsetList implements org.apache.axis2.databinding.ADBBean {
         final org.apache.axiom.om.OMFactory factory)
         throws org.apache.axis2.databinding.ADBException {
         org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
-                parentQName);
+                MY_QNAME);
 
-        return factory.createOMElement(dataSource, parentQName);
+        return factory.createOMElement(dataSource, MY_QNAME);
     }
 
     public void serialize(final javax.xml.namespace.QName parentQName,
@@ -111,34 +123,52 @@ public class CompsetList implements org.apache.axis2.databinding.ADBBean {
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":CompsetList", xmlWriter);
+                    namespacePrefix + ":GetOutputDataRequest", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "CompsetList", xmlWriter);
+                    "GetOutputDataRequest", xmlWriter);
             }
         }
 
-        if (localCompset != null) {
-            namespace = "http://earthsystemmodeling.org/ws";
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "ServerName", xmlWriter);
 
-            for (int i = 0; i < localCompset.length; i++) {
-                if (localCompset[i] != null) {
-                    writeStartElement(null, namespace, "compset", xmlWriter);
-
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            localCompset[i]));
-
-                    xmlWriter.writeEndElement();
-                } else {
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "compset cannot be null!!");
-                }
-            }
-        } else {
+        if (localServerName == null) {
+            // write the nil attribute
             throw new org.apache.axis2.databinding.ADBException(
-                "compset cannot be null!!");
+                "ServerName cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(localServerName);
         }
+
+        xmlWriter.writeEndElement();
+
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "ClientId", xmlWriter);
+
+        if (localClientId == null) {
+            // write the nil attribute
+            throw new org.apache.axis2.databinding.ADBException(
+                "ClientId cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(localClientId);
+        }
+
+        xmlWriter.writeEndElement();
+
+        namespace = "http://earthsystemmodeling.org/ws";
+        writeStartElement(null, namespace, "Time", xmlWriter);
+
+        if (java.lang.Double.isNaN(localTime)) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "Time cannot be null!!");
+        } else {
+            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localTime));
+        }
+
+        xmlWriter.writeEndElement();
 
         xmlWriter.writeEndElement();
     }
@@ -351,22 +381,33 @@ public class CompsetList implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        if (localCompset != null) {
-            for (int i = 0; i < localCompset.length; i++) {
-                if (localCompset[i] != null) {
-                    elementList.add(new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "compset"));
-                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            localCompset[i]));
-                } else {
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "compset cannot be null!!");
-                }
-            }
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "ServerName"));
+
+        if (localServerName != null) {
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localServerName));
         } else {
             throw new org.apache.axis2.databinding.ADBException(
-                "compset cannot be null!!");
+                "ServerName cannot be null!!");
         }
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "ClientId"));
+
+        if (localClientId != null) {
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localClientId));
+        } else {
+            throw new org.apache.axis2.databinding.ADBException(
+                "ClientId cannot be null!!");
+        }
+
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "Time"));
+
+        elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                localTime));
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -383,9 +424,9 @@ public class CompsetList implements org.apache.axis2.databinding.ADBBean {
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static CompsetList parse(javax.xml.stream.XMLStreamReader reader)
-            throws java.lang.Exception {
-            CompsetList object = new CompsetList();
+        public static GetOutputDataRequest parse(
+            javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
+            GetOutputDataRequest object = new GetOutputDataRequest();
 
             int event;
             java.lang.String nillableValue = null;
@@ -414,12 +455,12 @@ public class CompsetList implements org.apache.axis2.databinding.ADBBean {
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"CompsetList".equals(type)) {
+                        if (!"GetOutputDataRequest".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (CompsetList) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (GetOutputDataRequest) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -431,52 +472,89 @@ public class CompsetList implements org.apache.axis2.databinding.ADBBean {
 
                 reader.next();
 
-                java.util.ArrayList list1 = new java.util.ArrayList();
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "ServerName").equals(
+                            reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ServerName" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setServerName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
                     reader.next();
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "compset").equals(
+                            "http://earthsystemmodeling.org/ws", "ClientId").equals(
                             reader.getName())) {
-                    // Process the array and step past its final element's end.
-                    list1.add(reader.getElementText());
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
 
-                    //loop until we find a start element that is not part of this array
-                    boolean loopDone1 = false;
-
-                    while (!loopDone1) {
-                        // Ensure we are at the EndElement
-                        while (!reader.isEndElement()) {
-                            reader.next();
-                        }
-
-                        // Step out of this element
-                        reader.next();
-
-                        // Step to next element event.
-                        while (!reader.isStartElement() &&
-                                !reader.isEndElement())
-                            reader.next();
-
-                        if (reader.isEndElement()) {
-                            //two continuous end elements means we are exiting the xml structure
-                            loopDone1 = true;
-                        } else {
-                            if (new javax.xml.namespace.QName(
-                                        "http://earthsystemmodeling.org/ws",
-                                        "compset").equals(reader.getName())) {
-                                list1.add(reader.getElementText());
-                            } else {
-                                loopDone1 = true;
-                            }
-                        }
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ClientId" + "  cannot be null");
                     }
 
-                    // call the converter utility  to convert and set the array
-                    object.setCompset((java.lang.String[]) list1.toArray(
-                            new java.lang.String[list1.size()]));
+                    java.lang.String content = reader.getElementText();
+
+                    object.setClientId(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://earthsystemmodeling.org/ws", "Time").equals(
+                            reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "Time" + "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setTime(org.apache.axis2.databinding.utils.ConverterUtil.convertToDouble(
+                            content));
+
+                    reader.next();
                 } // End of if for expected property start element
 
                 else {

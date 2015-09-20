@@ -1,5 +1,5 @@
 /**
- * NewModelService.java
+ * SetOutputVariablesRequest.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -8,88 +8,76 @@ package org.earthsystemmodeling.ws;
 
 
 /**
- *  NewModelService bean class
+ *  SetOutputVariablesRequest bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class NewModelService implements org.apache.axis2.databinding.ADBBean {
+public class SetOutputVariablesRequest implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "NewModelService", "ns1");
+            "SetOutputVariablesRequest", "ns1");
 
     /**
-     * field for App
+     * field for ServerName
      */
-    protected java.lang.String localApp;
+    protected java.lang.String localServerName;
 
     /**
-     * field for Compset
+     * field for ClientId
      */
-    protected java.lang.String localCompset;
+    protected java.lang.String localClientId;
 
     /**
-     * field for Platform
+     * field for VariableNames
      */
-    protected java.lang.String localPlatform;
-
-    /*  This tracker boolean wil be used to detect whether the user called the set method
-     *   for this attribute. It will be used to determine whether to include this field
-     *   in the serialized XML
-     */
-    protected boolean localPlatformTracker = false;
+    protected org.earthsystemmodeling.ws.ArrayOfString localVariableNames;
 
     /**
      * Auto generated getter method
      * @return java.lang.String
      */
-    public java.lang.String getApp() {
-        return localApp;
+    public java.lang.String getServerName() {
+        return localServerName;
     }
 
     /**
      * Auto generated setter method
-     * @param param App
+     * @param param ServerName
      */
-    public void setApp(java.lang.String param) {
-        this.localApp = param;
+    public void setServerName(java.lang.String param) {
+        this.localServerName = param;
     }
 
     /**
      * Auto generated getter method
      * @return java.lang.String
      */
-    public java.lang.String getCompset() {
-        return localCompset;
+    public java.lang.String getClientId() {
+        return localClientId;
     }
 
     /**
      * Auto generated setter method
-     * @param param Compset
+     * @param param ClientId
      */
-    public void setCompset(java.lang.String param) {
-        this.localCompset = param;
-    }
-
-    public boolean isPlatformSpecified() {
-        return localPlatformTracker;
+    public void setClientId(java.lang.String param) {
+        this.localClientId = param;
     }
 
     /**
      * Auto generated getter method
-     * @return java.lang.String
+     * @return org.earthsystemmodeling.ws.ArrayOfString
      */
-    public java.lang.String getPlatform() {
-        return localPlatform;
+    public org.earthsystemmodeling.ws.ArrayOfString getVariableNames() {
+        return localVariableNames;
     }
 
     /**
      * Auto generated setter method
-     * @param param Platform
+     * @param param VariableNames
      */
-    public void setPlatform(java.lang.String param) {
-        localPlatformTracker = param != null;
-
-        this.localPlatform = param;
+    public void setVariableNames(org.earthsystemmodeling.ws.ArrayOfString param) {
+        this.localVariableNames = param;
     }
 
     /**
@@ -135,54 +123,47 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":NewModelService", xmlWriter);
+                    namespacePrefix + ":SetOutputVariablesRequest", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "NewModelService", xmlWriter);
+                    "SetOutputVariablesRequest", xmlWriter);
             }
         }
 
         namespace = "http://earthsystemmodeling.org/ws";
-        writeStartElement(null, namespace, "app", xmlWriter);
+        writeStartElement(null, namespace, "ServerName", xmlWriter);
 
-        if (localApp == null) {
+        if (localServerName == null) {
             // write the nil attribute
             throw new org.apache.axis2.databinding.ADBException(
-                "app cannot be null!!");
+                "ServerName cannot be null!!");
         } else {
-            xmlWriter.writeCharacters(localApp);
+            xmlWriter.writeCharacters(localServerName);
         }
 
         xmlWriter.writeEndElement();
 
         namespace = "http://earthsystemmodeling.org/ws";
-        writeStartElement(null, namespace, "compset", xmlWriter);
+        writeStartElement(null, namespace, "ClientId", xmlWriter);
 
-        if (localCompset == null) {
+        if (localClientId == null) {
             // write the nil attribute
             throw new org.apache.axis2.databinding.ADBException(
-                "compset cannot be null!!");
+                "ClientId cannot be null!!");
         } else {
-            xmlWriter.writeCharacters(localCompset);
+            xmlWriter.writeCharacters(localClientId);
         }
 
         xmlWriter.writeEndElement();
 
-        if (localPlatformTracker) {
-            namespace = "http://earthsystemmodeling.org/ws";
-            writeStartElement(null, namespace, "platform", xmlWriter);
-
-            if (localPlatform == null) {
-                // write the nil attribute
-                throw new org.apache.axis2.databinding.ADBException(
-                    "platform cannot be null!!");
-            } else {
-                xmlWriter.writeCharacters(localPlatform);
-            }
-
-            xmlWriter.writeEndElement();
+        if (localVariableNames == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "VariableNames cannot be null!!");
         }
+
+        localVariableNames.serialize(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "VariableNames"), xmlWriter);
 
         xmlWriter.writeEndElement();
     }
@@ -396,39 +377,36 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
         java.util.ArrayList attribList = new java.util.ArrayList();
 
         elementList.add(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "app"));
+                "http://earthsystemmodeling.org/ws", "ServerName"));
 
-        if (localApp != null) {
+        if (localServerName != null) {
             elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localApp));
+                    localServerName));
         } else {
             throw new org.apache.axis2.databinding.ADBException(
-                "app cannot be null!!");
+                "ServerName cannot be null!!");
         }
 
         elementList.add(new javax.xml.namespace.QName(
-                "http://earthsystemmodeling.org/ws", "compset"));
+                "http://earthsystemmodeling.org/ws", "ClientId"));
 
-        if (localCompset != null) {
+        if (localClientId != null) {
             elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localCompset));
+                    localClientId));
         } else {
             throw new org.apache.axis2.databinding.ADBException(
-                "compset cannot be null!!");
+                "ClientId cannot be null!!");
         }
 
-        if (localPlatformTracker) {
-            elementList.add(new javax.xml.namespace.QName(
-                    "http://earthsystemmodeling.org/ws", "platform"));
+        elementList.add(new javax.xml.namespace.QName(
+                "http://earthsystemmodeling.org/ws", "VariableNames"));
 
-            if (localPlatform != null) {
-                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        localPlatform));
-            } else {
-                throw new org.apache.axis2.databinding.ADBException(
-                    "platform cannot be null!!");
-            }
+        if (localVariableNames == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "VariableNames cannot be null!!");
         }
+
+        elementList.add(localVariableNames);
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -445,9 +423,9 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static NewModelService parse(
+        public static SetOutputVariablesRequest parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            NewModelService object = new NewModelService();
+            SetOutputVariablesRequest object = new SetOutputVariablesRequest();
 
             int event;
             java.lang.String nillableValue = null;
@@ -476,12 +454,12 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"NewModelService".equals(type)) {
+                        if (!"SetOutputVariablesRequest".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (NewModelService) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
+                            return (SetOutputVariablesRequest) org.earthsystemmodeling.ws.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -498,7 +476,7 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "app").equals(
+                            "http://earthsystemmodeling.org/ws", "ServerName").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -506,12 +484,13 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
                     if ("true".equals(nillableValue) ||
                             "1".equals(nillableValue)) {
                         throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "app" + "  cannot be null");
+                            "The element: " + "ServerName" +
+                            "  cannot be null");
                     }
 
                     java.lang.String content = reader.getElementText();
 
-                    object.setApp(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    object.setServerName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
                             content));
 
                     reader.next();
@@ -528,7 +507,7 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "compset").equals(
+                            "http://earthsystemmodeling.org/ws", "ClientId").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -536,12 +515,12 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
                     if ("true".equals(nillableValue) ||
                             "1".equals(nillableValue)) {
                         throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "compset" + "  cannot be null");
+                            "The element: " + "ClientId" + "  cannot be null");
                     }
 
                     java.lang.String content = reader.getElementText();
 
-                    object.setCompset(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    object.setClientId(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
                             content));
 
                     reader.next();
@@ -558,26 +537,18 @@ public class NewModelService implements org.apache.axis2.databinding.ADBBean {
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://earthsystemmodeling.org/ws", "platform").equals(
+                            "http://earthsystemmodeling.org/ws", "VariableNames").equals(
                             reader.getName())) {
-                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                            "nil");
-
-                    if ("true".equals(nillableValue) ||
-                            "1".equals(nillableValue)) {
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "platform" + "  cannot be null");
-                    }
-
-                    java.lang.String content = reader.getElementText();
-
-                    object.setPlatform(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            content));
+                    object.setVariableNames(org.earthsystemmodeling.ws.ArrayOfString.Factory.parse(
+                            reader));
 
                     reader.next();
                 } // End of if for expected property start element
 
                 else {
+                    // A start element we are not expecting indicates an invalid parameter was passed
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
