@@ -32,8 +32,8 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public ListServersResponse  listServers(ListServersRequest  request)
 	{
-		System.out.println("ESMFWebServices::ListServers()");
-		System.out.println("Registrar Host Name: " + 
+		log.info("ESMFWebServices::ListServers()");
+		log.info("Registrar Host Name: " + 
 				request.getRegistrarHostName());
 
 		//***
@@ -44,7 +44,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		try
 		{
 			RegistrarClient	registrar = 
-					new RegistrarClient(request.getRegistrarHostName(), 45002);
+					new RegistrarClient(request.getRegistrarHostName(), 27071);
 
 			services = registrar.listServices();
 		}
@@ -81,15 +81,15 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public NewClientResponse  newClient(NewClientRequest  request)
 	{
-		System.out.println("Inside newClient");
+		log.info("Inside newClient Yun2");
 		log.info("newClient: " + request.getServerName());
 		log.info("another message");
 		
 		//***
 		// Connect to the component service
 		//***
-		Component	esmfComponent = new Component("CAM Comp", 
-				"CAM Component", 
+		Component	esmfComponent = new Component("1234", 
+				"CoupledFlow Component", 
 				"localhost", 
 				"27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
@@ -98,6 +98,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client name
 		//***
 		int	clientId = connector.newClient("fflintstone", "bambam");
+                log.info("clientID:" + clientId);
 
 		//***
 		// Convert the client id to a string and pass it back
@@ -124,15 +125,15 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	setOutputVariables(SetOutputVariablesRequest  request)
 	{
 		/*
-      System.out.println("ESMFWebServices::SetOutputVariables()");
-      System.out.println("Server Name: " + request.getServerName());
-      System.out.println("Client ID: " + request.getClientId());
+      log.info("ESMFWebServices::SetOutputVariables()");
+      log.info("Server Name: " + request.getServerName());
+      log.info("Client ID: " + request.getClientId());
 
       ArrayOfString  importFiles = request.getImportFiles();
       String[]       importFilenames = importFiles.getItem();
       for (int i = 0; i < importFilenames.length; ++i)
       {
-         System.out.println("Import Filename: " + importFilenames[i]);
+         log.info("Import Filename: " + importFilenames[i]);
       }
 		 */
 
@@ -152,16 +153,16 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public InitComponentResponse  initComponent(InitComponentRequest  request)
 	{
-		System.out.println("ESMFWebServices::InitComponent()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("ESMFWebServices::InitComponent()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		/*
 		ArrayOfString	importFiles = request.getImportFiles();
 		String[]			importFilenames = importFiles.getItem();
 		for (int i = 0; i < importFilenames.length; ++i)
 		{
-			System.out.println("Import Filename: " + importFilenames[i]);
+			log.info("Import Filename: " + importFilenames[i]);
 		}
 		 */
 
@@ -180,7 +181,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 		int	statusCode = connector.compInit(clientId);
 
@@ -207,9 +208,9 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public RunComponentResponse  runComponent(RunComponentRequest  request)
 	{
-		System.out.println("ESMFWebServices::RunComponent()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("ESMFWebServices::RunComponent()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		//***
 		// Connect to the component service
@@ -224,7 +225,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 		int	statusCode = connector.compRun(clientId);
 
@@ -252,10 +253,10 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	public TimestepComponentResponse
 	timestepComponent(TimestepComponentRequest  request)
 	{
-		System.out.println("ESMFWebServices::TimestepComponent()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
-		System.out.println("Num Timesteps: " + request.getNumTimeSteps());
+		log.info("ESMFWebServices::TimestepComponent()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
+		log.info("Num Timesteps: " + request.getNumTimeSteps());
 
 		//***
 		// Connect to the component service
@@ -270,7 +271,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int   clientId = Integer.parseInt(request.getClientId());
 		int   numTimeSteps = Integer.parseInt(request.getNumTimeSteps());
 		int   statusCode = connector.compTimestep(clientId, numTimeSteps);
@@ -299,9 +300,9 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	public FinalizeComponentResponse  
 	finalizeComponent(FinalizeComponentRequest  request)
 	{
-		System.out.println("ESMFWebServices::FinalizeComponent()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("ESMFWebServices::FinalizeComponent()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		//***
 		// Connect to the component service
@@ -316,7 +317,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 		int	statusCode = connector.compFinalize(clientId);
 
@@ -344,9 +345,9 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	public ComponentStatusResponse  
 	componentStatus(ComponentStatusRequest  request)
 	{
-		System.out.println("ESMFWebServices::ComponentStatus()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("ESMFWebServices::ComponentStatus()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		//***
 		// Connect to the component service
@@ -361,7 +362,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 		int	statusCode = connector.compState(clientId);
 
@@ -388,9 +389,9 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public GetFilesResponse  getFiles(GetFilesRequest  request)
 	{
-		System.out.println("ESMFWebServices::GetFiles()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("ESMFWebServices::GetFiles()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		//***
 		// Connect to the component service
@@ -406,7 +407,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 		int	statusCode = connector.compState(clientId);
 		 */
@@ -453,8 +454,8 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		//***
 		// Get the input information
 		//***
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		int   clientId = Integer.parseInt(request.getClientId());
 
@@ -518,10 +519,10 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public GetOutputDataResponse  getOutputData(GetOutputDataRequest  request)
 	{
-		System.out.println("ESMFWebServices::GetOutputData()");
-		System.out.println("Server Name   : " + request.getServerName());
-		System.out.println("Client ID     : " + request.getClientId());
-		System.out.println("Time          : " + request.getTime());
+		log.info("ESMFWebServices::GetOutputData()");
+		log.info("Server Name   : " + request.getServerName());
+		log.info("Client ID     : " + request.getClientId());
+		log.info("Time          : " + request.getTime());
 
 		//***
 		// Connect to the component service
@@ -531,13 +532,13 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 				"localhost", 
 				"27071");
 		ComponentConnector	connector = new ComponentConnector(esmfComponent);
-		System.out.println("Connected");
+		log.info("Connected");
 
 		//***
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 
 		OutputDataResponse   resp = connector.outputData(clientId,
@@ -589,9 +590,9 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 	 */
 	public EndClientResponse  endClient(EndClientRequest  request)
 	{
-		System.out.println("ESMFWebServices::EndClient()");
-		System.out.println("Server Name: " + request.getServerName());
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("ESMFWebServices::EndClient()");
+		log.info("Server Name: " + request.getServerName());
+		log.info("Client ID: " + request.getClientId());
 
 		//***
 		// Connect to the component service
@@ -606,7 +607,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		// Make the call, passing the client id (after parsing the integer
 		// from the string)
 		//***
-		System.out.println("Client ID: " + request.getClientId());
+		log.info("Client ID: " + request.getClientId());
 		int	clientId = Integer.parseInt(request.getClientId());
 		int	statusCode = connector.endClient(clientId);
 
