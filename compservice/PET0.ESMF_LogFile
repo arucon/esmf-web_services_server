@@ -1,0 +1,23 @@
+20151117 142823.673 INFO             PET0 Running with ESMF Version 7.0.0 beta snapshot
+20151117 142823.680 INFO             PET0 clientId:101
+20151117 142823.715 INFO             PET0 ESMCI_WebServRegistrarClient.C:375 ESMCI_WebServRegistrarClient::co WebServRegistrarClient: start compStarted()
+20151117 142823.792 INFO             PET0 ESMCI_WebServRegistrarClient.C:485 ESMCI_WebServRegistrarClient::co WebServRegistrarClient: end compStarted()
+20151117 142823.792 INFO             PET0 ESMCI_WebServComponentSvr.C:265 ESMCI_WebServComponentSvr::setPo WebServComponentSvr: start setPort()
+20151117 142823.793 INFO             PET0 ESMCI_WebServRegistrarClient.C:899 ESMCI_WebServRegistrarClient::se WebServRegistrarClient: start setStatus()
+20151117 142823.793 INFO             PET0 ESMCI_WebServRegistrarClient.C:947 ESMCI_WebServRegistrarClient::se Sending client id: 101
+20151117 142823.841 INFO             PET0 ESMCI_WebServRegistrarClient.C:997 ESMCI_WebServRegistrarClient::se Return value is: READY
+20151117 142823.841 INFO             PET0 ESMCI_WebServRegistrarClient.C:1004 ESMCI_WebServRegistrarClient::se WebServRegistrarClient: end setStatus()
+20151117 142908.231 INFO             PET0 ESMCI_WebServRegistrarClient.C:899 ESMCI_WebServRegistrarClient::se WebServRegistrarClient: start setStatus()
+20151117 142908.231 INFO             PET0 ESMCI_WebServRegistrarClient.C:947 ESMCI_WebServRegistrarClient::se Sending client id: 101
+20151117 142908.276 INFO             PET0 ESMCI_WebServRegistrarClient.C:997 ESMCI_WebServRegistrarClient::se Return value is: INITIALIZING
+20151117 142908.276 INFO             PET0 ESMCI_WebServRegistrarClient.C:1004 ESMCI_WebServRegistrarClient::se WebServRegistrarClient: end setStatus()
+20151117 142908.307 ERROR            PET0 ESMCI_VM.C:1446 ESMCI::VM::getCurrent() Internal error: Bad condition  - - Could not determine current VM
+20151117 142908.307 ERROR            PET0 ESMCI_VM_F.C:882 c_esmc_vmgetcurrent() Internal error: Bad condition  - Internal subroutine call returned Error
+20151117 142908.307 ERROR            PET0 ESMF_VM.F90:4415 ESMF_VMGetPetLocalInfo() Internal error: Bad condition  - Internal subroutine call returned Error
+20151117 142908.307 ERROR            PET0 ESMF_Comp.F90:635 ESMF_CompConstruct Internal error: Bad condition  - Internal subroutine call returned Error
+20151117 142908.307 ERROR            PET0 ESMF_GridComp.F90:475 ESMF_GridCompCreate Internal error: Bad condition  - Internal subroutine call returned Error
+20151117 142908.307 ERROR            PET0 CoupledFlowDemo.F90:212 Internal error: Bad condition  - Passing error in return code
+20151117 142908.315 INFO             PET0 ESMCI_WebServRegistrarClient.C:899 ESMCI_WebServRegistrarClient::se WebServRegistrarClient: start setStatus()
+20151117 142908.328 INFO             PET0 ESMCI_WebServRegistrarClient.C:947 ESMCI_WebServRegistrarClient::se Sending client id: 101
+20151117 142908.374 INFO             PET0 ESMCI_WebServRegistrarClient.C:997 ESMCI_WebServRegistrarClient::se Return value is: INIT_DONE
+20151117 142908.374 INFO             PET0 ESMCI_WebServRegistrarClient.C:1004 ESMCI_WebServRegistrarClient::se WebServRegistrarClient: end setStatus()

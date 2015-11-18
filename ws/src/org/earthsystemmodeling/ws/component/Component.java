@@ -15,6 +15,9 @@
 
 package org.earthsystemmodeling.ws.component;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  *****************************************************************************
  *
@@ -37,8 +40,10 @@ public class Component
 	 *
 	 **************************************************************************
 	 */
+	private static Log log = LogFactory.getLog(Component.class);
 	public Component()
 	{
+         	log.info("Instantiating Component object");
 	}
 
 
@@ -47,6 +52,8 @@ public class Component
 	 *
 	 **************************************************************************
 	 */
+
+
 	public Component(String  clientId,
 			String  jobId,
 			String  hostName,
@@ -57,8 +64,14 @@ public class Component
 		theHostName = hostName;
 		thePortNum = portNum;
 		thePhysicalHostName = hostName;
+
 	}
 
+
+	
+
+	
+	
 
 	/**
 	 **************************************************************************
@@ -68,6 +81,7 @@ public class Component
 	public void  setClientId(String  clientId)
 	{
 		theClientId = clientId;
+		log.info("setClientId");
 	}
 
 
@@ -79,6 +93,7 @@ public class Component
 	public void  setJobId(String  jobId)
 	{
 		theJobId = jobId;
+		log.info("setJobId");
 	}
 
 
@@ -90,6 +105,7 @@ public class Component
 	public void  setHostName(String  hostName)
 	{
 		theHostName = hostName;
+		log.info("setHostName");
 	}
 
 
@@ -101,6 +117,7 @@ public class Component
 	public void  setPortNum(String  portNum)
 	{
 		thePortNum = portNum;
+		log.info("setPortNum");
 	}
 
 
@@ -112,6 +129,7 @@ public class Component
 	public void  setName(String  name)
 	{
 		theName = name;
+		log.info("setName");
 	}
 
 
@@ -123,6 +141,7 @@ public class Component
 	public void  setDescription(String  description)
 	{
 		theDescription = description;
+		log.info("setDescription");
 	}
 
 
@@ -134,6 +153,7 @@ public class Component
 	public void  setPhysicalHostName(String  hostName)
 	{
 		thePhysicalHostName = hostName;
+		log.info("setPhysicalHostName");
 	}
 
 
@@ -145,6 +165,7 @@ public class Component
 	public void  setCurrentState(String  state)
 	{
 		theCurrentState = state;
+		log.info("setCurrentState");
 	}
 
 
@@ -155,6 +176,7 @@ public class Component
 	 */
 	public String  getClientId()
 	{
+		log.info("theClientId: " + theClientId );
 		return theClientId;
 	}
 
@@ -166,6 +188,7 @@ public class Component
 	 */
 	public String  getJobId()
 	{
+		log.info("JobId: " + theJobId );
 		return theJobId;
 	}
 
@@ -177,6 +200,7 @@ public class Component
 	 */
 	public String  getHostName()
 	{
+		log.info("theHostName: " + theHostName );
 		return theHostName;
 	}
 
@@ -188,7 +212,9 @@ public class Component
 	 */
 	public String  getPortNum()
 	{
+		log.info("thePortNum: " + thePortNum );
 		return thePortNum;
+
 	}
 
 
@@ -199,7 +225,9 @@ public class Component
 	 */
 	public String  getName()
 	{
+		log.info("theName: " + theName );
 		return theName;
+
 	}
 
 
@@ -210,7 +238,9 @@ public class Component
 	 */
 	public String  getDescription()
 	{
+		log.info("theDescription: " + theDescription );
 		return theDescription;
+
 	}
 
 
@@ -221,7 +251,9 @@ public class Component
 	 */
 	public String  getPhysicalHostName()
 	{
+		log.info("thePhysicalHostName: " + thePhysicalHostName );
 		return thePhysicalHostName;
+
 	}
 
 
@@ -232,7 +264,9 @@ public class Component
 	 */
 	public String  getCurrentState()
 	{
+		log.info("theCurrentState: " + theCurrentState );
 		return theCurrentState;
+
 	}
 
 
@@ -243,15 +277,15 @@ public class Component
 	 */
 	public void  print()
 	{
-		System.out.println("************** BEGIN Component *****************");
-		System.out.println("Client ID     : " + theClientId);
-		System.out.println("Job ID        : " + theJobId);
-		System.out.println("Host Name     : " + theHostName);
-		System.out.println("Port Num      : " + thePortNum);
-		System.out.println("Name          : " + theName);
-		System.out.println("Description   : " + theDescription);
-		System.out.println("Physical Host : " + thePhysicalHostName);
-		System.out.println("Current State : " + theCurrentState);
-		System.out.println("************** END Component *****************");
+		log.info("************** BEGIN Component *****************");
+		log.info("Client ID     : " + theClientId);
+		log.info("Job ID        : " + theJobId);
+		log.info("Host Name     : " + theHostName);
+		log.info("Port Num      : " + thePortNum);
+		log.info("Name          : " + theName);
+		log.info("Description   : " + theDescription);
+		log.info("Physical Host : " + thePhysicalHostName);
+		log.info("Current State : " + theCurrentState);
+		log.info("************** END Component *****************");
 	}
 }

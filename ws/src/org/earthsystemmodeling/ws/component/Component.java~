@@ -1,0 +1,270 @@
+//***************************************************************************
+//
+// $Id$
+//
+// Earth System Modeling Framework
+// Copyright 2002-2015, University Corporation for Atmospheric Research,
+// Massachusetts Institute of Technology, Geophysical Fluid Dynamics
+// Laboratory, University of Michigan, National Centers for Environmental
+// Prediction, Los Alamos National Laboratory, Argonne National Laboratory,
+// NASA Goddard Space Flight Center.
+//
+// Licensed under the University of Illinois-NCSA License
+//
+//***************************************************************************
+
+package org.earthsystemmodeling.ws.component;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ *****************************************************************************
+ *
+ *****************************************************************************
+ */
+public class Component
+{
+	private String          theClientId = "";
+	private String          theJobId = "";
+	private String			theHostName = "";
+	private String			thePortNum = "";
+	private String			theName = "";
+	private String			theDescription = "";
+	private String          thePhysicalHostName = "";
+	private String          theCurrentState = "";
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	private static Log log = LogFactory.getLog(Component.class);
+	public Component()
+	{
+         	log.info("Instantiating Component object");
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+
+
+	public Component(String  clientId,
+			String  jobId,
+			String  hostName,
+			String  portNum)
+	{
+		theClientId = clientId;
+		theJobId = jobId;
+		theHostName = hostName;
+		thePortNum = portNum;
+		thePhysicalHostName = hostName;
+
+	}
+
+
+	
+
+	
+	
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setClientId(String  clientId)
+	{
+		theClientId = clientId;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setJobId(String  jobId)
+	{
+		theJobId = jobId;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setHostName(String  hostName)
+	{
+		theHostName = hostName;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setPortNum(String  portNum)
+	{
+		thePortNum = portNum;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setName(String  name)
+	{
+		theName = name;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setDescription(String  description)
+	{
+		theDescription = description;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setPhysicalHostName(String  hostName)
+	{
+		thePhysicalHostName = hostName;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  setCurrentState(String  state)
+	{
+		theCurrentState = state;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getClientId()
+	{
+		return theClientId;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getJobId()
+	{
+		return theJobId;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getHostName()
+	{
+		return theHostName;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getPortNum()
+	{
+		return thePortNum;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getName()
+	{
+		return theName;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getDescription()
+	{
+		return theDescription;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getPhysicalHostName()
+	{
+		return thePhysicalHostName;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public String  getCurrentState()
+	{
+		return theCurrentState;
+	}
+
+
+	/**
+	 **************************************************************************
+	 *
+	 **************************************************************************
+	 */
+	public void  print()
+	{
+		log.info("************** BEGIN Component *****************");
+		log.info("Client ID     : " + theClientId);
+		log.info("Job ID        : " + theJobId);
+		log.info("Host Name     : " + theHostName);
+		log.info("Port Num      : " + thePortNum);
+		log.info("Name          : " + theName);
+		log.info("Description   : " + theDescription);
+		log.info("Physical Host : " + thePhysicalHostName);
+		log.info("Current State : " + theCurrentState);
+		log.info("************** END Component *****************");
+	}
+}

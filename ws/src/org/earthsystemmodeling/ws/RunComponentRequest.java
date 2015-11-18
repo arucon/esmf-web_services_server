@@ -6,6 +6,10 @@
  */
 package org.earthsystemmodeling.ws;
 
+import org.apache.commons.logging.Log;
+
+
+import org.apache.commons.logging.LogFactory;
 
 /**
  *  RunComponentRequest bean class
@@ -14,8 +18,16 @@ package org.earthsystemmodeling.ws;
     "unused"
 })
 public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean {
+	
+	private static Log log = LogFactory.getLog(RunComponentRequest.class);
+
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
             "RunComponentRequest", "ns1");
+    
+    public RunComponentRequest() {
+  		log.info("Begin RunComponentRequest");
+  	}
+
 
     /**
      * field for ServerName
@@ -32,7 +44,9 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
      * @return java.lang.String
      */
     public java.lang.String getServerName() {
+        log.info("localServerName: "  +localServerName);
         return localServerName;
+
     }
 
     /**
@@ -115,6 +129,7 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
         if (localServerName == null) {
             // write the nil attribute
+            log.info("ServerName cannot be null!!");
             throw new org.apache.axis2.databinding.ADBException(
                 "ServerName cannot be null!!");
         } else {
@@ -128,8 +143,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
         if (localClientId == null) {
             // write the nil attribute
+            log.info("ClientId cannot be null!!");
             throw new org.apache.axis2.databinding.ADBException(
                 "ClientId cannot be null!!");
+
         } else {
             xmlWriter.writeCharacters(localClientId);
         }
@@ -354,8 +371,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
             elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
                     localServerName));
         } else {
+            log.info("ServerName cannot be null!!");
             throw new org.apache.axis2.databinding.ADBException(
                 "ServerName cannot be null!!");
+
         }
 
         elementList.add(new javax.xml.namespace.QName(
@@ -365,8 +384,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
             elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
                     localClientId));
         } else {
+            log.info("ClientId cannot be null!!");
             throw new org.apache.axis2.databinding.ADBException(
                 "ClientId cannot be null!!");
+
         }
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
@@ -444,9 +465,13 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
                     if ("true".equals(nillableValue) ||
                             "1".equals(nillableValue)) {
+                        log.info("The element: " + "ServerName" +
+                                "  cannot be null");
                         throw new org.apache.axis2.databinding.ADBException(
                             "The element: " + "ServerName" +
                             "  cannot be null");
+  
+
                     }
 
                     java.lang.String content = reader.getElementText();
@@ -459,8 +484,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
                 else {
                     // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
+                    log.info("Unexpected subelement" + reader.getName());
+                	throw new org.apache.axis2.databinding.ADBException(
                         "Unexpected subelement " + reader.getName());
+
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
@@ -475,8 +502,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
                     if ("true".equals(nillableValue) ||
                             "1".equals(nillableValue)) {
+                        log.info("The element: " + "ClientId" + "  cannot be null");
                         throw new org.apache.axis2.databinding.ADBException(
                             "The element: " + "ClientId" + "  cannot be null");
+
                     }
 
                     java.lang.String content = reader.getElementText();
@@ -489,8 +518,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
                 else {
                     // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
+                    log.info("Unexpected subelement" + reader.getName());
+                	throw new org.apache.axis2.databinding.ADBException(
                         "Unexpected subelement " + reader.getName());
+
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
@@ -498,8 +529,10 @@ public class RunComponentRequest implements org.apache.axis2.databinding.ADBBean
 
                 if (reader.isStartElement()) {
                     // A start element we are not expecting indicates a trailing invalid property
-                    throw new org.apache.axis2.databinding.ADBException(
+                    log.info("Unexpected subelement" + reader.getName());
+                	throw new org.apache.axis2.databinding.ADBException(
                         "Unexpected subelement " + reader.getName());
+
                 }
             } catch (javax.xml.stream.XMLStreamException e) {
                 throw new java.lang.Exception(e);

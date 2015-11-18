@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ESMFWebServices" targetNamespace="http://earthsystemmodeling.org/ws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:esmf="http://earthsystemmodeling.org/ws" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://earthsystemmodeling.org/ws">
+
+      <xsd:complexType name="ArrayOfString">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="item" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ArrayOfFloat">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="item" type="xsd:float"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ArrayOfDouble">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="item" type="xsd:double"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="StatusMsg">
+        <xsd:sequence>
+          <xsd:element name="code" type="xsd:string"/>
+          <xsd:element name="msg" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DataDesc">
+        <xsd:sequence>
+          <xsd:element name="NumberOfVariables" type="xsd:int"/>
+          <xsd:element name="VariableNames" type="esmf:ArrayOfString"/>
+          <xsd:element name="NumberOfLatValues" type="xsd:int"/>
+          <xsd:element name="LatitudeValues" type="esmf:ArrayOfDouble"/>
+          <xsd:element name="NumberOfLonValues" type="xsd:int"/>
+          <xsd:element name="LongitudeValues" type="esmf:ArrayOfDouble"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      
+      <!-- ELEMENTS -->
+      
+      <xsd:element name="ListServersRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="RegistrarHostName" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="ListServersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerList" type="esmf:ArrayOfString"/>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="NewClientRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="NewClientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetOutputVariablesRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="VariableNames" type="esmf:ArrayOfString"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetOutputVariablesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="InitComponentRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="InitComponentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataDescRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="InputDataDesc" type="esmf:DataDesc"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataDescResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="Time" type="xsd:double"/>
+            <xsd:element name="Values" type="esmf:ArrayOfDouble"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SetInputDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="RunComponentRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="RunComponentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="TimestepComponentRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="NumTimeSteps" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="TimestepComponentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="FinalizeComponentRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="FinalizeComponentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="ComponentStatusRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="ComponentStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="GetFilesRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetFilesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="FileList" type="esmf:ArrayOfString"/>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetOutputDataDescRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetOutputDataDescResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="OutputDataDesc" type="esmf:DataDesc"/>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="GetOutputDataRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+            <xsd:element name="Time" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetOutputDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="NumberOfVariables" type="xsd:int"/>
+            <xsd:element name="VariableNames" type="esmf:ArrayOfString"/>
+            <xsd:element name="NumberOfLatValues" type="xsd:int"/>
+            <xsd:element name="NumberOfLonValues" type="xsd:int"/>
+            <xsd:element name="Values" type="esmf:ArrayOfDouble"/>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="EndClientRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServerName" type="xsd:string"/>
+            <xsd:element name="ClientId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="EndClientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Status" type="esmf:StatusMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SetInputDataDescRequest">
+    <wsdl:part name="input" element="esmf:SetInputDataDescRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetOutputVariablesRequest">
+    <wsdl:part name="input" element="esmf:SetOutputVariablesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutputDataDescRequest">
+    <wsdl:part name="input" element="esmf:GetOutputDataDescRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitComponentResponse">
+    <wsdl:part name="output" element="esmf:InitComponentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInputDataRequest">
+    <wsdl:part name="input" element="esmf:SetInputDataRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="FinalizeComponentRequest">
+    <wsdl:part name="input" element="esmf:FinalizeComponentRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetOutputVariablesResponse">
+    <wsdl:part name="output" element="esmf:SetOutputVariablesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitComponentRequest">
+    <wsdl:part name="input" element="esmf:InitComponentRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RunComponentRequest">
+    <wsdl:part name="input" element="esmf:RunComponentRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutputDataDescResponse">
+    <wsdl:part name="output" element="esmf:GetOutputDataDescResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NewClientResponse">
+    <wsdl:part name="output" element="esmf:NewClientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ComponentStatusRequest">
+    <wsdl:part name="input" element="esmf:ComponentStatusRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListServersRequest">
+    <wsdl:part name="input" element="esmf:ListServersRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TimestepComponentRequest">
+    <wsdl:part name="input" element="esmf:TimestepComponentRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutputDataResponse">
+    <wsdl:part name="output" element="esmf:GetOutputDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInputDataResponse">
+    <wsdl:part name="output" element="esmf:SetInputDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetFilesRequest">
+    <wsdl:part name="input" element="esmf:GetFilesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="FinalizeComponentResponse">
+    <wsdl:part name="output" element="esmf:FinalizeComponentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutputDataRequest">
+    <wsdl:part name="input" element="esmf:GetOutputDataRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInputDataDescResponse">
+    <wsdl:part name="output" element="esmf:SetInputDataDescResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="EndClientRequest">
+    <wsdl:part name="input" element="esmf:EndClientRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListServersResponse">
+    <wsdl:part name="output" element="esmf:ListServersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RunComponentResponse">
+    <wsdl:part name="output" element="esmf:RunComponentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TimestepComponentResponse">
+    <wsdl:part name="output" element="esmf:TimestepComponentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ComponentStatusResponse">
+    <wsdl:part name="output" element="esmf:ComponentStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetFilesResponse">
+    <wsdl:part name="output" element="esmf:GetFilesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NewClientRequest">
+    <wsdl:part name="input" element="esmf:NewClientRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="EndClientResponse">
+    <wsdl:part name="output" element="esmf:EndClientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ESMFWebServices">
+    <wsdl:operation name="ListServers">
+      <wsdl:input message="esmf:ListServersRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:ListServersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewClient">
+      <wsdl:input message="esmf:NewClientRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:NewClientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOutputVariables">
+      <wsdl:input message="esmf:SetOutputVariablesRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:SetOutputVariablesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitComponent">
+      <wsdl:input message="esmf:InitComponentRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:InitComponentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInputDataDesc">
+      <wsdl:input message="esmf:SetInputDataDescRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:SetInputDataDescResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInputData">
+      <wsdl:input message="esmf:SetInputDataRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:SetInputDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunComponent">
+      <wsdl:input message="esmf:RunComponentRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:RunComponentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TimestepComponent">
+      <wsdl:input message="esmf:TimestepComponentRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:TimestepComponentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeComponent">
+      <wsdl:input message="esmf:FinalizeComponentRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:FinalizeComponentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComponentStatus">
+      <wsdl:input message="esmf:ComponentStatusRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:ComponentStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiles">
+      <wsdl:input message="esmf:GetFilesRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:GetFilesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutputDataDesc">
+      <wsdl:input message="esmf:GetOutputDataDescRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:GetOutputDataDescResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutputData">
+      <wsdl:input message="esmf:GetOutputDataRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:GetOutputDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndClient">
+      <wsdl:input message="esmf:EndClientRequest">
+    </wsdl:input>
+      <wsdl:output message="esmf:EndClientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ESMFWebServicesSoapBinding" type="esmf:ESMFWebServices">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ListServers">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/ListServers"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewClient">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/NewClient"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOutputVariables">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/SetOutputVariables"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitComponent">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/InitComponent"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInputDataDesc">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/SetInputDataDesc"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInputData">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/SetInputData"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunComponent">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/RunComponent"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TimestepComponent">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/TimestepComponent"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeComponent">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/FinalizeComponent"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComponentStatus">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/ComponentStatus"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiles">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/GetFiles"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutputDataDesc">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/GetOutputDataDesc"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutputData">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/GetOutputData"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndClient">
+      <wsdlsoap:operation soapAction="http://earthsystemmodeling.org/ws/EndClient"/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ESMFWebServices">
+    <wsdl:port name="ESMFWebServices" binding="esmf:ESMFWebServicesSoapBinding">
+      <wsdlsoap:address location="http://localhost:8080/axis2/services/ESMFWebServices"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

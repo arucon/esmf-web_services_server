@@ -6,7 +6,8 @@
  */
 package org.earthsystemmodeling.ws;
 
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  *  SetInputDataRequest bean class
  */
@@ -14,9 +15,14 @@ package org.earthsystemmodeling.ws;
     "unused"
 })
 public class SetInputDataRequest implements org.apache.axis2.databinding.ADBBean {
-    public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
-            "SetInputDataRequest", "ns1");
+	private static Log log = LogFactory.getLog(SetInputDataRequest.class);
 
+	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
+            "SetInputDataRequest", "ns1");
+    
+    public SetInputDataRequest() {
+ 		log.info("Begin SetInputDataRequest");
+ 	}
     /**
      * field for ServerName
      */

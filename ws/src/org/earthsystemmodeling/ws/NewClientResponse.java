@@ -6,6 +6,14 @@
  */
 package org.earthsystemmodeling.ws;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.earthsystemmodeling.ws.component.Component;
+import org.earthsystemmodeling.ws.component.ComponentConnector;
+import org.earthsystemmodeling.ws.component.DataDescResponse;
+import org.earthsystemmodeling.ws.component.OutputDataResponse;
+import org.earthsystemmodeling.ws.registrar.RegistrarClient;
+
 
 /**
  *  NewClientResponse bean class
@@ -14,6 +22,13 @@ package org.earthsystemmodeling.ws;
     "unused"
 })
 public class NewClientResponse implements org.apache.axis2.databinding.ADBBean {
+
+    private static Log log = LogFactory.getLog(NewClientResponse.class);
+	
+    public NewClientResponse() {
+		log.info("Instantiating NewClientResponse object");
+	}
+
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
             "NewClientResponse", "ns1");
 
@@ -32,7 +47,9 @@ public class NewClientResponse implements org.apache.axis2.databinding.ADBBean {
      * @return java.lang.String
      */
     public java.lang.String getClientId() {
+        log.info("return localClientId"); 
         return localClientId;
+
     }
 
     /**
@@ -48,7 +65,9 @@ public class NewClientResponse implements org.apache.axis2.databinding.ADBBean {
      * @return org.earthsystemmodeling.ws.StatusMsg
      */
     public org.earthsystemmodeling.ws.StatusMsg getStatus() {
+        log.info("return localStatus" );
         return localStatus;
+
     }
 
     /**

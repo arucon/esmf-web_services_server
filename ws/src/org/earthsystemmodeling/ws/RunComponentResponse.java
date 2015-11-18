@@ -6,7 +6,8 @@
  */
 package org.earthsystemmodeling.ws;
 
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  *  RunComponentResponse bean class
  */
@@ -14,8 +15,14 @@ package org.earthsystemmodeling.ws;
     "unused"
 })
 public class RunComponentResponse implements org.apache.axis2.databinding.ADBBean {
+	private static Log log = LogFactory.getLog(RunComponentResponse.class);
+
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://earthsystemmodeling.org/ws",
             "RunComponentResponse", "ns1");
+    
+    public RunComponentResponse() {
+ 		log.info("Begin RunComponentResponse");
+ 	}
 
     /**
      * field for Status
@@ -27,7 +34,9 @@ public class RunComponentResponse implements org.apache.axis2.databinding.ADBBea
      * @return org.earthsystemmodeling.ws.StatusMsg
      */
     public org.earthsystemmodeling.ws.StatusMsg getStatus() {
+        log.info("localStatus: "  +localStatus);
         return localStatus;
+
     }
 
     /**
@@ -90,6 +99,7 @@ public class RunComponentResponse implements org.apache.axis2.databinding.ADBBea
         }
 
         if (localStatus == null) {
+        	log.info("Status cannot be null!!");
             throw new org.apache.axis2.databinding.ADBException(
                 "Status cannot be null!!");
         }
@@ -312,8 +322,10 @@ public class RunComponentResponse implements org.apache.axis2.databinding.ADBBea
                 "http://earthsystemmodeling.org/ws", "Status"));
 
         if (localStatus == null) {
+            log.info("Status cannot be null!!");
             throw new org.apache.axis2.databinding.ADBException(
                 "Status cannot be null!!");
+
         }
 
         elementList.add(localStatus);
@@ -396,8 +408,10 @@ public class RunComponentResponse implements org.apache.axis2.databinding.ADBBea
 
                 else {
                     // A start element we are not expecting indicates an invalid parameter was passed
-                    throw new org.apache.axis2.databinding.ADBException(
+                    log.info("Unexpected subelement" + reader.getName());
+                	throw new org.apache.axis2.databinding.ADBException(
                         "Unexpected subelement " + reader.getName());
+
                 }
 
                 while (!reader.isStartElement() && !reader.isEndElement())
@@ -405,8 +419,10 @@ public class RunComponentResponse implements org.apache.axis2.databinding.ADBBea
 
                 if (reader.isStartElement()) {
                     // A start element we are not expecting indicates a trailing invalid property
-                    throw new org.apache.axis2.databinding.ADBException(
+                    log.info("Unexpected subelement" + reader.getName());
+                	throw new org.apache.axis2.databinding.ADBException(
                         "Unexpected subelement " + reader.getName());
+
                 }
             } catch (javax.xml.stream.XMLStreamException e) {
                 throw new java.lang.Exception(e);

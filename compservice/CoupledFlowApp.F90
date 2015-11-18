@@ -62,6 +62,8 @@
                      e_month, e_day, e_hour, e_min
 
     integer :: portNum
+    character(len=10) :: clientId
+    integer :: clientIdLen
 
 !BOE
 !
@@ -139,6 +141,16 @@
 !------------------------------------------------------------------------------
 
     print *, "Coupled Flow Demo Application Start"
+
+
+  call ESMF_UtilGetArg(1, argvalue=clientId, rc=rc)
+  call ESMF_LogWrite("clientId:"//clientId, ESMF_LOGMSG_INFO)
+  if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=__FILE__)) &
+      call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+
 
 !------------------------------------------------------------------------------
 !------------------------------------------------------------------------------
@@ -461,7 +473,9 @@
 !------------------------------------------------------------------------------
  
 !BOC
-#define RUN_AS_SERVICE
+
+
+#define RUN_AS_SERVICE 
 #ifndef RUN_AS_SERVICE
     call ESMF_GridCompInitialize(coupledFlowComp, &
       importState=coupledFlowState, exportState=coupledFlowState, &
@@ -497,7 +511,8 @@
 
     portNum = 27060
 
-    call ESMF_WebServicesLoop(coupledFlowComp, portNum=portNum, clientId="1234", &
+
+    call ESMF_WebServicesLoop(coupledFlowComp, portNum=portNum, clientId=clientId, &
         registrarHost="localhost", rc=rc)
     if (ESMF_LogFoundError(rcToCheck=rc, msg="Error starting web services loop", &
       line=__LINE__, &

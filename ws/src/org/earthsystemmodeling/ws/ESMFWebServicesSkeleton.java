@@ -1,6 +1,8 @@
 package org.earthsystemmodeling.ws;
 
 import org.apache.commons.logging.Log;
+
+
 import org.apache.commons.logging.LogFactory;
 import org.earthsystemmodeling.ws.component.Component;
 import org.earthsystemmodeling.ws.component.ComponentConnector;
@@ -196,7 +198,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		status.setCode(statusStr);
 		status.setMsg("Operation successful");
 		response.setStatus(status);
-
+		log.info("exiting initComponent");
 		return response;
 	}
 
@@ -240,7 +242,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		status.setCode(statusStr);
 		status.setMsg("Operation successful");
 		response.setStatus(status);
-
+		log.info("exiting runComponent");
 		return response;
 	}
 
@@ -287,7 +289,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		status.setCode(statusStr);
 		status.setMsg("Operation successful");
 		response.setStatus(status);
-
+		log.info("exiting timestepComponent");
 		return response;
 	}
 
@@ -332,7 +334,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		status.setCode(statusStr);
 		status.setMsg("Operation successful");
 		response.setStatus(status);
-
+		log.info("exiting FinalizeComponentResponse");
 		return response;
 	}
 
@@ -374,7 +376,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		ComponentStatusResponse		response = new ComponentStatusResponse();
 
 		StatusMsg		status = new StatusMsg();
-		status.setCode(statusStr);
+		status.setCode(statusStr); // what is the code?
 		status.setMsg("Operation successful");
 		response.setStatus(status);
 
@@ -622,7 +624,7 @@ public class ESMFWebServicesSkeleton implements ESMFWebServicesSkeletonInterface
 		status.setCode(statusStr);
 		status.setMsg("Operation successful");
 		response.setStatus(status);
-
+		log.info("exiting endClient");
 		return response;
 	}
 
