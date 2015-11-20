@@ -1,31 +1,42 @@
 from pysimplesoap.client import SoapClient
+import time
 
-client = SoapClient(wsdl='http://localhost:8080/axis2/services/ESMFWebServices?wsdl',trace=True)
-#response1 = client.NewClient(ServerName="localhost") 
-ID = '101' 
-response2 = client.InitComponent(ServerName="localhost",ClientId = ID)
-#response3 = client.RunComponent(ServerName="localhost",ClientId = ID)
-#response4 = client.SetInputData(ServerName="localhost",ClientId = ID)
-#response5 = client.GetOutputData(ServerName="localhost",ClientId = ID)
-#response6 = client.FinalizeComponent(ServerName="localhost",ClientId = ID)
-#response7 = client.EndClient(ServerName="localhost",ClientId = ID)
-#ComponentStatusRequests
-#InitComponentRequest
-#RunComponentRequest
-#####during run###
-#SetInputDataRequest
-#GetOutputDataRequest
-#FinalizeComponentRequest
-#response = client.ListServers(RegistrarHostName="localhost")
-#print 'Yun Test 1'
+client = SoapClient(wsdl='http://localhost:8080/axis2/services/ESMFWebServices?wsdl',trace=False)
 
-#print response1
-print response2
-#print response3
-#print response4
-#print response5
-#print response6
-#print response7
+response = client.NewClient(ServerName="localhost") 
+print response
+print "ClientID = " + response['ClientId']
+ID = response['ClientId']
+
+print "Sleeping for 5 seconds...."
+time.sleep(5)
+
+response = client.InitComponent(ServerName="localhost", ClientId=ID)
+print response
+
+
+print "Sleeping for 5 seconds...."
+time.sleep(5)
+
+response = client.RunComponent(ServerName="localhost", ClientId=ID)
+print response
+
+
+print "Sleeping for 10 seconds...."
+time.sleep(10)
+
+response = client.FinalizeComponent(ServerName="localhost", ClientId=ID)
+print response
+
+print "Sleeping for 5 seconds...."
+time.sleep(5)
+
+response = client.EndClient(ServerName="localhost", ClientId=ID)
+print response
+
+
+#response = client.SetInputData(ServerName="localhost",ClientId = ID)
+#response = client.GetOutputData(ServerName="localhost",ClientId = ID)
 
 
 

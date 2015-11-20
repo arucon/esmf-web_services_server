@@ -142,13 +142,21 @@
 
     print *, "Coupled Flow Demo Application Start"
 
+  call ESMF_LogSet(flush=.true.)
 
   call ESMF_UtilGetArg(1, argvalue=clientId, rc=rc)
-  call ESMF_LogWrite("clientId:"//clientId, ESMF_LOGMSG_INFO)
   if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=__FILE__)) &
       call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+  call ESMF_LogWrite("clientId:"//clientId, ESMF_LOGMSG_INFO,rc=rc)
+  if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=__FILE__)) &
+      call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+
 
 
 
@@ -433,7 +441,7 @@
     enddo
 
     ! Set Grid in Gridded Component
-    call ESMF_GridCompSet(coupledFlowComp, grid=grid, rc=rc)
+    call ESMF_GridCompSet(coupledFlowComp, grid=grid, clock=clock, rc=rc)
     if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=__FILE__)) &
@@ -475,7 +483,7 @@
 !BOC
 
 
-#define RUN_AS_SERVICE 
+#define RUN_AS_SERVICE
 #ifndef RUN_AS_SERVICE
     call ESMF_GridCompInitialize(coupledFlowComp, &
       importState=coupledFlowState, exportState=coupledFlowState, &

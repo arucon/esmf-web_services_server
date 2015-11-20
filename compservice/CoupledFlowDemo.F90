@@ -160,10 +160,15 @@
     type(ESMF_Array) :: coordXa, coordYa
 #endif
 
+    !type(ESMF_VM) :: globalVM, localVM
+
     rc = ESMF_SUCCESS ! initialize
 
-    ! Get petCount from the component
-    call ESMF_GridCompGet(gcomp, petCount=petCount, rc=localrc)
+    call ESMF_LogWrite("Inside coupledflow_init", &
+      ESMF_LOGMSG_INFO, line=__LINE__, file=__FILE__)
+
+    ! Get petCount and clock from the component
+    call ESMF_GridCompGet(gcomp, petCount=petCount, clock=clock, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=__FILE__, &
@@ -501,7 +506,7 @@
 
      ! Local variables
      type(ESMF_Clock) :: localclock
-     integer          :: urc
+     integer          :: urc, localrc
 
 
 !BOE
@@ -512,6 +517,14 @@
 ! Advancing in time with ESMF clock, the coupled flow component calls
 ! the run methods of the gridded components and coupler component sequentially:
 !BOC
+
+     ! Get clock from the component, ignoring incoming clock
+     call ESMF_GridCompGet(comp, clock=clock, rc=localrc)
+     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+       line=__LINE__, &
+       file=__FILE__, &
+       rcToReturn=rc)) return  ! bail out
+
      ! Make our own local copy of the clock
      localclock = ESMF_ClockCreate(clock, rc=rc)
      if(rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT, rc=rc)
@@ -611,9 +624,16 @@ end subroutine coupledflow_run
 !
 !EOPI
 
-      integer :: urc
+      integer :: urc, localrc
 
       ! First finalize all subcomponents
+
+      ! Get clock from the component, ignoring incoming clock
+      call ESMF_GridCompGet(comp, clock=clock, rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=__FILE__, &
+        rcToReturn=rc)) return  ! bail out
 
       ! Finalize Injector Component    
       call ESMF_GridCompFinalize(INcomp, importState=INimp, exportState=INexp, &
