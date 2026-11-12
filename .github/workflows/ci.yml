@@ -1,0 +1,42 @@
+name: Build the ESMF SOAP service
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '8'
+      - name: Download the project's Axis2 release and verify its SHA-256
+        run: |
+          archive="$RUNNER_TEMP/axis2.zip"
+          curl --fail --silent --show-error --location --retry 2 --max-time 180 \
+            https://archive.apache.org/dist/axis/axis2/java/core/1.6.3/axis2-1.6.3-bin.zip --output "$archive"
+          printf '%s  %s\n' d964ad2a1260a6a6e28d7e7d8b2a17e065b4d45c537c051a0169f517dea98928 "$archive" | sha256sum -c
+          unzip -q "$archive" -d "$RUNNER_TEMP"
+      - name: Build and verify the SOAP archives
+        working-directory: ws
+        run: |
+          export AXIS2_HOME="$RUNNER_TEMP/axis2-1.6.3"
+          ant jar.all registrar
+          for archive in ESMFWebServices.aar ESMFWebServices-test-client.jar registrar.jar; do
+            test -s "build/lib/$archive"
+            jar tf "build/lib/$archive" >/dev/null
+          done
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: esmf-soap-service
+          path: ws/build/lib/
+          if-no-files-found: error
+          retention-days: 14
